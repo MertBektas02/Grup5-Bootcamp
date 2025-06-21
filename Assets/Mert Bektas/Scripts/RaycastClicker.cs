@@ -9,11 +9,13 @@ public class RaycastClicker : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, maxDistance))
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
             {
-                Debug.Log("Tıkladığın obje: " + hit.collider.name);
+                IClickable clickable = hit.collider.GetComponent<IClickable>();
+                if (clickable != null)
+                {
+                    clickable.OnClick();
+                }
             }
         }
     }
