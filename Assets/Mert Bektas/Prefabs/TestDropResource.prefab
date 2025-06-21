@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6149701573856093255}
   - component: {fileID: 5700555041472555036}
   - component: {fileID: 8870046828096734969}
+  - component: {fileID: 8800333562471981331}
   m_Layer: 0
   m_Name: TestDropResource
   m_TagString: Untagged
@@ -158,3 +159,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8800333562471981331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361931607598865630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3216c7722a05ce24080c047090f121d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 1
