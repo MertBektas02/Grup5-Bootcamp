@@ -7,6 +7,8 @@ public class CurrentResourceUIManager : MonoBehaviour
     [Header("UI References")]
     public TextMeshProUGUI woodAmount;
     public GameObject InfoPanel;
+    public GameObject crossHairCanvas;
+    public MonoBehaviour playerMovementScript;
     // public TreeData currentData; //just in case if i needed;
     // public void ShowCurrentResources(TreeData data)//just in case if i needed;
     // {
@@ -20,12 +22,30 @@ public class CurrentResourceUIManager : MonoBehaviour
     {
         UpdateUI();
     }
-    void Update()
+       void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             UpdateUI();
-            InfoPanel.SetActive(!InfoPanel.activeSelf); 
+            bool isPanelActive = !InfoPanel.activeSelf;
+            InfoPanel.SetActive(isPanelActive);
+
+            // Cursor'ı kontrol et
+            if (isPanelActive)
+            {
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+                UnityEngine.Cursor.visible = true;
+                if (playerMovementScript != null)
+                    playerMovementScript.enabled = false;
+                
+            }
+            else
+            {
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                UnityEngine.Cursor.visible = false;
+                if (playerMovementScript != null)
+                    playerMovementScript.enabled = true;
+            }
         }
     }
     public void UpdateUI()

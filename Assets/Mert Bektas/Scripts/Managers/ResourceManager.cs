@@ -68,4 +68,27 @@ public class ResourceManager : MonoBehaviour
             return resourceAmounts[type];
         return 0;
     }
+
+
+    //UPGRADES//
+    public bool TrySpendResources(List<ResourceCost> costList)
+{
+    // 1. Önce hepsi var mı diye kontrol et
+    foreach (var cost in costList)
+    {
+        if (GetResourceAmount(cost.type) < cost.amount)
+        {
+            Debug.Log("Yeterli " + cost.type + " yok!");
+            return false;
+        }
+    }
+
+    // 2. Hepsi varsa şimdi harcayalım
+    foreach (var cost in costList)
+    {
+        UseResource(cost.type, cost.amount);
+    }
+
+    return true;
+}
 }
