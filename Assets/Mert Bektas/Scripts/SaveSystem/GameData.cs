@@ -11,7 +11,7 @@ public class GameData
     public List<string> collectedObjectIDs = new();
 
     // Yapılan upgrade’ler
-    public Dictionary<string, bool> unlockedUpgrades = new();
+    public List<UpgradeState> unlockedUpgrades = new();
 
     // Oyuncu pozisyonu (isteğe bağlı kullanılabilir)
     public float[] playerPosition = new float[3];
