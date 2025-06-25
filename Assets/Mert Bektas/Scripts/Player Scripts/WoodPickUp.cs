@@ -8,7 +8,7 @@ public class WoodPickup : MonoBehaviour, IPickupable
     {
         ResourceManager.Instance.AddResource(ResourceType.Wood, amount);
         Debug.Log("Odun toplandı! +" + amount);
-        // TODO: Envantere ekle
+        
         Destroy(gameObject);
     }
 

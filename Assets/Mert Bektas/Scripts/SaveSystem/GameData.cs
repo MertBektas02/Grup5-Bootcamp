@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class GameData
 {
     // Kaynaklar (örn. odun, taş, demir vs.)
-    public Dictionary<string, int> resourceAmounts = new();
+    //public Dictionary<string, int> resourceAmounts = new();
+    public List<ResourceAmount> resourceAmounts = new List<ResourceAmount>();
 
     // Sahnedeki nesnelerin toplanma durumu (örnek: ağaç, taş vs.)
     public List<string> collectedObjectIDs = new();

@@ -8,7 +8,7 @@ public enum ResourceType
     Food,
     Fiber
 }
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : MonoBehaviour,IDataPersistence
 {
     public static ResourceManager Instance;
 
@@ -25,6 +25,10 @@ public class ResourceManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+        foreach (ResourceType type in System.Enum.GetValues(typeof(ResourceType)))
+        {
+            resourceAmounts[type] = 0;
         }
     }
 
@@ -69,11 +73,51 @@ public class ResourceManager : MonoBehaviour
         return 0;
     }
 
+    //save sistemi için kaynakların hepsini tek seferde alabileceğimiz bir getter metodu
+    public Dictionary<ResourceType, int> GetAllResources()
+    {
+        return new Dictionary<ResourceType, int>(resourceAmounts);
+    }
+    // load sırasında kaynakları sıfırdan setleyeceğimiz için bir setter metodu
+    public void SetResourceAmount(ResourceType type, int amount)
+    {
+        if (resourceAmounts.ContainsKey(type))
+            resourceAmounts[type] = amount;
+        else
+            resourceAmounts.Add(type, amount);
+    }
+
+    // ------------------- IDataPersistence -------------------
+
+    public void LoadData(GameData data)
+    {
+        if (data.resourceAmounts == null || data.resourceAmounts.Count == 0)
+            return;
+
+        foreach (var res in data.resourceAmounts)
+        {
+            SetResourceAmount(res.type, res.amount);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.resourceAmounts.Clear();
+
+        foreach (var kvp in resourceAmounts)
+        {
+            data.resourceAmounts.Add(new ResourceAmount
+            {
+                type = kvp.Key,
+                amount = kvp.Value
+            });
+        }
+    }
 
     //UPGRADES//
     public bool TrySpendResources(List<ResourceCost> costList)
     {
-        // 1. Önce hepsi var mı diye kontrol et
+
         foreach (var cost in costList)
         {
             if (GetResourceAmount(cost.type) < cost.amount)
@@ -83,7 +127,6 @@ public class ResourceManager : MonoBehaviour
             }
         }
 
-        // 2. Hepsi varsa şimdi harcayalım
         foreach (var cost in costList)
         {
             UseResource(cost.type, cost.amount);
