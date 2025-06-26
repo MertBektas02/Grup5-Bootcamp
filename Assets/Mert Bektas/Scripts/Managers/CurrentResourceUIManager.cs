@@ -4,11 +4,14 @@ using UnityEngine.UIElements;
 
 public class CurrentResourceUIManager : MonoBehaviour
 {
+    [SerializeField] private Player player;
+
     [Header("UI References")]
     public TextMeshProUGUI woodAmount;
     public GameObject InfoPanel;
     public GameObject crossHairCanvas;
     public MonoBehaviour playerMovementScript;
+    public TextMeshProUGUI currentHealthText;
     // public TreeData currentData; //just in case if i needed;
     // public void ShowCurrentResources(TreeData data)//just in case if i needed;
     // {
@@ -51,5 +54,7 @@ public class CurrentResourceUIManager : MonoBehaviour
     public void UpdateUI()
     {
         woodAmount.text = "Wood: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Wood);
+        currentHealthText.text = "health: " + player.currentHealth;
+        
     }
 }

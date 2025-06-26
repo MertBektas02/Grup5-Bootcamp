@@ -17,6 +17,12 @@ public class GameData
     // Oyuncu pozisyonu (isteğe bağlı kullanılabilir)
     public float[] playerPosition = new float[3];
 
+    public PlayerData playerData = new PlayerData();
+
     // Boş constructor yeni oyun içindir
-    public GameData() { }
+
+    public GameData()
+    { 
+        playerData.playerHealth = 100;
+    }
 }

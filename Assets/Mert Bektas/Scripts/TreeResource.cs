@@ -48,7 +48,7 @@ public class TreeResource : MonoBehaviour, IClickable, IDataPersistence
     }
 
     // ---------SAVE LOAD
-        public void LoadData(GameData data)
+    public void LoadData(GameData data)
     {
         if (data.collectedObjectIDs.Contains(uniqueID))
         {
@@ -57,16 +57,15 @@ public class TreeResource : MonoBehaviour, IClickable, IDataPersistence
         }
     }
 
-public void SaveData(ref GameData data)
-{
-    if (isCollected)
+    public void SaveData(ref GameData data)
     {
-        Debug.Log($"Tree saved: {uniqueID}");
-        data.collectedObjectIDs.Add(uniqueID);
+        if (isCollected && !data.collectedObjectIDs.Contains(uniqueID))
+        {
+            data.collectedObjectIDs.Add(uniqueID);
+        }
+        else
+        {
+            Debug.Log($"Tree NOT collected, skipping save: {uniqueID}");
+        }
     }
-    else
-    {
-        Debug.Log($"Tree NOT collected, skipping save: {uniqueID}");
-    }
-}
 }
