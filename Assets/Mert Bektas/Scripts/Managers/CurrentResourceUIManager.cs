@@ -12,6 +12,8 @@ public class CurrentResourceUIManager : MonoBehaviour
     public GameObject crossHairCanvas;
     public MonoBehaviour playerMovementScript;
     public TextMeshProUGUI currentHealthText;
+    public TextMeshProUGUI currentFood;
+    public TextMeshProUGUI currentWater;
     // public TreeData currentData; //just in case if i needed;
     // public void ShowCurrentResources(TreeData data)//just in case if i needed;
     // {
@@ -55,6 +57,8 @@ public class CurrentResourceUIManager : MonoBehaviour
     {
         woodAmount.text = "Wood: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Wood);
         currentHealthText.text = "health: " + player.currentHealth;
+        currentFood.text = "food: " + player.currentFood;
+        currentWater.text = "water: " + player.currentWater;
         
     }
 }
