@@ -6,7 +6,8 @@ public enum ResourceType
     Stone,
     Iron,
     Food,
-    Fiber
+    Fiber,
+    Water
 }
 public class ResourceManager : MonoBehaviour,IDataPersistence
 {
