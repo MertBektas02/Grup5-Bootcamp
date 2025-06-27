@@ -7,7 +7,7 @@ public class ZombieAI : MonoBehaviour
     public float attackRange = 2f;
     public float chaseRange = 15f;
     public int health = 100;
-    public LayerMask visionObstructionMask;
+    
 
     public float wanderRadius = 10f;    // Dolaşacağı alan yarıçapı
     public float wanderWaitTime = 3f;   // Her hedefte bekleme süresi
@@ -110,7 +110,7 @@ public class ZombieAI : MonoBehaviour
         Vector3 direction = (target - origin).normalized;
         float distance = Vector3.Distance(origin, target);
 
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance, visionObstructionMask))
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
         {
             return hit.collider.gameObject == player.gameObject;
         }
