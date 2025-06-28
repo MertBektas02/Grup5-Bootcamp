@@ -19,7 +19,10 @@ public class ZombieAI : MonoBehaviour
     private float idleTimer = 0f;
     private Vector3 wanderTarget;
     private bool isWandering = false;
-
+    
+    private float attackCooldown = 1.5f;
+    private float attackTimer = 0f;
+    
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -30,6 +33,7 @@ public class ZombieAI : MonoBehaviour
 
     void Update()
     {
+        
         if (isDead || player == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -44,6 +48,12 @@ public class ZombieAI : MonoBehaviour
                 agent.isStopped = true;
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isAttacking", true);
+                attackTimer -= Time.deltaTime;
+                if (attackTimer <= 0f)
+                {
+                    TryDamagePlayer();
+                    attackTimer = attackCooldown;
+                }
             }
             else
             {
@@ -86,6 +96,15 @@ public class ZombieAI : MonoBehaviour
             agent.isStopped = false;
         }
     }
+    void TryDamagePlayer()
+    {
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(10f); // 10 birim hasar ver
+        }
+    }
+
 
     void ChooseNewWanderTarget()
     {
@@ -137,5 +156,19 @@ public class ZombieAI : MonoBehaviour
         animator.SetBool("isWalking", false);
         animator.SetBool("isAttacking", false);
         Destroy(gameObject, 5f);
+        
+        float deathAnimLength = GetAnimationClipLength("Zombie Death"); // animasyon ismiyle birebir eşleşmeli
+        Destroy(gameObject, deathAnimLength);
+
     }
+    float GetAnimationClipLength(string clipName)
+    {
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+                return clip.length;
+        }
+        return 5f; // fallback
+    }
+
 }

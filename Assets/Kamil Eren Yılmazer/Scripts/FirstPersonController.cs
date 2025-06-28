@@ -59,7 +59,7 @@ public class FirstPersonController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         cameraPitch -= mouseY;
-        cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90f);
+        cameraPitch = Mathf.Clamp(cameraPitch, -35f, 35f);
 
         cameraPivot.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
