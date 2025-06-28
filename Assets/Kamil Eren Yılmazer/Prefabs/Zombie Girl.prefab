@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 858dbbae0344829458680a10ccafaf20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.428319
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 858dbbae0344829458680a10ccafaf20, type: 3}
       propertyPath: m_LocalPosition.y
@@ -118,7 +118,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.25
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -142,12 +142,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5957211dbb1f75438fb5281bbe5658b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 194564548609876591, guid: af9a9544287efcd4ea9f6dd28217a1fe, type: 3}
   attackRange: 1.5
   chaseRange: 10
   health: 100
   wanderRadius: 7
   wanderWaitTime: 1
+  activeFlashBomb: {fileID: 5511885155306033212, guid: e81a1387b5225744b881b11a8c9fff7d, type: 3}
 --- !u!136 &560596363963842739
 CapsuleCollider:
   m_ObjectHideFlags: 0

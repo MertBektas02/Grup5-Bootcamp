@@ -23,24 +23,58 @@ public class ZombieAI : MonoBehaviour
     private float attackCooldown = 1.5f;
     private float attackTimer = 0f;
     
+    private bool isBlinded = false;
+    private float blindTimer = 0f;
+
+    public GameObject activeFlashBomb; // Flash bombası sahnedeyse atanacak
+    
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        ChooseNewWanderTarget();
+        ChooseNewWanderTarget(); // Zombinin ilk wander hedefini belirle
         idleTimer = wanderWaitTime;
+        isWandering = true;
+        Debug.DrawLine(transform.position, wanderTarget, Color.yellow, 2f);
     }
 
     void Update()
     {
         
         if (isDead || player == null) return;
+        // FLASH MODU: Flash bombası aktifse ona yürü
+        if (activeFlashBomb != null && activeFlashBomb.activeSelf&& activeFlashBomb.scene.IsValid())
+        {
+            agent.isStopped = false;
+            animator.SetBool("isWalking", true);
+            animator.SetBool("isAttacking", false);
+            agent.SetDestination(activeFlashBomb.transform.position);
+            return;
+        }
+        
+        if (isBlinded)
+        {
+            blindTimer -= Time.deltaTime;
+
+            // Flash bombaya yürümeye devam etsin
+            animator.SetBool("isAttacking", false);
+
+            if (blindTimer <= 0f)
+            {
+                isBlinded = false;
+                
+            }
+
+            return;
+        }
+        
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= chaseRange && HasLineOfSight())
         {
-            // Oyuncuyu görürse takip veya saldırı moduna geç
+            
             isWandering = false;
 
             if (distanceToPlayer <= attackRange)
@@ -95,6 +129,9 @@ public class ZombieAI : MonoBehaviour
 
             agent.isStopped = false;
         }
+      
+
+
     }
     void TryDamagePlayer()
     {
@@ -105,7 +142,7 @@ public class ZombieAI : MonoBehaviour
         }
     }
 
-
+    
     void ChooseNewWanderTarget()
     {
         Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
@@ -170,5 +207,19 @@ public class ZombieAI : MonoBehaviour
         }
         return 5f; // fallback
     }
+    public void BecomeBlinded(float duration, Vector3 distractionPosition)
+    {
+        if (isBlinded || isDead || agent == null) return;
+
+        isBlinded = true;
+        blindTimer = duration;
+
+        agent.isStopped = false;
+        agent.SetDestination(distractionPosition);
+
+        animator.SetBool("isWalking", true);
+        
+    }
+  
 
 }

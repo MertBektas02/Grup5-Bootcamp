@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -6,6 +7,14 @@ public class WeaponController : MonoBehaviour
     public Camera fpsCamera;
     public float damage = 25f;
     public float range = 50f;
+    
+    
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -17,6 +26,7 @@ public class WeaponController : MonoBehaviour
         if (weaponModel.activeSelf && Input.GetButtonDown("Fire1"))
         {
             Shoot();
+            audioSource.PlayOneShot(this.audioSource.clip);
         }
     }
 
