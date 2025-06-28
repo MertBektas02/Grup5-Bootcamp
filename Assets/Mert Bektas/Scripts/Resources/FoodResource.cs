@@ -20,7 +20,7 @@ public class FoodResource : MonoBehaviour,IClickable, IDataPersistence
             gameObject.SetActive(false);
             DropResource();
             isCollected = true;
-            Debug.Log(isCollected);
+            
         }
     }
     private void PlayHitEffects()

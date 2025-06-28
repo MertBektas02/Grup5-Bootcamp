@@ -22,7 +22,9 @@ public class GameData
     // Boş constructor yeni oyun içindir
 
     public GameData()
-    { 
+    {
         playerData.playerHealth = 100;
+        playerData.playerFood = 100;
+        playerData.playerWater = 100;
     }
 }

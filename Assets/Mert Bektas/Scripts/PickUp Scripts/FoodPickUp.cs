@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class FoodPickUp : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int amount = 1;
+
+    public void OnPickup()
     {
+        ResourceManager.Instance.AddResource(ResourceType.Food, amount);
+        Debug.Log("food toplandı! +" + amount);
         
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            OnPickup();
+        }
     }
 }
