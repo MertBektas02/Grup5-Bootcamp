@@ -38,6 +38,7 @@ public class RestorePlayerStats : MonoBehaviour
             {
                 player.currentWater += actualDrinkAmount;
                 manager.UpdateUI();
+                SoundManager.PlaySound(SoundType.DrinkWater);
                 Debug.Log($"Su içildi. +{actualDrinkAmount} currentWater: {player.currentWater}");
             }
         }
@@ -48,33 +49,34 @@ public class RestorePlayerStats : MonoBehaviour
     }
 
     public void EatFood()
-{
-    int maxFood = 100;
-    int biteAmount = 10; // her yeme işleminde alınacak gıda miktarı
-    int neededFood = maxFood - player.currentFood;
-
-    if (neededFood <= 0)
     {
-        Debug.Log("Zaten tok durumdasın (maksimum food).");
-        return;
-    }
+        int maxFood = 100;
+        int biteAmount = 10; // her yeme işleminde alınacak gıda miktarı
+        int neededFood = maxFood - player.currentFood;
 
-    int availableFood = ResourceManager.Instance.GetResourceAmount(ResourceType.Food);
-    int actualEatAmount = Mathf.Min(biteAmount, neededFood, availableFood);
-
-    if (actualEatAmount > 0)
-    {
-        bool success = ResourceManager.Instance.UseResource(ResourceType.Food, actualEatAmount);
-        if (success)
+        if (neededFood <= 0)
         {
-            player.currentFood += actualEatAmount;
-            manager.UpdateUI();
-            Debug.Log($"Yemek yendi. +{actualEatAmount} currentFood: {player.currentFood}");
+            Debug.Log("Zaten tok durumdasın (maksimum food).");
+            return;
+        }
+
+        int availableFood = ResourceManager.Instance.GetResourceAmount(ResourceType.Food);
+        int actualEatAmount = Mathf.Min(biteAmount, neededFood, availableFood);
+
+        if (actualEatAmount > 0)
+        {
+            bool success = ResourceManager.Instance.UseResource(ResourceType.Food, actualEatAmount);
+            if (success)
+            {
+                player.currentFood += actualEatAmount;
+                manager.UpdateUI();
+                SoundManager.PlaySound(SoundType.EatFood);
+                Debug.Log($"Yemek yendi. +{actualEatAmount} currentFood: {player.currentFood}");
+            }
+        }
+        else
+        {
+            Debug.Log("Yeterli gıda kaynağın yok.");
         }
     }
-    else
-    {
-        Debug.Log("Yeterli gıda kaynağın yok.");
-    }
-}
 }
