@@ -78,6 +78,7 @@ public class PlayerHealth : MonoBehaviour
         lerpTimer = 0f;
         durationTimer = 0f;
         overlay.color=new Color(overlay.color.r,overlay.color.g,overlay.color.b,1);
+        overlay.gameObject.SetActive(true);
     }
 
     public void RestoreHealth(float healAmount)
