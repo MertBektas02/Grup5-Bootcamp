@@ -6,9 +6,11 @@ public enum ResourceType
     Stone,
     Iron,
     Food,
-    Fiber
+    Fiber,
+    Water,
+    Coal
 }
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : MonoBehaviour,IDataPersistence
 {
     public static ResourceManager Instance;
 
@@ -25,6 +27,10 @@ public class ResourceManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+        foreach (ResourceType type in System.Enum.GetValues(typeof(ResourceType)))
+        {
+            resourceAmounts[type] = 0;
         }
     }
 
@@ -69,26 +75,65 @@ public class ResourceManager : MonoBehaviour
         return 0;
     }
 
-
-    //UPGRADES//
-    public bool TrySpendResources(List<ResourceCost> costList)
-{
-    // 1. Önce hepsi var mı diye kontrol et
-    foreach (var cost in costList)
+    //save sistemi için kaynakların hepsini tek seferde alabileceğimiz bir getter metodu
+    public Dictionary<ResourceType, int> GetAllResources()
     {
-        if (GetResourceAmount(cost.type) < cost.amount)
+        return new Dictionary<ResourceType, int>(resourceAmounts);
+    }
+    // load sırasında kaynakları sıfırdan setleyeceğimiz için bir setter metodu
+    public void SetResourceAmount(ResourceType type, int amount)
+    {
+        if (resourceAmounts.ContainsKey(type))
+            resourceAmounts[type] = amount;
+        else
+            resourceAmounts.Add(type, amount);
+    }
+
+    // ------------------- IDataPersistence -------------------
+
+    public void LoadData(GameData data)
+    {
+        if (data.resourceAmounts == null || data.resourceAmounts.Count == 0)
+            return;
+
+        foreach (var res in data.resourceAmounts)
         {
-            Debug.Log("Yeterli " + cost.type + " yok!");
-            return false;
+            SetResourceAmount(res.type, res.amount);
         }
     }
 
-    // 2. Hepsi varsa şimdi harcayalım
-    foreach (var cost in costList)
+    public void SaveData(ref GameData data)
     {
-        UseResource(cost.type, cost.amount);
+        data.resourceAmounts.Clear();
+
+        foreach (var kvp in resourceAmounts)
+        {
+            data.resourceAmounts.Add(new ResourceAmount
+            {
+                type = kvp.Key,
+                amount = kvp.Value
+            });
+        }
     }
 
-    return true;
-}
+    //UPGRADES//
+    public bool TrySpendResources(List<ResourceCost> costList)
+    {
+
+        foreach (var cost in costList)
+        {
+            if (GetResourceAmount(cost.type) < cost.amount)
+            {
+                Debug.Log("Yeterli " + cost.type + " yok!");
+                return false;
+            }
+        }
+
+        foreach (var cost in costList)
+        {
+            UseResource(cost.type, cost.amount);
+        }
+
+        return true;
+    }
 }
