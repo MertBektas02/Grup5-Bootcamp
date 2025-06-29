@@ -4,11 +4,21 @@ using UnityEngine.UIElements;
 
 public class CurrentResourceUIManager : MonoBehaviour
 {
+    [SerializeField] private Player player;
+
     [Header("UI References")]
-    public TextMeshProUGUI woodAmount;
+    
     public GameObject InfoPanel;
     public GameObject crossHairCanvas;
     public MonoBehaviour playerMovementScript;
+    public TextMeshProUGUI currentHealthText;
+    [Header("Player current stats")]
+    public TextMeshProUGUI currentFood;
+    public TextMeshProUGUI currentWater;
+    [Header("Player Storage UI ")]
+    public TextMeshProUGUI woodAmount;
+    public TextMeshProUGUI foodAmount;
+    public TextMeshProUGUI waterAmount;
     // public TreeData currentData; //just in case if i needed;
     // public void ShowCurrentResources(TreeData data)//just in case if i needed;
     // {
@@ -50,6 +60,15 @@ public class CurrentResourceUIManager : MonoBehaviour
     }
     public void UpdateUI()
     {
+        currentHealthText.text = "health: " + player.currentHealth;
+        //player current stats
+        currentFood.text = "food: " + player.currentFood;
+        currentWater.text = "water: " + player.currentWater;
+
+        //player storage
         woodAmount.text = "Wood: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Wood);
+        foodAmount.text = "food: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Food);
+        waterAmount.text = "water: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Water);
+
     }
 }
