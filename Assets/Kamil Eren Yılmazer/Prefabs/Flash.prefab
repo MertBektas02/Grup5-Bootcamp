@@ -149,6 +149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionDelay: 0.2
   effectRadius: 20
-  blindDuration: 5
+  blindDuration: 0
   explosionSound: {fileID: 8300000, guid: 1b3c5756e0badee42a05443c35e487c2, type: 3}
   explosionEffect: {fileID: 7057117152817391294, guid: 1fb94d97244a5244cb535b93ca6c87ff, type: 3}

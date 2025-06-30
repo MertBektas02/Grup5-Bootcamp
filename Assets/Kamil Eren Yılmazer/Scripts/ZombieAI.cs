@@ -14,7 +14,7 @@ public class ZombieAI : MonoBehaviour
 
     private NavMeshAgent agent;
     private Animator animator;
-    private bool isDead = false;
+    public bool isDead = false;
 
     private float idleTimer = 0f;
     private Vector3 wanderTarget;
@@ -52,6 +52,7 @@ public class ZombieAI : MonoBehaviour
             agent.SetDestination(activeFlashBomb.transform.position);
             return;
         }
+        
         
         if (isBlinded)
         {
