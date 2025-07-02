@@ -9,10 +9,12 @@ public class AnimalMovement : MonoBehaviour
     private NavMeshAgent agent;
     private float waitTimer;
     
+    private Animator animator;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         
         ChooseNewDestination();
         waitTimer = waitTime;
@@ -25,6 +27,8 @@ public class AnimalMovement : MonoBehaviour
     void Update()
     {
         if (!agent.isOnNavMesh) return;
+        bool isWalking = agent.velocity.magnitude > 0.1f;
+        animator.SetBool("isWalking", isWalking);
 
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
@@ -36,8 +40,8 @@ public class AnimalMovement : MonoBehaviour
                 waitTimer = waitTime;
             }
         }
-
-        RotateTowardsDirection();
+        
+            RotateTowardsDirection();
     }
 
     void ChooseNewDestination()
@@ -57,9 +61,17 @@ public class AnimalMovement : MonoBehaviour
     void RotateTowardsDirection()
     {
         Vector3 dir = agent.velocity;
-        if (dir.x < -0.1f)
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f); // sola bak
-        else if (dir.x > 0.1f)
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);   // sağa bak
+        if (dir.magnitude > 0.1f)
+        {
+            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            if (sprite != null)
+            {
+                if (dir.x < -0.1f)
+                    sprite.flipX = false; // sola bak
+                else if (dir.x > 0.1f)
+                    sprite.flipX = true; // sağa bak
+            }
+        }
     }
+
 }
