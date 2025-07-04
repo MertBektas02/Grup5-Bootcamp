@@ -473,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 193585803}
-  - component: {fileID: 193585802}
+  - component: {fileID: 193585804}
   m_Layer: 0
   m_Name: DayNightManager
   m_TagString: Untagged
@@ -481,7 +481,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &193585802
+--- !u!4 &193585803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193585801}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 121.7, y: 9.88, z: 72.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &193585804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,10 +505,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 193585801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6de8b2aac98947f7be93838f876a951, type: 3}
+  m_Script: {fileID: 11500000, guid: 938baaf193b2bcd4e9b685b4b7b11abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayDurationInSeconds: 120
+  dayDuration: 900
+  nightDuration: 300
   startTimeOfDay: 0
   sun: {fileID: 1723758518}
   sunColorOverTime:
@@ -532,39 +548,33 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 4.436945
-      outSlope: 4.436945
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.03955453
+      outWeight: 0
     - serializedVersion: 3
-      time: 1.0000103
-      value: -0.0000012814999
-      inSlope: -4.5182137
-      outSlope: -4.5182137
+      time: 0.58169556
+      value: 0.9833832
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.021415073
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0840821
+      value: 0.018008769
+      inSlope: -2.1254535
+      outSlope: -2.1254535
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2553807
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!4 &193585803
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193585801}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 121.7, y: 9.88, z: 72.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &280179503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6531280139454478555, guid: 9efc5829a7fc7054d9346e84e1a66336, type: 3}
