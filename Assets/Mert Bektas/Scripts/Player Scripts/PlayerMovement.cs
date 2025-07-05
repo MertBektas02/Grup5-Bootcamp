@@ -13,34 +13,35 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     private Rigidbody rb;
-    private Vector3 inputDirection;
+    private Vector3 moveInput;
     private bool isGrounded;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Dönmeyi engelle
+
     }
 
     void Update()
     {
-        // Klavye hareketleri
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        inputDirection = transform.right * x + transform.forward * z;
+                Vector3 moveVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = new Vector3(moveVelocity.x, rb.linearVelocity.y, moveVelocity.z);
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+        moveInput = (transform.right * x + transform.forward * z).normalized;
 
-        // Zıplama
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // Dikey hızı sıfırla
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
     void FixedUpdate()
     {
-        Vector3 move = inputDirection * moveSpeed;
-        Vector3 velocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
-        rb.linearVelocity = velocity;
+
     }
 }
