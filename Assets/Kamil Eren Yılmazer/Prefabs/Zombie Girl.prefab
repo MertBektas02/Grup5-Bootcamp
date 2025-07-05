@@ -147,7 +147,7 @@ MonoBehaviour:
   chaseRange: 10
   health: 100
   wanderRadius: 7
-  wanderWaitTime: 1
+  wanderWaitTime: 3
   activeFlashBomb: {fileID: 5511885155306033212, guid: e81a1387b5225744b881b11a8c9fff7d, type: 3}
 --- !u!136 &560596363963842739
 CapsuleCollider:
