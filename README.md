@@ -25,7 +25,8 @@ Deadline to Last Stop
 
 # Oyun Logosu
 
-<img width="795" alt="Screenshot 2025-07-05 at 11 41 16" src="https://github.com/user-attachments/assets/636db7f3-7b90-4985-b1a2-f8c52ccc0123" />
+![Gemini_Generated_Image_ar9papar9papar9p](https://github.com/user-attachments/assets/a5bc6f82-de2b-4267-91e2-d7d8aa0007fa)
+
 
 # Oyun Açıklaması
 
@@ -93,50 +94,17 @@ Bu bağlamda story point tahminleri Fibonacci serisiyle yapıldı:
 
 ## Daily Scrum
 
-[Daily Scrum Screenshots](https://imgur.com/a/sRodWew)
+	Visuals
 
 ## Sprint Board Updates
 
-<img width="1392" alt="Screenshot 2025-07-05 at 11 33 48" src="https://github.com/user-attachments/assets/9fefeacc-b740-4978-8e78-3996606cd0e3" />
-
-<img width="1392" alt="Screenshot 2025-07-05 at 11 34 11" src="https://github.com/user-attachments/assets/2c55a699-d40d-43f9-bae0-b371b5029868" />
-
-<img width="1392" alt="Screenshot 2025-07-05 at 11 34 20" src="https://github.com/user-attachments/assets/30fba822-5ba2-43c4-8c7c-7f09bfde7aee" />
-
-## Ürün Durumu: Ekran Görüntüleri
-
-https://github.com/user-attachments/assets/783e1fca-fde0-407a-8683-fddebb12717f
-
-https://github.com/user-attachments/assets/80520334-66d9-47a0-ae14-e502daca0838
-
-![uıCanvases](https://github.com/user-attachments/assets/a7763837-f110-4180-a8ee-dc9559695935)
-
-![managers](https://github.com/user-attachments/assets/ff0ea498-a892-4c0a-97b1-0c20dd4198a9)
-
-![damageScreen](https://github.com/user-attachments/assets/14c146c8-c119-4f26-95ee-ed8a29e58b35)
-
-https://github.com/user-attachments/assets/090393c5-8941-49e2-a10f-047028fae8ce
+	Visuals
 
 ## Sprint Review
 
-* Bu sprint başında, takımda bulunan 3 fikrin ortak noktalarında ilerleyecek şekilde proje geliştirilmeye başlandı ve sprint sonuna doğru geliştirme ilerledikçe nihai karara ortak şekilde varıldı.
-
-* GDD temelleri oluşturulmaya başlandı.
-
-* Genişletilebilir kaynak sistemi geliştirildi.
-
-* Sprint sonunda projenin "oynanabilir prototip" aşamasına doğru evrilmesi sağlandı.
+...
 
 ## Sprint Retrospective
 
-* Her üye, takım içi iletişimin iyi olduğu yönünde düşüncelerini paylaştı.
-
-* Takımın üretim hızının kuvvetli olduğu vurgulandı.
-
-* Teknik konuları paylaşmakta zorlanıldığı ve takımdaki teknik gücün görece düşük kaldığı dile getirildi.
-
-* Başlangıçta Git problemleri (merge çakışmaları) yaşandı. Buna yönelik düzenlemeler ve aksiyonlar alınarak durumun tekrarlanmaması için takım içi bilgi paylaşımları gerçekleşti.
-
-* Başta fikri basit tutma çabalarımıza rağmen, hala oyunda kompleks özellikler barındırmamız konusu tartışıldı.
-
+...
 
