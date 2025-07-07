@@ -65,7 +65,7 @@ public class TreeResource : MonoBehaviour, IClickable, IDataPersistence
         }
         else
         {
-            Debug.Log($"Tree NOT collected, skipping save:");
+            //Debug.Log($"Tree NOT collected, skipping save:");
            // Debug.Log($"Tree NOT collected, skipping save: {uniqueID}");
         }
     }

@@ -25,8 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-                Vector3 moveVelocity = moveInput * moveSpeed;
-        rb.linearVelocity = new Vector3(moveVelocity.x, rb.linearVelocity.y, moveVelocity.z);
+
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
         moveInput = (transform.right * x + transform.forward * z).normalized;
@@ -42,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        Vector3 moveVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = new Vector3(moveVelocity.x, rb.linearVelocity.y, moveVelocity.z);
     }
 }

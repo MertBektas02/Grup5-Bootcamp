@@ -62,7 +62,8 @@ public class CoalResource : MonoBehaviour, IClickable, IDataPersistence
         }
         else
         {
-            Debug.Log($"Tree NOT collected, skipping save: {uniqueID}");
+            //Debug.Log($"Tree NOT collected, skipping save");
+            //Debug.Log($"Tree NOT collected, skipping save: {uniqueID}");
         }
     }
 }
