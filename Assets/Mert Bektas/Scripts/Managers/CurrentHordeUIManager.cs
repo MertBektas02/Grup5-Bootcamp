@@ -18,11 +18,19 @@ public class CurrentHordeUIManager : MonoBehaviour
         string message;
 
         if (daysLeft > 0)
+        {
             message = $"Horde yaklaşıyor. {daysLeft} gün kaldı!";
+            SoundManager.PlaySound(SoundType.CurrentDaySFX);
+        }
         else if (daysLeft == 0)
+        {
             message = $"‼ Horde bugün geliyor!";
+            SoundManager.PlaySound(SoundType.CurrentDaySFX);
+        }
         else
+        {
             return; // Artık geçmiş, mesaj göstermeyelim.
+        }
 
         ShowMessage(message);
     }

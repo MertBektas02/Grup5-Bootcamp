@@ -2301,6 +2301,7 @@ MonoBehaviour:
   SoundList:
   - {fileID: 8300000, guid: 3f5b8393a6de8d544b67bbe12ac7c049, type: 3}
   - {fileID: 8300000, guid: eeaa1f0d86a943842a470dc39d69bdae, type: 3}
+  - {fileID: 8300000, guid: c8eb55195e9026d4b900c9a555d59611, type: 3}
 --- !u!82 &651814511
 AudioSource:
   m_ObjectHideFlags: 0

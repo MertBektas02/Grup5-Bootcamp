@@ -3,7 +3,8 @@ using UnityEngine;
 public enum SoundType
 {
     DrinkWater,
-    EatFood
+    EatFood,
+    CurrentDaySFX
 }
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
