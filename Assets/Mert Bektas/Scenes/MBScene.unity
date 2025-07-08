@@ -4293,7 +4293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDay: 1
-  dayDuration: 5
+  dayDuration: 10
 --- !u!4 &1427166550
 Transform:
   m_ObjectHideFlags: 0

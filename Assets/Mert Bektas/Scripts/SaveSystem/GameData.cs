@@ -18,6 +18,7 @@ public class GameData
     public float[] playerPosition = new float[3];
 
     public PlayerData playerData = new PlayerData();
+    public int currentDayData;
 
     // Boş constructor yeni oyun içindir
 

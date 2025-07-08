@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class GameTimeManager : MonoBehaviour
+public class GameTimeManager : MonoBehaviour, IDataPersistence
 {
     public int currentDay = 1;
     public float dayDuration = 1200f; // 20 dakika
@@ -18,5 +18,15 @@ public class GameTimeManager : MonoBehaviour
             currentDay++;
             OnNewDayStarted?.Invoke(currentDay);
         }
+    }
+
+    //--------Save, Load--------
+    public void SaveData(ref GameData data)
+    {
+        currentDay = data.currentDayData;
+    }
+    public void LoadData(GameData data)
+    {
+        data.currentDayData = currentDay;
     }
 }
