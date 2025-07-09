@@ -19,6 +19,8 @@ public class GameData
 
     public PlayerData playerData = new PlayerData();
     public int currentDayData;
+    public List<CollectorData> purchasedCollectors = new List<CollectorData>();
+
 
     // Boş constructor yeni oyun içindir
 

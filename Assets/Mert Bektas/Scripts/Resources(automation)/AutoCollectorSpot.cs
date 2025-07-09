@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoCollectorPurchasePoint : MonoBehaviour
+public class AutoCollectorPurchasePoint : MonoBehaviour, IDataPersistence
 {
     [Header("Collector")]
-    public GameObject collectorObject; // Sahnedeki toplayıcı, SetActive ile aktif edilecek
+    public GameObject collectorObject;
 
     [Header("Satın Alma Koşulları")]
     public List<ResourceCost> purchaseCosts = new List<ResourceCost>();
@@ -12,6 +12,7 @@ public class AutoCollectorPurchasePoint : MonoBehaviour
     [Header("UI")]
     public GameObject uiPanel;
 
+    [SerializeField] private string uniqueID;
     private bool isPurchased = false;
     private bool playerInRange = false;
 
@@ -29,27 +30,22 @@ public class AutoCollectorPurchasePoint : MonoBehaviour
     {
         if (ResourceManager.Instance.TrySpendResources(purchaseCosts))
         {
-            collectorObject.SetActive(true);
-
-            // EKLENMESİ GEREKEN SATIR:
-            var collector = collectorObject.GetComponent<AutoCollector>();
-            if (collector != null)
-            {
-                collector.Activate();
-            }
-            else
-            {
-                Debug.LogError("AutoCollector scripti atanmadı!");
-            }
-
-            isPurchased = true;
-            if (uiPanel != null)
-                uiPanel.SetActive(false);
+            ActivateCollector();
         }
         else
         {
             Debug.Log("Satın alma başarısız: Yetersiz kaynak.");
         }
+    }
+
+    private void ActivateCollector()
+    {
+        collectorObject.SetActive(true);
+        collectorObject.GetComponent<AutoCollector>()?.Activate();
+        isPurchased = true;
+
+        if (uiPanel != null)
+            uiPanel.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,6 +65,32 @@ public class AutoCollectorPurchasePoint : MonoBehaviour
             playerInRange = false;
             if (uiPanel != null)
                 uiPanel.SetActive(false);
+        }
+    }
+
+    // ---------- SAVE / LOAD ----------
+    public void SaveData(ref GameData data)
+    {
+        var existing = data.purchasedCollectors.Find(x => x.id == uniqueID);
+        if (existing != null)
+        {
+            existing.isPurchased = isPurchased;
+        }
+        else
+        {
+            data.purchasedCollectors.Add(new CollectorData
+            {
+                id = uniqueID,
+                isPurchased = isPurchased
+            });
+        }
+    }
+    public void LoadData(GameData data)
+    {
+        var match = data.purchasedCollectors.Find(x => x.id == uniqueID);
+        if (match != null && match.isPurchased)
+        {
+            ActivateCollector();
         }
     }
 }
