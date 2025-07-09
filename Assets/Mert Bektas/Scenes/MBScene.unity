@@ -2640,7 +2640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31758cb98d28b8c418f8dff40c913eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hordeDay: 50
+  hordeDay: 45
   hordeUI: {fileID: 1140131847}
 --- !u!4 &702048894
 Transform:
@@ -4730,7 +4730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDay: 1
-  dayDuration: 10000
+  dayDuration: 10
 --- !u!4 &1427166550
 Transform:
   m_ObjectHideFlags: 0

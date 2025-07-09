@@ -18,15 +18,19 @@ public class GameTimeManager : MonoBehaviour, IDataPersistence
             currentDay++;
             OnNewDayStarted?.Invoke(currentDay);
         }
+        Debug.Log(currentTime);
     }
 
     //--------Save, Load--------
     public void SaveData(ref GameData data)
     {
-        currentDay = data.currentDayData;
+        data.currentDayData = currentDay;
+        data.currentTimeData = currentTime;
     }
+
     public void LoadData(GameData data)
     {
-        data.currentDayData = currentDay;
+        currentDay = data.currentDayData;
+        currentTime = data.currentTimeData;
     }
 }

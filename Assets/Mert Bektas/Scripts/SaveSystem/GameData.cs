@@ -19,6 +19,10 @@ public class GameData
 
     public PlayerData playerData = new PlayerData();
     public int currentDayData;
+    public float currentTimeData;
+
+    public int hordeDayData;
+    public bool playerEscapedData;
     public List<CollectorData> purchasedCollectors = new List<CollectorData>();
 
 

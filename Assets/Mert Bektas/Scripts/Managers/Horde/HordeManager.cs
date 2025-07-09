@@ -1,7 +1,7 @@
 using UnityEngine;
-public class HordeManager : MonoBehaviour
+public class HordeManager : MonoBehaviour,IDataPersistence
 {
-   
+
     public int hordeDay = 5;
     private bool playerEscaped = false;
     [Header("Referances")]
@@ -35,5 +35,19 @@ public class HordeManager : MonoBehaviour
     {
         Debug.Log("GAME OVER! Horde geldi, ama sen kaçamadın.");
         // Oyunu bitir, menü göster, vs.
+    }
+    
+
+        // -------- Save, Load --------
+    public void SaveData(ref GameData data)
+    {
+        data.hordeDayData = hordeDay;
+        data.playerEscapedData = playerEscaped;
+    }
+
+    public void LoadData(GameData data)
+    {
+        hordeDay = data.hordeDayData;
+        playerEscaped = data.playerEscapedData;
     }
 }
