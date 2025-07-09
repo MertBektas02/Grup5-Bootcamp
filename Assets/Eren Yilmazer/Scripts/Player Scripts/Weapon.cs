@@ -12,6 +12,10 @@ public class Weapon : MonoBehaviour
     private AudioSource audioSource;
     private Rigidbody rb;
     private bool isEquipped = false;
+    
+    [Header("Muzzle Flash")]
+    public GameObject muzzleFlashPrefab;
+    public Transform muzzlePoint;
 
     void Awake()
     {
@@ -95,6 +99,15 @@ public class Weapon : MonoBehaviour
             {
                 zombie.TakeDamage((int)damage);
             }
+        }
+        PlayMuzzleFlash();
+    }
+    void PlayMuzzleFlash()
+    {
+        if (muzzleFlashPrefab != null && muzzlePoint != null)
+        {
+            GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
+            Destroy(flash, 0.1f); // Efekti kısa sürede sil
         }
     }
 }

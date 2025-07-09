@@ -88,6 +88,9 @@ public class FlashBomb : MonoBehaviour
 
         Vector3 throwDirection = fpsCamera.transform.forward + fpsCamera.transform.up * 0.5f;
         rb.AddForce(throwDirection.normalized * throwForce, ForceMode.VelocityChange);
+        
+        if (explosionSound != null && audioSource != null)
+            audioSource.PlayOneShot(explosionSound);
 
         StartCoroutine(DelayedExplosion());
     }
@@ -105,9 +108,6 @@ public class FlashBomb : MonoBehaviour
 
         if (explosionEffect != null)
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-
-        if (explosionSound != null && audioSource != null)
-            audioSource.PlayOneShot(explosionSound);
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, effectRadius);
         foreach (Collider col in hitColliders)
