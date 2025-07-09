@@ -18,6 +18,13 @@ public class GameData
     public float[] playerPosition = new float[3];
 
     public PlayerData playerData = new PlayerData();
+    public int currentDayData;
+    public float currentTimeData;
+
+    public int hordeDayData;
+    public bool playerEscapedData;
+    public List<CollectorData> purchasedCollectors = new List<CollectorData>();
+
 
     // Boş constructor yeni oyun içindir
 
