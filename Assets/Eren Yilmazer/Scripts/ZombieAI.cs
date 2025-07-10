@@ -136,10 +136,10 @@ public class ZombieAI : MonoBehaviour
     }
     void TryDamagePlayer()
     {
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        Player playerHealth = player.GetComponent<Player>();
         if (playerHealth != null)
         {
-            playerHealth.TakeDamage(10f); // 10 birim hasar ver
+            playerHealth.TakeDamage(10); // 10 birim hasar ver
         }
     }
 
