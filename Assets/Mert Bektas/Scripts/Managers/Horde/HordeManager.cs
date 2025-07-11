@@ -45,9 +45,15 @@ public class HordeManager : MonoBehaviour,IDataPersistence
         data.playerEscapedData = playerEscaped;
     }
 
-    public void LoadData(GameData data)
+public void LoadData(GameData data)
+{
+    if (data.hordeDayData == 0)
     {
-        hordeDay = data.hordeDayData;
-        playerEscaped = data.playerEscapedData;
+        // Bu sahne için varsayılan horde gününü inspector'dan ayarlamışsın
+        data.hordeDayData = hordeDay; // ilk değer GameData'ya yazılır
     }
+
+    hordeDay = data.hordeDayData;
+    playerEscaped = data.playerEscapedData;
+}
 }

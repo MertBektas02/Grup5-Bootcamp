@@ -18,7 +18,7 @@ public class GameTimeManager : MonoBehaviour, IDataPersistence
             currentDay++;
             OnNewDayStarted?.Invoke(currentDay);
         }
-        Debug.Log(currentTime);
+        //Debug.Log(currentTime);
     }
 
     //--------Save, Load--------
