@@ -4,7 +4,9 @@ public enum SoundType
 {
     DrinkWater,
     EatFood,
-    CurrentDaySFX
+    CurrentDaySFX,
+    ClickSound,
+    ButtonHoverEffect
 }
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
