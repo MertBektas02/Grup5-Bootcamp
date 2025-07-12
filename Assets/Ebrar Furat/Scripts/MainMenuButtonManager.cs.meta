@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a4f99405539c34b4d96bebd6a07e8c19
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - settingsPanel: {fileID: 9026564155902176872, guid: 385c375fd61f9e54d910ee92c3e17f45, type: 3}
+  - Panel: {fileID: 8431451075758174451, guid: 99c2dc021a726ed49bc7093e1ad60efa, type: 3}
+  - volumeSlider: {instanceID: 0}
+  - musicToggle: {instanceID: 0}
+  - playButton: {instanceID: 0}
+  - settingsButton: {instanceID: 0}
+  - quitButton: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
