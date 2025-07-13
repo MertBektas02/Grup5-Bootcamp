@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,7 +7,8 @@ public class ZombieAI : MonoBehaviour
     public Transform player;
     public float attackRange = 2f;
     public float chaseRange = 15f;
-    public int health = 100;
+    public int health = 25;
+    
     
 
     public float wanderRadius = 10f;    // Dolaşacağı alan yarıçapı
@@ -27,7 +29,7 @@ public class ZombieAI : MonoBehaviour
     private float blindTimer = 0f;
 
     public GameObject activeFlashBomb; // Flash bombası sahnedeyse atanacak
-    
+    public GameObject bloodEffect;
 
     void Start()
     {
@@ -137,10 +139,8 @@ public class ZombieAI : MonoBehaviour
     void TryDamagePlayer()
     {
         Player playerHealth = player.GetComponent<Player>();
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(10); // 10 birim hasar ver
-        }
+        playerHealth.TakeDamage(10); // 10 birim hasar ver
+        
     }
 
     
@@ -180,6 +180,11 @@ public class ZombieAI : MonoBehaviour
         if (isDead) return;
 
         health -= amount;
+        if (bloodEffect != null)
+        {
+            GameObject effect = Instantiate(bloodEffect, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            Destroy(effect, 1.5f); // 1.5 saniye sonra sil
+        }
         if (health <= 0)
         {
             Die();
@@ -195,7 +200,7 @@ public class ZombieAI : MonoBehaviour
         animator.SetBool("isAttacking", false);
         Destroy(gameObject, 5f);
         
-        float deathAnimLength = GetAnimationClipLength("Zombie Death"); // animasyon ismiyle birebir eşleşmeli
+        float deathAnimLength = GetAnimationClipLength("Zombie Death"); 
         Destroy(gameObject, deathAnimLength);
 
     }
@@ -221,6 +226,5 @@ public class ZombieAI : MonoBehaviour
         animator.SetBool("isWalking", true);
         
     }
-  
 
 }
