@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Auto Created Folders/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Mert Bektas/Scenes/MBScene.unity
+    guid: 8bda9eff25954b14a97967a9438187ac
+  - enabled: 1
+    path: Assets/Mert Bektas/Scenes/EmptySceneMB.unity
+    guid: 6e2b28b9bb42a1b43b10f8a88557045f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

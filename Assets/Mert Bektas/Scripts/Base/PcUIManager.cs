@@ -5,7 +5,8 @@ public class PcUIManager : MonoBehaviour
 {
     [Header("UI Ayarları")]
     [SerializeField] private GameObject pcMainPanel;
-    [SerializeField] private Button toggleButton;
+    [SerializeField] private Button togglePcbutton;
+    [SerializeField] private GameObject StoragePanel;
 
     [Header("Kontrol Edilecek Scriptler")]
     [SerializeField] private MouseLook mouseLookScript;
@@ -18,7 +19,7 @@ public class PcUIManager : MonoBehaviour
 
     private void Start()
     {
-        toggleButton.onClick.AddListener(TogglePcMainPanel);
+        togglePcbutton.onClick.AddListener(TogglePcMainPanel);
     }
 
     public void TogglePcMainPanel()
@@ -42,5 +43,10 @@ public class PcUIManager : MonoBehaviour
             customCursorImage.SetActive(true);
 
         }
+    }
+
+    public void ToggleStorage()
+    {
+       StoragePanel.SetActive(!StoragePanel.activeSelf); 
     }
 }

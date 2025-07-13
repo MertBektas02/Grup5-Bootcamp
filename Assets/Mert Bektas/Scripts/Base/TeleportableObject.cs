@@ -22,6 +22,6 @@ public class TeleportableObject : MonoBehaviour
     {
         if (interactionUI != null)
             interactionUI.SetActive(show);
-        Debug.Log(show);
+        //Debug.Log(show);
     }
 }

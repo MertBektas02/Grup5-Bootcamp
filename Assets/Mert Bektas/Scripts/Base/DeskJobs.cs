@@ -10,8 +10,7 @@ public class DeskJobs : MonoBehaviour
 
     public PcUIManager pcUIManager;
 
-    [Header("UI Cursor")]
-    [SerializeField] private GameObject customCursorImage;
+
 
 
     void Update()
