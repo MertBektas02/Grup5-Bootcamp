@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ground
   - CinemachineTarget
+  - PlayerHand
+  - FlashBomb
+  - Weapon
+  - InActiveSlot
   layers:
   - Default
   - TransparentFX
@@ -18,8 +22,7 @@ TagManager:
   - player
   - Not Walkable
   - Obstacles
-  - 
-  - 
+  - PickupLayer
   - 
   - 
   - 

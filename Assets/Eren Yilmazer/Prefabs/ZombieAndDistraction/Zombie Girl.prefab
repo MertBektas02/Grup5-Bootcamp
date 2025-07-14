@@ -1240,9 +1240,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4776836335574267247}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 72.53961, y: -0.0000023841858, z: 57.491}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 188877814913216249}
@@ -1308,11 +1308,12 @@ MonoBehaviour:
   player: {fileID: 0}
   attackRange: 1.5
   chaseRange: 10
-  health: 100
+  health: 25
   wanderRadius: 7
   wanderWaitTime: 3
   isDead: 0
-  activeFlashBomb: {fileID: 5511885155306033212, guid: e81a1387b5225744b881b11a8c9fff7d, type: 3}
+  activeFlashBomb: {fileID: 2813751717898330367, guid: e81a1387b5225744b881b11a8c9fff7d, type: 3}
+  bloodEffect: {fileID: 1000013355911406, guid: 0764a70be45353b46bde93ec6b9f57da, type: 3}
 --- !u!136 &376440680642885932
 CapsuleCollider:
   m_ObjectHideFlags: 0

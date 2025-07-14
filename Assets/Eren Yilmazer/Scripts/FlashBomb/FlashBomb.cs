@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FlashBomb : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class FlashBomb : MonoBehaviour
     public Transform playerHand;
     public Camera fpsCamera;
     public float throwForce = 10f;
-    public float pickupRange = 2f;
+    
     public float explosionDelay = 2f;
     public float effectRadius = 20f;
     public float blindDuration = 5f;
@@ -24,37 +25,16 @@ public class FlashBomb : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-
-        if (fpsCamera == null)
-            fpsCamera = Camera.main;
-
-        if (playerHand == null)
-        {
-            GameObject handObj = GameObject.FindWithTag("PlayerHand");
-            if (handObj != null)
-                playerHand = handObj.transform;
-        }
+        fpsCamera = Camera.main;
+        
+        GameObject handObj = GameObject.FindWithTag("PlayerHand");
+        playerHand = handObj.transform;
+        
     }
 
     void Update()
     {
         if (hasBeenThrown) return;
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (!isEquipped)
-            {
-                float distance = Vector3.Distance(transform.position, playerHand.position);
-                if (distance <= pickupRange)
-                {
-                    Equip();
-                }
-            }
-            else
-            {
-                Unequip();
-            }
-        }
 
         if (isEquipped && Input.GetButtonDown("Fire1"))
         {
@@ -62,23 +42,7 @@ public class FlashBomb : MonoBehaviour
         }
     }
 
-    void Equip()
-    {
-        isEquipped = true;
-        rb.isKinematic = true;
-        transform.SetParent(playerHand);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-    }
-
-    void Unequip()
-    {
-        isEquipped = false;
-        transform.SetParent(null);
-        rb.isKinematic = false;
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 45);
-    }
-
+    
     void Throw()
     {
         isEquipped = false;
@@ -89,13 +53,13 @@ public class FlashBomb : MonoBehaviour
         Vector3 throwDirection = fpsCamera.transform.forward + fpsCamera.transform.up * 0.5f;
         rb.AddForce(throwDirection.normalized * throwForce, ForceMode.VelocityChange);
         
-        if (explosionSound != null && audioSource != null)
-            audioSource.PlayOneShot(explosionSound);
+        audioSource.PlayOneShot(explosionSound);
 
         StartCoroutine(DelayedExplosion());
     }
 
-    IEnumerator DelayedExplosion()
+    
+    private IEnumerator DelayedExplosion()
     {
         yield return new WaitForSeconds(explosionDelay);
         Explode();
@@ -119,7 +83,32 @@ public class FlashBomb : MonoBehaviour
                 zombie.BecomeBlinded(blindDuration, transform.position);
             }
         }
-
+        EquipmentManager.Instance.ClearFlashBomb();
         Destroy(gameObject, 5f); // bombayı sonra yok et
     }
+
+
+    
+    public bool IsEquipped() => isEquipped;
+
+    public void SetEquipped(bool val) => isEquipped = val;
+
+    public void MoveTo(Transform target)
+    {
+        isEquipped = false;
+        transform.SetParent(target);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        rb.isKinematic = true;
+    }
+
+    public void DropFromHand()
+    {
+        isEquipped = false;
+        transform.SetParent(null);
+        rb.isKinematic = false;
+        transform.position = playerHand.position + playerHand.forward * 1f;
+        transform.eulerAngles += new Vector3(0, 0, -45);
+    }
+    
 }
