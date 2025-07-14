@@ -29,18 +29,18 @@ public class MainMenuButtonManager : MonoBehaviour
 
     public void PlayGame()
     {
-        Debug.Log("PlayGame fonksiyonu çaðrýldý");
+        Debug.Log("PlayGame fonksiyonu ï¿½aï¿½rï¿½ldï¿½");
         SceneManager.LoadScene("TutorialScene");
     }
     public void OpenSettings()
     {
-        Debug.Log("Settings butonuna basýldý");
+        Debug.Log("Settings butonuna basï¿½ldï¿½");
             settingsPanel.SetActive(true);
             Panel.SetActive(false);
     }
     public void CloseSettings()
     {
-        Debug.Log("Settings kapatýldý");
+        Debug.Log("Settings kapatï¿½ldï¿½");
 
         if (settingsPanel != null)
             settingsPanel.SetActive(false);
@@ -50,7 +50,7 @@ public class MainMenuButtonManager : MonoBehaviour
     }
     public void SetVolume(float value)
     {
-        Debug.Log("Volume ayarlandý: " + value);
+        Debug.Log("Volume ayarlandï¿½: " + value);
     }
     public void ToggleMusic(bool isOn)
     {
@@ -59,7 +59,7 @@ public class MainMenuButtonManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Oyundan çýkýlýyor...");
+        Debug.Log("Oyundan ï¿½ï¿½kï¿½lï¿½yor...");
         Application.Quit();
     }
 }
