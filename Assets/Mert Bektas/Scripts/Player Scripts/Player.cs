@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -22,6 +23,18 @@ public class Player : MonoBehaviour, IDataPersistence
 
     void Update()
     {
+        HandleHungerAndThirstDamage();
+        HanleAutoHealing();
+    }
+
+
+    void ReduceNeeds()
+    {
+        currentFood = Mathf.Max(currentFood - 1, 0);
+        currentWater = Mathf.Max(currentWater - 1, 0);
+    }
+    private void HandleHungerAndThirstDamage()
+    {
         if (currentHealth == 0) return;
         {
             if (currentFood == 0 || currentWater == 0)
@@ -40,9 +53,15 @@ public class Player : MonoBehaviour, IDataPersistence
             }
         }
 
+    }
 
-        //healing
-        if (currentFood >= 85 && currentFood == 100 || currentWater >= 85 && currentWater == 100)
+    private void HanleAutoHealing()
+    {
+        // Yüksek food/water durumunda can yenile
+        bool hasHighFood = (currentFood >= 85 && currentFood == 100);
+        bool hasHighWater = (currentWater >= 85 && currentWater == 100);
+
+        if (hasHighFood || hasHighWater)
         {
             damageTimer += Time.deltaTime;
 
@@ -58,10 +77,14 @@ public class Player : MonoBehaviour, IDataPersistence
         }
 
     }
-
-    public void TakeDamage(int amount)
+        public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0);
+        if (currentHealth <= 0)
+        {
+            GameOverManager.Instance.ShowGameOver();
+        }
         Debug.Log("Player took damage. Current health: " + currentHealth);
     }
     public void RecoveryHealth(int amount) // food ve water 85'in üstündeyse can yenilensin.
@@ -70,11 +93,10 @@ public class Player : MonoBehaviour, IDataPersistence
         Debug.Log("Player healing. Current health: " + currentHealth);
     }
 
-    void ReduceNeeds()
-    {
-        currentFood = Mathf.Max(currentFood - 1, 0);
-        currentWater = Mathf.Max(currentWater - 1, 0);
-    }
+
+
+    //------------SAVE/LOAD-----------------
+
     public void SaveData(ref GameData data)
     {
         data.playerData.playerHealth = currentHealth;
