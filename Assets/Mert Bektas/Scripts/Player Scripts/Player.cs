@@ -24,7 +24,7 @@ public class Player : MonoBehaviour, IDataPersistence
     void Update()
     {
         HandleHungerAndThirstDamage();
-        HanleAutoHealing();
+        HandleAutoHealing();
     }
 
 
@@ -55,11 +55,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
     }
 
-    private void HanleAutoHealing()
+    private void HandleAutoHealing()
     {
-        // Yüksek food/water durumunda can yenile
-        bool hasHighFood = (currentFood >= 85 && currentFood == 100);
-        bool hasHighWater = (currentWater >= 85 && currentWater == 100);
+        // Food ya da Water 85 ve üzerindeyse can yenile
+        bool hasHighFood = currentFood >= 85;
+        bool hasHighWater = currentWater >= 85;
 
         if (hasHighFood || hasHighWater)
         {
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour, IDataPersistence
 
             if (damageTimer >= damageInterval)
             {
-                RecoveryHealth(5);
+                RecoveryHealth(5); // heal fonksiyonunda sınır koyacağız
                 damageTimer = 0f;
             }
         }
@@ -75,9 +75,8 @@ public class Player : MonoBehaviour, IDataPersistence
         {
             damageTimer = 0f;
         }
-
     }
-        public void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0);
@@ -89,7 +88,7 @@ public class Player : MonoBehaviour, IDataPersistence
     }
     public void RecoveryHealth(int amount) // food ve water 85'in üstündeyse can yenilensin.
     {
-        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth + amount, 100);
         Debug.Log("Player healing. Current health: " + currentHealth);
     }
 

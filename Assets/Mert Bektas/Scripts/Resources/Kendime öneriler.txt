@@ -1,0 +1,1 @@
+BaseResource tasarlayıp diğer bütün resource'leri base'den türetmeyi değerlendir-Refactor fikri

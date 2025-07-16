@@ -19,6 +19,8 @@ public class CurrentResourceUIManager : MonoBehaviour
     public TextMeshProUGUI woodAmount;
     public TextMeshProUGUI foodAmount;
     public TextMeshProUGUI waterAmount;
+    public TextMeshProUGUI stoneAmount;
+    public TextMeshProUGUI coalAmount;
     // public TreeData currentData; //just in case if i needed;
     // public void ShowCurrentResources(TreeData data)//just in case if i needed;
     // {
@@ -73,6 +75,8 @@ public class CurrentResourceUIManager : MonoBehaviour
         woodAmount.text =  ResourceManager.Instance.GetResourceAmount(ResourceType.Wood).ToString();
         foodAmount.text =  ResourceManager.Instance.GetResourceAmount(ResourceType.Food).ToString();
         waterAmount.text = ResourceManager.Instance.GetResourceAmount(ResourceType.Water).ToString();
+        coalAmount.text = ResourceManager.Instance.GetResourceAmount(ResourceType.Coal).ToString();
+        stoneAmount.text = ResourceManager.Instance.GetResourceAmount(ResourceType.Stone).ToString();
 
     }
 }
