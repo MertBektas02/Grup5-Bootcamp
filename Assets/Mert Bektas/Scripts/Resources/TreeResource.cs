@@ -28,6 +28,10 @@ public class TreeResource : MonoBehaviour, IClickable, IDataPersistence
     }
     private void PlayHitEffects()
     {
+        if (floatingText != null)
+        {
+            ShowFloatingText();
+        }
         if (data.hitSound != null)
         {
             AudioSource.PlayClipAtPoint(data.hitSound, transform.position);
@@ -66,7 +70,32 @@ public class TreeResource : MonoBehaviour, IClickable, IDataPersistence
         else
         {
             //Debug.Log($"Tree NOT collected, skipping save:");
-           // Debug.Log($"Tree NOT collected, skipping save: {uniqueID}");
+            // Debug.Log($"Tree NOT collected, skipping save: {uniqueID}");
+        }
+    }
+
+
+
+    [SerializeField] private GameObject floatingText;
+
+    public void ShowFloatingText()
+    {
+        if (floatingText == null) return;
+
+        Vector3 spawnPos = transform.position;
+        if (Camera.main != null)
+        {
+            spawnPos -= Camera.main.transform.forward * 0.1f;
+        }
+
+        // instantiate world-space bağımsız
+        GameObject go = Instantiate(floatingText, spawnPos, Quaternion.identity);
+
+        // TextMesh'e currentHealth'i yaz
+        TextMesh tm = go.GetComponentInChildren<TextMesh>();
+        if (tm != null)
+        {
+            tm.text = currentHealth.ToString();
         }
     }
 }

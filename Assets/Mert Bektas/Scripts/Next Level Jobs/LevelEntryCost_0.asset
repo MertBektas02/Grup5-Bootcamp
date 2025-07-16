@@ -15,8 +15,8 @@ MonoBehaviour:
   sceneName: TutoLevelScene
   costList:
   - type: 0
-    amount: 100
+    amount: 30
   - type: 6
-    amount: 100
+    amount: 30
   - type: 1
-    amount: 100
+    amount: 30
