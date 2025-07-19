@@ -1,5 +1,5 @@
 using UnityEngine;
-public class HordeManager : MonoBehaviour,IDataPersistence
+public class HordeManager : MonoBehaviour, IDataPersistence
 {
 
     public int hordeDay = 5;
@@ -36,24 +36,24 @@ public class HordeManager : MonoBehaviour,IDataPersistence
         Debug.Log("GAME OVER! Horde geldi, ama sen kaçamadın.");
         // Oyunu bitir, menü göster, vs.
     }
-    
 
-        // -------- Save, Load --------
+
+    // -------- Save, Load --------
     public void SaveData(ref GameData data)
     {
         data.hordeDayData = hordeDay;
         data.playerEscapedData = playerEscaped;
     }
 
-public void LoadData(GameData data)
-{
-    if (data.hordeDayData == 0)
+    public void LoadData(GameData data)
     {
-        // Bu sahne için varsayılan horde gününü inspector'dan ayarlamışsın
-        data.hordeDayData = hordeDay; // ilk değer GameData'ya yazılır
-    }
+        if (data.hordeDayData == 0)
+        {
+            // Bu sahne için varsayılan horde gününü inspector'dan ayarlamışsın
+            data.hordeDayData = hordeDay; // ilk değer GameData'ya yazılır
+        }
 
-    hordeDay = data.hordeDayData;
-    playerEscaped = data.playerEscapedData;
-}
+        hordeDay = data.hordeDayData;
+        playerEscaped = data.playerEscapedData;
+    }
 }

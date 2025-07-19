@@ -29,6 +29,7 @@ public class AutoCollector : MonoBehaviour
             timer = 0f;
             ResourceManager.Instance.AddResource(resourceType, amountPerTick);
             _updateUI.UpdateUI();
+            ShowAutomationPopup(amountPerTick,resourceType);
         }
     }
 
@@ -39,4 +40,26 @@ public class AutoCollector : MonoBehaviour
     }
 
     public bool IsActive => isActive;
+
+
+    [Header("Popup Ayarları")]
+    public GameObject automationPopupPrefab;     
+    public Transform popupSpawnPoint;            
+    private void ShowAutomationPopup(int amount, ResourceType type)
+    {
+        if (automationPopupPrefab == null) return;
+
+        // Spawn pozisyonunu belirle
+        Vector3 spawnPos = popupSpawnPoint != null ? popupSpawnPoint.position : transform.position;
+
+        GameObject go = Instantiate(automationPopupPrefab, spawnPos, Quaternion.identity);
+
+        // TextMesh’i güncelle
+        TextMesh tm = go.GetComponentInChildren<TextMesh>();
+        if (tm != null)
+        {
+            tm.text = $"+{amount} {type}";
+        }
+    }
+
 }

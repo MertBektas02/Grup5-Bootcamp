@@ -68,6 +68,8 @@ public class AutoCollectorPurchasePoint : MonoBehaviour, IDataPersistence
         }
     }
 
+
+
     // ---------- SAVE / LOAD ----------
     public void SaveData(ref GameData data)
     {

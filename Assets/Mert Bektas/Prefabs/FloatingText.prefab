@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8094470349084255144}
   - component: {fileID: 285503075383470881}
   - component: {fileID: 1451273337161826406}
-  - component: {fileID: 305474368412252820}
   - component: {fileID: 6499210372840926134}
   m_Layer: 0
   m_Name: Text
@@ -102,21 +101,6 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &305474368412252820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 665414836730909915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef2d5fdf5d70094d80a672350b3ceac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyTime: 1.12
-  Offset: {x: 0, y: 2, z: 0}
-  RandomizeIntensity: {x: 1, y: 0, z: 0}
 --- !u!95 &6499210372840926134
 Animator:
   serializedVersion: 7
@@ -148,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6769700082332939961}
+  - component: {fileID: 3781151976882303834}
   m_Layer: 0
   m_Name: FloatingText
   m_TagString: Untagged
@@ -171,3 +156,18 @@ Transform:
   - {fileID: 8094470349084255144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3781151976882303834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338897620228575866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef2d5fdf5d70094d80a672350b3ceac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 1.12
+  Offset: {x: 0, y: 0, z: 0}
+  RandomizeIntensity: {x: 0.5, y: 0.5, z: 0}

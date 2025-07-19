@@ -18,61 +18,35 @@ public class DayNightSystemCopy : MonoBehaviour
     [SerializeField] private bool isDay = false;
     [SerializeField] private bool isNight = false;
 
-    private void Update()
+    void Update()
     {
-        if (timeManager == null)
-        {
-            Debug.LogWarning("[DayNight] TimeManager atanmamış!");
-            return;
-        }
-        if (sun == null)
-        {
-            Debug.LogWarning("[DayNight] Sun Light atanmamış!");
-            return;
-        }
+        if (timeManager == null || sun == null) return;
 
-        // 0-1 arası gün ilerleme oranı
+        // 0–1 arası gün ilerlemesi
         float t = timeManager.GetDayProgress01();
 
-        // test için log
-        Debug.Log($"[DayNight] DayProgress: {t:F3} | CurrentDay: {timeManager.currentDay}");
+        // Başlangıcı doğma konumuna kaydır
+        float shifted = (t + 0.25f) % 1f;
 
-        if (t < dayPortion)
-        {
-            if (!isDay) Debug.Log("[DayNight] Gündüz başladı!");
-            isDay = true;
-            isNight = false;
+        // Gündüz/gece bool'ları
+        isDay = shifted >= 0.25f && shifted < 0.75f;
+        isNight = !isDay;
 
-            float normalized = Mathf.InverseLerp(0f, dayPortion, t) * 0.5f;
-            UpdateSun(normalized);
-        }
-        else
-        {
-            if (!isNight) Debug.Log("[DayNight] Gece başladı!");
-            isDay = false;
-            isNight = true;
-
-            float normalized = Mathf.InverseLerp(dayPortion, 1f, t) * 0.5f + 0.5f;
-            UpdateSun(normalized);
-        }
+        UpdateSun(shifted);
     }
 
     void UpdateSun(float timeOfDay)
     {
-        // Zamanı logla
-        Debug.Log($"[DayNight] timeOfDay: {timeOfDay:F3}");
-
-        // ışık rotasyonu
+        // Güneş açısı
         float sunAngle = (timeOfDay * 360f) - 90f;
         sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
 
-        // ışık rengi ve yoğunluğu
         if (sunColorOverTime != null)
             sun.color = sunColorOverTime.Evaluate(timeOfDay);
+
         if (sunIntensityCurve != null)
             sun.intensity = sunIntensityCurve.Evaluate(timeOfDay);
 
-        // ortam ışığı
         RenderSettings.ambientLight = sun.color * 0.4f;
     }
 }
