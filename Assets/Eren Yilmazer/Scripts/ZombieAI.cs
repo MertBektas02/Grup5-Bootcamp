@@ -46,7 +46,7 @@ public class ZombieAI : MonoBehaviour
         
         if (isDead || player == null) return;
         // FLASH MODU: Flash bombası aktifse ona yürü
-        if (activeFlashBomb != null && activeFlashBomb.activeSelf&& activeFlashBomb.scene.IsValid())
+        if ((activeFlashBomb != null && activeFlashBomb.activeSelf && activeFlashBomb.scene.IsValid()))
         {
             agent.isStopped = false;
             animator.SetBool("isWalking", true);
@@ -60,7 +60,7 @@ public class ZombieAI : MonoBehaviour
         {
             blindTimer -= Time.deltaTime;
 
-            // Flash bombaya yürümeye devam etsin
+            
             animator.SetBool("isAttacking", false);
 
             if (blindTimer <= 0f)
@@ -136,6 +136,8 @@ public class ZombieAI : MonoBehaviour
 
 
     }
+  
+    // ReSharper disable Unity.PerformanceAnalysis
     void TryDamagePlayer()
     {
         Player playerHealth = player.GetComponent<Player>();
@@ -180,11 +182,9 @@ public class ZombieAI : MonoBehaviour
         if (isDead) return;
 
         health -= amount;
-        if (bloodEffect != null)
-        {
-            GameObject effect = Instantiate(bloodEffect, transform.position + Vector3.up * 0.5f, Quaternion.identity);
-            Destroy(effect, 1.5f); // 1.5 saniye sonra sil
-        }
+        GameObject effect = Instantiate(bloodEffect, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        Destroy(effect, 1.5f); // 1.5 saniye sonra sil
+        
         if (health <= 0)
         {
             Die();

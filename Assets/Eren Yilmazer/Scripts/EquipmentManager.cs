@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class EquipmentManager : MonoBehaviour
@@ -9,8 +10,11 @@ public class EquipmentManager : MonoBehaviour
     public Weapon revolver;
     public FlashBomb flashBomb;
     
+
     public Image revolverIcon;
     public Image flashBombIcon;
+    public Image handIcon;
+
 
     public Color activeEquippedColor = Color.green; // elde olan ikon
     public Color inactiveEquippedColor = Color.white; // elde olmayan ama alınmış ikon
@@ -27,18 +31,18 @@ public class EquipmentManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
             Instance = this;
         revolverIcon.gameObject.SetActive(false);
         flashBombIcon.gameObject.SetActive(false);
+        handIcon.gameObject.SetActive(true);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            TryPickupNearest();
-
+            if (revolver != null || flashBomb != null)
+                TryPickupNearest();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -46,12 +50,61 @@ public class EquipmentManager : MonoBehaviour
             if (currentEquipped != EquippedItem.None)
                 DropCurrent();
         }
-
+        
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            EquipWeapon(EquippedItem.Revolver);
+        {
+            if (revolver != null && revolver.IsEquipped())
+            {
+                EquipWeapon(EquippedItem.Revolver);
+                
+            }
+            else if (revolver != null && flashBomb != null && flashBomb.IsEquipped())
+            {
+                EquipWeapon(EquippedItem.Revolver);
+                
+            }
+            else if (revolver != null && revolver.IsEquipped() == false && (flashBomb == null || !flashBomb.IsEquipped()))
+            {
+                EquipWeapon(EquippedItem.Revolver);
+                
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            EquipWeapon(EquippedItem.FlashBomb);
+        {
+            if (flashBomb != null && flashBomb.IsEquipped())
+            {
+                EquipWeapon(EquippedItem.FlashBomb);
+                ;
+            }
+            else if (flashBomb != null && revolver != null && revolver.IsEquipped())
+            {
+                EquipWeapon(EquippedItem.FlashBomb);
+               
+            }
+            else if (flashBomb != null && flashBomb.IsEquipped() == false && (revolver == null || !revolver.IsEquipped()))
+            {
+                EquipWeapon(EquippedItem.FlashBomb);
+                
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (currentEquipped != EquippedItem.None)
+            {
+                // Elimizdekini bırakmadan sadece inActiveSlot'a çekiyoruz
+                if (currentEquipped == EquippedItem.Revolver)
+                    revolver.MoveTo(inActiveSlot);
+                else if (currentEquipped == EquippedItem.FlashBomb)
+                    flashBomb.MoveTo(inActiveSlot);
+
+                currentEquipped = EquippedItem.None;
+                UpdateUIIcons();
+            }
+        }
+        
+            
     }
 
     void TryPickupNearest()
@@ -59,14 +112,19 @@ public class EquipmentManager : MonoBehaviour
         float revolverDist = float.MaxValue;
         float flashDist = float.MaxValue;
 
-        // Sadece elde değilse mesafesini hesapla
-        if (!revolver.IsEquipped())
-            revolverDist = Vector3.Distance(revolver.transform.position, playerHand.position);
+        if (revolver != null && !revolver.IsEquipped())
+        {
+            if (revolver.transform != null && playerHand != null)
+                revolverDist = Vector3.Distance(revolver.transform.position, playerHand.position);
+        }
 
-        if (!flashBomb.IsEquipped())
-            flashDist = Vector3.Distance(flashBomb.transform.position, playerHand.position);
+        if (flashBomb != null && !flashBomb.IsEquipped())
+        {
+            if (flashBomb.transform != null && playerHand != null)
+                flashDist = Vector3.Distance(flashBomb.transform.position, playerHand.position);
+        }
 
-        // İkisi de eldeyse çık
+        // İkisi de eldeyse ya da yakında değilse çık
         if (revolverDist == float.MaxValue && flashDist == float.MaxValue)
             return;
 
@@ -80,6 +138,7 @@ public class EquipmentManager : MonoBehaviour
             EquipWeapon(EquippedItem.FlashBomb);
         }
     }
+
 
     public void EquipWeapon(EquippedItem toEquip)
     {
@@ -115,7 +174,6 @@ public class EquipmentManager : MonoBehaviour
                     break;
             }
         }
-
 
         switch (toEquip)
         {
@@ -160,6 +218,7 @@ public class EquipmentManager : MonoBehaviour
 
         flashBomb = null;
     }
+    
     private void UpdateUIIcons()
     {
         bool hasRevolver = revolver != null && (revolver.transform.parent == playerHand || revolver.transform.parent == inActiveSlot);
@@ -187,7 +246,16 @@ public class EquipmentManager : MonoBehaviour
             else if (hasFlashBomb)
                 flashBombIcon.color = inactiveEquippedColor;
         }
+        // Hand Icon - her zaman açık 
+        if (handIcon != null)
+        {
+            handIcon.gameObject.SetActive(true); // her zaman açık
+
+            if (currentEquipped == EquippedItem.None)
+                handIcon.color = activeEquippedColor; // yeşil: sadece el aktif
+            else
+                handIcon.color = inactiveEquippedColor; // beyaz: el alınmış ama aktif değil
+        }
     }
-
-
+    
 }

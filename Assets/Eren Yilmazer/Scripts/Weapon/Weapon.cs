@@ -29,32 +29,35 @@ public class Weapon : MonoBehaviour
     [Header("Ammo")]
     public int maxAmmo = 6;
     private int currentAmmo;
+    public int reserveAmmo = 6; 
     public float reloadTime = 2f;
 
     [Header("Effects")]
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private AudioClip emptyClickSound;
     private AudioSource audioSource;
     
     [Header("UI")]
     public AmmoUI ammoUI;
-    
-    void Awake()
+
+    private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-        fpsCamera = Camera.main;
         currentAmmo = maxAmmo;
         
-        GameObject handObj = GameObject.FindWithTag("PlayerHand");
-        playerHand = handObj.transform;
+       //*GameObject handObj = GameObject.FindWithTag("PlayerHand");
+        //*playerHand = handObj.transform;
         
     }
-    void Start()
+
+    private void Start()
     {
-            ammoUI.UpdateAmmo(currentAmmo, maxAmmo);
+        ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
     }
-    void Update()
+
+    private void Update()
     {
         if (isEquipped)
         {
@@ -68,7 +71,10 @@ public class Weapon : MonoBehaviour
                 nextFireTime = Time.time + fireRate;
                 Shoot();
             }
-            
+            else if (Input.GetButtonDown("Fire1") && currentAmmo <= 0 && !isReloading)
+            {
+                audioSource.PlayOneShot(emptyClickSound);
+            }
 
             // Yeniden doldurma
             if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo && !isReloading)
@@ -78,43 +84,34 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Shoot()
+    
+    private void Shoot()
     {
         if (isReloading || currentAmmo <= 0) return;
-        if (bulletPrefab != null && bulletSpawnPoint != null)
-        {
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            
-            if (bulletRb != null)
-            {
-                bulletRb.isKinematic = false;
-                bulletRb.AddForce(bulletSpawnPoint.forward * bulletForce, ForceMode.Impulse);
-            }
-        }
 
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        
+        bulletRb.isKinematic = false;
+        bulletRb.AddForce(bulletSpawnPoint.forward * bulletForce, ForceMode.Impulse);
+        
         // Raycast ile anlık hasar kontrolü
         RaycastHit hit;
-        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, shootRange))
+        if (Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward, out hit, shootRange))
         {
-            ZombieAI zombie = hit.collider.GetComponentInParent<ZombieAI>();
+            var zombie = hit.collider.GetComponentInParent<ZombieAI>();
             if (zombie != null)
             {
                 zombie.TakeDamage((int)damage);
             }
+            
         }
-
-        // Efektler
         PlayMuzzleFlash();
         currentAmmo--;
-        
-        if (ammoUI != null)
-            ammoUI.UpdateAmmo(currentAmmo, maxAmmo);
+        ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
+        audioSource.PlayOneShot(shootSound);
 
-        if (shootSound != null)
-            audioSource.PlayOneShot(shootSound);
-
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0 && reserveAmmo > 0)
         {
             StartCoroutine(Reload());
         }
@@ -127,19 +124,22 @@ public class Weapon : MonoBehaviour
         isReloading = true;
         audioSource.PlayOneShot(reloadSound);
         yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
+        
+        int ammoNeeded = maxAmmo - currentAmmo;
+        int ammoToLoad = Mathf.Min(ammoNeeded, reserveAmmo);
+
+        currentAmmo += ammoToLoad;
+        reserveAmmo -= ammoToLoad;
+        
         isReloading = false;
-        if (ammoUI != null)
-            ammoUI.UpdateAmmo(currentAmmo, maxAmmo);
+        ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
     }
 
-    void PlayMuzzleFlash()
+    private void PlayMuzzleFlash()
     {
-        if (muzzleFlashPrefab != null && muzzlePoint != null)
-        {
-            GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
-            Destroy(flash, 0.1f);
-        }
+        GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
+        Destroy(flash, 0.1f);
+        
     }
 
     // ----------- Yeni Fonksiyonlar -----------
@@ -154,6 +154,9 @@ public class Weapon : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         rb.isKinematic = true;
+        
+        rb.detectCollisions = false;
+        SetColliderEnabled(false);
     }
 
     public void DropFromHand()
@@ -161,8 +164,20 @@ public class Weapon : MonoBehaviour
         isEquipped = false;
         transform.SetParent(null);
         rb.isKinematic = false;
+        rb.detectCollisions = true; // ← geri aç
+        SetColliderEnabled(true);
         transform.position = playerHand.position + playerHand.forward * 1f;
         transform.eulerAngles += new Vector3(0, 0, -45);
     }
-    
+    public void AddAmmo(int amount)
+    {
+        reserveAmmo += amount;
+        ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
+    }
+    void SetColliderEnabled(bool isEnabled)
+    {
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+            col.enabled = isEnabled;
+    }
 }

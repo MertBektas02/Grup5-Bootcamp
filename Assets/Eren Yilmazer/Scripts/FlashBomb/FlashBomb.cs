@@ -14,7 +14,8 @@ public class FlashBomb : MonoBehaviour
     public float blindDuration = 5f;
     public AudioClip explosionSound;
     public GameObject explosionEffect;
-
+    
+    
     private AudioSource audioSource;
     private Rigidbody rb;
     private bool isEquipped = false;
@@ -25,11 +26,8 @@ public class FlashBomb : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        fpsCamera = Camera.main;
-        
         GameObject handObj = GameObject.FindWithTag("PlayerHand");
         playerHand = handObj.transform;
-        
     }
 
     void Update()
@@ -54,6 +52,10 @@ public class FlashBomb : MonoBehaviour
         rb.AddForce(throwDirection.normalized * throwForce, ForceMode.VelocityChange);
         
         audioSource.PlayOneShot(explosionSound);
+        
+        // FlashBomb ikonunu kapat
+        EquipmentManager.Instance.flashBombIcon.gameObject.SetActive(false);
+        
 
         StartCoroutine(DelayedExplosion());
     }
@@ -83,7 +85,7 @@ public class FlashBomb : MonoBehaviour
                 zombie.BecomeBlinded(blindDuration, transform.position);
             }
         }
-        EquipmentManager.Instance.ClearFlashBomb();
+        EquipmentManager.Instance.ClearFlashBomb(); 
         Destroy(gameObject, 5f); // bombayı sonra yok et
     }
 
@@ -91,7 +93,11 @@ public class FlashBomb : MonoBehaviour
     
     public bool IsEquipped() => isEquipped;
 
-    public void SetEquipped(bool val) => isEquipped = val;
+    public void SetEquipped(bool val)
+    {
+        isEquipped = val;
+        
+    }
 
     public void MoveTo(Transform target)
     {
