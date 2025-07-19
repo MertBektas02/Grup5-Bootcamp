@@ -4,7 +4,7 @@ using System;
 public class GameTimeManager : MonoBehaviour, IDataPersistence
 {
     public int currentDay = 1;
-    public float dayDuration = 1200f; // 20 dakika
+    public float dayDuration = 1200f;
     private float currentTime;
 
     public event Action<int> OnNewDayStarted;
@@ -19,6 +19,11 @@ public class GameTimeManager : MonoBehaviour, IDataPersistence
             OnNewDayStarted?.Invoke(currentDay);
         }
         //Debug.Log(currentTime);
+    }
+
+    public float GetDayProgress01()
+    {
+        return currentTime / dayDuration; // 0-1 arası gün ilerleme oranı
     }
 
     //--------Save, Load--------

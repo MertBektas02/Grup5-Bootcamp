@@ -2,59 +2,77 @@ using UnityEngine;
 
 public class DayNightSystemCopy : MonoBehaviour
 {
-    [Header("Zaman Ayarları")]
-    [Tooltip("Gündüz süresi (saniye cinsinden)")]
-    public float dayDuration = 900f; // 15 dakika
+    [Header("Referanslar")]
+    public GameTimeManager timeManager; // Inspector’dan bağla
+    public Light sun;
 
-    [Tooltip("Gece süresi (saniye cinsinden)")]
-    public float nightDuration = 300f; // 5 dakika
-
-    [Range(0, 1)]
-    [Tooltip("Günün hangi saatinde başlanacağı. 0 = gece, 0.5 = öğlen, 1 = gece")]
-    public float startTimeOfDay = 0f;
+    [Header("Oranlar (0-1 toplamı 1 olacak)")]
+    [Range(0.1f, 0.9f)] public float dayPortion = 0.7f; // örnek: %70 gündüz, %30 gece
+    [Range(0.1f, 0.9f)] public float nightPortion = 0.3f; // bu otomatik hesaplanabilir
 
     [Header("Güneş Ayarları")]
-    public Light sun;
     public Gradient sunColorOverTime;
     public AnimationCurve sunIntensityCurve;
 
-    private float timeOfDay = 0f;
+    [Header("Durum Bool'ları (Sadece Okunur)")]
+    [SerializeField] private bool isDay = false;
+    [SerializeField] private bool isNight = false;
 
-    void Start()
+    private void Update()
     {
-        timeOfDay = startTimeOfDay;
-    }
-
-    void Update()
-    {
-        float deltaTimeFraction;
-
-        // Gündüz: 0.25 - 0.75 (yarım dairelik gündüz aralığı)
-        if (timeOfDay >= 0.25f && timeOfDay < 0.75f)
+        if (timeManager == null)
         {
-            // Gündüz süresi 50% zaman aralığını kapsıyor
-            deltaTimeFraction = (Time.deltaTime / dayDuration) * 0.5f;
+            Debug.LogWarning("[DayNight] TimeManager atanmamış!");
+            return;
+        }
+        if (sun == null)
+        {
+            Debug.LogWarning("[DayNight] Sun Light atanmamış!");
+            return;
+        }
+
+        // 0-1 arası gün ilerleme oranı
+        float t = timeManager.GetDayProgress01();
+
+        // test için log
+        Debug.Log($"[DayNight] DayProgress: {t:F3} | CurrentDay: {timeManager.currentDay}");
+
+        if (t < dayPortion)
+        {
+            if (!isDay) Debug.Log("[DayNight] Gündüz başladı!");
+            isDay = true;
+            isNight = false;
+
+            float normalized = Mathf.InverseLerp(0f, dayPortion, t) * 0.5f;
+            UpdateSun(normalized);
         }
         else
         {
-            // Gece süresi 50% zaman aralığını kapsıyor
-            deltaTimeFraction = (Time.deltaTime / nightDuration) * 0.5f;
+            if (!isNight) Debug.Log("[DayNight] Gece başladı!");
+            isDay = false;
+            isNight = true;
+
+            float normalized = Mathf.InverseLerp(dayPortion, 1f, t) * 0.5f + 0.5f;
+            UpdateSun(normalized);
         }
-
-        timeOfDay += deltaTimeFraction;
-        if (timeOfDay > 1f) timeOfDay -= 1f;
-
-        UpdateSun();
     }
 
-    void UpdateSun()
+    void UpdateSun(float timeOfDay)
     {
+        // Zamanı logla
+        Debug.Log($"[DayNight] timeOfDay: {timeOfDay:F3}");
+
+        // ışık rotasyonu
         float sunAngle = (timeOfDay * 360f) - 90f;
         sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
 
-        sun.color = sunColorOverTime.Evaluate(timeOfDay);
-        sun.intensity = sunIntensityCurve.Evaluate(timeOfDay);
+        // ışık rengi ve yoğunluğu
+        if (sunColorOverTime != null)
+            sun.color = sunColorOverTime.Evaluate(timeOfDay);
+        if (sunIntensityCurve != null)
+            sun.intensity = sunIntensityCurve.Evaluate(timeOfDay);
 
+        // ortam ışığı
         RenderSettings.ambientLight = sun.color * 0.4f;
     }
 }
