@@ -584,6 +584,9 @@ MonoBehaviour:
   Panel: {fileID: 0}
   volumeSlider: {fileID: 0}
   musicToggle: {fileID: 0}
+  playButton: {fileID: 0}
+  settingsButton: {fileID: 0}
+  quitButton: {fileID: 0}
 --- !u!1 &4255798650175626831 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2819019865742940460, guid: d994b0858ab2695468bdd8da7ee04b67, type: 3}
@@ -605,6 +608,9 @@ MonoBehaviour:
   Panel: {fileID: 0}
   volumeSlider: {fileID: 0}
   musicToggle: {fileID: 0}
+  playButton: {fileID: 0}
+  settingsButton: {fileID: 0}
+  quitButton: {fileID: 0}
 --- !u!1 &5006368191877018474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6443165262837085193, guid: d994b0858ab2695468bdd8da7ee04b67, type: 3}
@@ -626,6 +632,9 @@ MonoBehaviour:
   Panel: {fileID: 0}
   volumeSlider: {fileID: 0}
   musicToggle: {fileID: 0}
+  playButton: {fileID: 0}
+  settingsButton: {fileID: 0}
+  quitButton: {fileID: 0}
 --- !u!4 &5725592209213638847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6009466788830695388, guid: d994b0858ab2695468bdd8da7ee04b67, type: 3}

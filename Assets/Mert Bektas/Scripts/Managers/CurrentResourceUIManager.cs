@@ -10,7 +10,7 @@ public class CurrentResourceUIManager : MonoBehaviour
     
     public GameObject InfoPanel;
     public GameObject crossHairCanvas;
-    public MonoBehaviour playerMovementScript;
+    public PlayerMovement playerMovementScript;
     public TextMeshProUGUI currentHealthText;
     [Header("Player current stats")]
     public TextMeshProUGUI currentFood;
@@ -19,6 +19,8 @@ public class CurrentResourceUIManager : MonoBehaviour
     public TextMeshProUGUI woodAmount;
     public TextMeshProUGUI foodAmount;
     public TextMeshProUGUI waterAmount;
+    public TextMeshProUGUI stoneAmount;
+    public TextMeshProUGUI coalAmount;
     // public TreeData currentData; //just in case if i needed;
     // public void ShowCurrentResources(TreeData data)//just in case if i needed;
     // {
@@ -31,14 +33,17 @@ public class CurrentResourceUIManager : MonoBehaviour
     void Start()
     {
         UpdateUI();
+
     }
        void Update()
     {
+        UpdateUI();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             UpdateUI();
             bool isPanelActive = !InfoPanel.activeSelf;
             InfoPanel.SetActive(isPanelActive);
+            crossHairCanvas.SetActive(!isPanelActive);
 
             // Cursor'ı kontrol et
             if (isPanelActive)
@@ -47,7 +52,7 @@ public class CurrentResourceUIManager : MonoBehaviour
                 UnityEngine.Cursor.visible = true;
                 if (playerMovementScript != null)
                     playerMovementScript.enabled = false;
-                
+
             }
             else
             {
@@ -60,15 +65,18 @@ public class CurrentResourceUIManager : MonoBehaviour
     }
     public void UpdateUI()
     {
-        currentHealthText.text = "health: " + player.currentHealth;
+        currentHealthText.text =  player.currentHealth.ToString();
+
         //player current stats
-        currentFood.text = "food: " + player.currentFood;
-        currentWater.text = "water: " + player.currentWater;
+        currentFood.text =  player.currentFood.ToString();
+        currentWater.text =  player.currentWater.ToString();
 
         //player storage
-        woodAmount.text = "Wood: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Wood);
-        foodAmount.text = "food: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Food);
-        waterAmount.text = "water: " + ResourceManager.Instance.GetResourceAmount(ResourceType.Water);
+        woodAmount.text =  ResourceManager.Instance.GetResourceAmount(ResourceType.Wood).ToString();
+        foodAmount.text =  ResourceManager.Instance.GetResourceAmount(ResourceType.Food).ToString();
+        waterAmount.text = ResourceManager.Instance.GetResourceAmount(ResourceType.Water).ToString();
+        coalAmount.text = ResourceManager.Instance.GetResourceAmount(ResourceType.Coal).ToString();
+        stoneAmount.text = ResourceManager.Instance.GetResourceAmount(ResourceType.Stone).ToString();
 
     }
 }

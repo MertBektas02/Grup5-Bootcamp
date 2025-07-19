@@ -19,7 +19,7 @@ public class RestorePlayerStats : MonoBehaviour
     public void DrinkWater()
     {
         int maxWater = 100;
-        int sipAmount = 10; // her içmede alınacak su miktarı
+        int sipAmount = 30; // her içmede alınacak su miktarı
         int neededWater = maxWater - player.currentWater;
 
         if (neededWater <= 0)
@@ -51,7 +51,7 @@ public class RestorePlayerStats : MonoBehaviour
     public void EatFood()
     {
         int maxFood = 100;
-        int biteAmount = 10; // her yeme işleminde alınacak gıda miktarı
+        int biteAmount = 30; // her yeme işleminde alınacak gıda miktarı
         int neededFood = maxFood - player.currentFood;
 
         if (neededFood <= 0)

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6315458309087844996}
   - component: {fileID: 6963303161099571731}
   - component: {fileID: 825720731345734449}
-  - component: {fileID: 3397305300628199830}
   m_Layer: 0
   m_Name: Quit
   m_TagString: Untagged
@@ -122,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3397305300628199830}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuButtonManager, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
@@ -134,25 +133,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3397305300628199830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1674761708226702308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4f99405539c34b4d96bebd6a07e8c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsPanel: {fileID: 0}
-  Panel: {fileID: 0}
-  volumeSlider: {fileID: 0}
-  musicToggle: {fileID: 0}
-  playButton: {fileID: 0}
-  settingsButton: {fileID: 0}
-  quitButton: {fileID: 0}
 --- !u!1 &2973746165285841414
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +145,6 @@ GameObject:
   - component: {fileID: 4527396938750041217}
   - component: {fileID: 1075705793765418476}
   - component: {fileID: 4802409358533660191}
-  - component: {fileID: 7674956090475232159}
   m_Layer: 0
   m_Name: Restart
   m_TagString: Untagged
@@ -275,7 +254,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7674956090475232159}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuButtonManager, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
@@ -287,25 +266,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7674956090475232159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2973746165285841414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4f99405539c34b4d96bebd6a07e8c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsPanel: {fileID: 0}
-  Panel: {fileID: 0}
-  volumeSlider: {fileID: 0}
-  musicToggle: {fileID: 0}
-  playButton: {fileID: 0}
-  settingsButton: {fileID: 0}
-  quitButton: {fileID: 0}
 --- !u!1 &3430735717227412103
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +278,6 @@ GameObject:
   - component: {fileID: 4856828850244761458}
   - component: {fileID: 61739541775269247}
   - component: {fileID: 3813993988769757211}
-  - component: {fileID: 1596468131871718192}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -428,7 +387,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1596468131871718192}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuButtonManager, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
@@ -440,25 +399,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1596468131871718192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3430735717227412103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4f99405539c34b4d96bebd6a07e8c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsPanel: {fileID: 0}
-  Panel: {fileID: 0}
-  volumeSlider: {fileID: 0}
-  musicToggle: {fileID: 0}
-  playButton: {fileID: 0}
-  settingsButton: {fileID: 0}
-  quitButton: {fileID: 0}
 --- !u!1 &6175325100383033905
 GameObject:
   m_ObjectHideFlags: 0
