@@ -6,12 +6,12 @@ public class AmmoUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private TextMeshProUGUI totalAmmoText;
 
-    public void UpdateAmmo(int currentAmmo, int maxAmmo)
+    public void UpdateAmmo(int currentAmmo, int reserveAmmo)
     {
         if (ammoText != null)
             ammoText.text = currentAmmo.ToString();
-        
+    
         if (totalAmmoText != null)
-            totalAmmoText.text = maxAmmo.ToString();
+            totalAmmoText.text = reserveAmmo.ToString();
     }
 }
