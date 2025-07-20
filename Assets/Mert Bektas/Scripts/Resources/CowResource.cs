@@ -1,11 +1,20 @@
 using UnityEngine;
-
-public class FoodResource : MonoBehaviour, IClickable, IDataPersistence
+using System.Collections;
+public class CowResource : MonoBehaviour, IClickable, IDataPersistence
 {
     public FoodData data;
     private int currentHealth;
     [SerializeField] private string uniqueID;
     [SerializeField] private bool isCollected = false;
+    void Awake()
+    {
+        //cow hit effect sudden color change
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+    }
     void Start()
     {
         currentHealth = data.foodHealth;
@@ -17,10 +26,17 @@ public class FoodResource : MonoBehaviour, IClickable, IDataPersistence
         currentHealth--;
         if (currentHealth <= 0)
         {
-            gameObject.SetActive(false);
-            DropResource();
             isCollected = true;
-
+            StartCoroutine(HandleDeath());
+        }
+        else
+        {
+            // Sadece renk efekti
+            Color flashColor;
+            if (ColorUtility.TryParseHtmlString("#BC5F5F", out flashColor))
+            {
+                FlashColorEffect(flashColor, 0.2f);
+            }
         }
     }
     private void PlayHitEffects()
@@ -40,6 +56,12 @@ public class FoodResource : MonoBehaviour, IClickable, IDataPersistence
             ps.Play();
             Destroy(ps.gameObject, 0.5f);
         }
+        SoundManager.PlayRandomSound(new SoundType[]
+        {
+            SoundType.CowHurt1,
+            SoundType.CowHurt2,
+            SoundType.CowHurt3
+        });
     }
 
     private void DropResource()
@@ -95,5 +117,37 @@ public class FoodResource : MonoBehaviour, IClickable, IDataPersistence
         {
             tm.text = currentHealth.ToString();
         }
+    }
+
+
+    //cow effects
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    public void FlashColorEffect(Color flashColor, float duration)
+    {
+        if (spriteRenderer != null)
+        {
+            StartCoroutine(FlashRoutine(flashColor, duration));
+        }
+    }
+
+    private IEnumerator FlashRoutine(Color flashColor, float duration)
+    {
+        spriteRenderer.color = flashColor;
+        yield return new WaitForSeconds(duration);
+        spriteRenderer.color = originalColor;
+    }
+    private IEnumerator HandleDeath()
+    {
+        Color flashColor;
+        if (ColorUtility.TryParseHtmlString("#BC5F5F", out flashColor))
+        {
+            spriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(0.2f);
+            spriteRenderer.color = originalColor;
+        }
+
+        DropResource();
+        gameObject.SetActive(false);
     }
 }

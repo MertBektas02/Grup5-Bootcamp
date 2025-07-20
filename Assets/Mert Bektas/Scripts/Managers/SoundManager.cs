@@ -9,7 +9,11 @@ public enum SoundType
     ButtonHoverEffect,
     MachineWorking1,
     MachineWorking2,
-    MachineWorking3
+    MachineWorking3,
+    HitEffect,
+    CowHurt1,
+    CowHurt2,
+    CowHurt3
 }
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
@@ -38,7 +42,7 @@ public class SoundManager : MonoBehaviour
         instance.audioSource.loop = true;
         instance.audioSource.Play();
     }
-        public static void StopLoopSound()
+    public static void StopLoopSound()
     {
         if (instance.audioSource.isPlaying && instance.audioSource.loop)
         {
@@ -46,5 +50,14 @@ public class SoundManager : MonoBehaviour
             instance.audioSource.loop = false;
             instance.audioSource.clip = null;
         }
+    }
+
+    public static void PlayRandomSound(SoundType[] sounds, float volume = 1f)
+    {
+        if (sounds == null || sounds.Length == 0) return;
+
+        int index = Random.Range(0, sounds.Length);
+        AudioClip clip = instance.SoundList[(int)sounds[index]];
+        instance.audioSource.PlayOneShot(clip, volume);
     }
 }
