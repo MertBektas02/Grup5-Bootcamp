@@ -57,7 +57,11 @@ Deadline to Last Stop bir clicker kaynak toplama ve yönetme oyunudur. Karavanı
 
 [Notion Backlog Board](https://www.notion.so/219a0db472aa8017ab16e3270870d84d?v=219a0db472aa810589f6000ca3908628&source=copy_link)
 
-# Sprint 1
+# Sprints
+
+<details>
+  
+<summary>Sprint 1</summary>
 
 ## Sprint Notları
 
@@ -66,12 +70,12 @@ Deadline to Last Stop bir clicker kaynak toplama ve yönetme oyunudur. Karavanı
 * Tamamlanan görevler projenin "oynanabilir prototip" aşamasına doğru evrilmesini sağladı.
 
 
-## Tahmin Edilen Tamamlanacak Puan
+### Tahmin Edilen Tamamlanacak Puan
 
 * Toplam 191 olarak hesaplanan Story Point (SP) içerisinde, Sprint 1'de tamamlanan SP 49 olmuştur.
 
 
-## Tahmin Mantığı
+### Tahmin Mantığı
 
 Tahmin sistemimiz 3 kriter üzerinden şekillendi:
 
@@ -91,11 +95,11 @@ Bu bağlamda story point tahminleri Fibonacci serisiyle yapıldı:
 
 * 5 SP: Karmaşıklık ve teknik risk içeren işler
 
-## Daily Scrum
+### Daily Scrum
 
 [Daily Scrum Screenshots](https://imgur.com/a/sRodWew)
 
-## Sprint Board Updates
+### Sprint Board Updates
 
 <img width="1392" alt="Screenshot 2025-07-05 at 11 33 48" src="https://github.com/user-attachments/assets/9fefeacc-b740-4978-8e78-3996606cd0e3" />
 
@@ -103,7 +107,7 @@ Bu bağlamda story point tahminleri Fibonacci serisiyle yapıldı:
 
 <img width="1392" alt="Screenshot 2025-07-05 at 11 34 20" src="https://github.com/user-attachments/assets/30fba822-5ba2-43c4-8c7c-7f09bfde7aee" />
 
-## Ürün Durumu: Ekran Görüntüleri
+### Ürün Durumu: Ekran Görüntüleri
 
 https://github.com/user-attachments/assets/783e1fca-fde0-407a-8683-fddebb12717f
 
@@ -117,7 +121,7 @@ https://github.com/user-attachments/assets/80520334-66d9-47a0-ae14-e502daca0838
 
 https://github.com/user-attachments/assets/090393c5-8941-49e2-a10f-047028fae8ce
 
-## Sprint Review
+### Sprint Review
 
 * Bu sprint başında, takımda bulunan 3 fikrin ortak noktalarında ilerleyecek şekilde proje geliştirilmeye başlandı ve sprint sonuna doğru geliştirme ilerledikçe nihai karara ortak şekilde varıldı.
 
@@ -127,7 +131,7 @@ https://github.com/user-attachments/assets/090393c5-8941-49e2-a10f-047028fae8ce
 
 * Sprint sonunda projenin "oynanabilir prototip" aşamasına doğru evrilmesi sağlandı.
 
-## Sprint Retrospective
+### Sprint Retrospective
 
 * Her üye, takım içi iletişimin iyi olduğu yönünde düşüncelerini paylaştı.
 
@@ -139,4 +143,83 @@ https://github.com/user-attachments/assets/090393c5-8941-49e2-a10f-047028fae8ce
 
 * Başta fikri basit tutma çabalarımıza rağmen, hala oyunda kompleks özellikler barındırmamız konusu tartışıldı.
 
+</details>
 
+<details>
+  
+<summary>Sprint 2</summary>
+
+## Sprint Notları
+
+* Oyun bu etapta net bir şekilde tanımlandı.
+
+* Bu sprint içerisinde, tutorial ve ilk seviye tamamlandı. Yine ilk build bu etapta alındı.
+
+* Sprint 2’de ekip, yeni çıkan sistem ihtiyaçlarına yanıt verdi.
+
+* Takımın üretim kapasitesi artarken proje kapsamı da büyüme gösterdi.
+
+
+### Tahmin Edilen Tamamlanacak Puan
+
+* Yeni eklenen görevler ile toplam 238 olarak hesaplanan SP içerisinde, Sprint 2'de tamamlanan SP 73 olmuştur. Toplam tamamlanan SP ise 122'dir.
+
+### Tahmin Mantığı
+
+* İlk sprint’te belirlediğimiz efor, karmaşıklık ve bağımlılık temelli Fibonacci sistemini bu sprint’te de aynı kararlılıkla uyguladık. Sprint 2 boyunca yeni çıkan görevler, tanımlandıktan sonra tahmin mantığına göre hızlıca puanlandı ve planlamaya entegre edildi.
+
+* Bu durum, üretim sürecinin canlılığını ve planlarımızın iteratif yapıya uygunluğunu gösterdi.
+
+### Daily Scrum
+
+[Daily Scrum Screenshots](https://imgur.com/a/iyWFqbb)
+
+### Sprint Board Updates
+
+<img width="1507" height="768" alt="Screenshot 2025-07-19 at 23 58 51" src="https://github.com/user-attachments/assets/73c67a79-c995-4ab6-9492-d4c09aa52227" />
+
+<img width="1507" height="768" alt="Screenshot 2025-07-19 at 23 59 07" src="https://github.com/user-attachments/assets/40f8477e-f3b0-4b93-9cda-220a780762be" />
+
+<img width="1507" height="768" alt="Screenshot 2025-07-19 at 23 59 32" src="https://github.com/user-attachments/assets/c83afb5a-2592-4c0d-bd3d-65e5e8039b36" />
+
+<img width="1507" height="768" alt="Screenshot 2025-07-19 at 23 59 48" src="https://github.com/user-attachments/assets/30d23cc2-71a3-48cf-ac77-5ef20dd7777b" />
+
+<img width="1507" height="768" alt="Screenshot 2025-07-20 at 00 00 01" src="https://github.com/user-attachments/assets/2fc25320-230d-43c9-a499-b1b02a903ba1" />
+
+<img width="1507" height="768" alt="Screenshot 2025-07-20 at 00 00 17" src="https://github.com/user-attachments/assets/d354d50c-c692-43ac-9784-3d308d1e1a1f" />
+
+<img width="1507" height="768" alt="Screenshot 2025-07-20 at 00 00 25" src="https://github.com/user-attachments/assets/dd2b483f-76da-4097-9dac-c87e1007244d" />
+
+### Ürün Durumu: Ekran Görüntüleri
+
+https://github.com/user-attachments/assets/e93b5b75-73f0-4a57-b8a9-69bf14cd7412
+
+https://github.com/user-attachments/assets/893d020e-8860-4eab-9071-ccb9567be205
+
+https://github.com/user-attachments/assets/0fec9d4a-9d1e-47cb-852d-faeb1434464c
+
+https://github.com/user-attachments/assets/0a88f49b-22a0-4a45-9875-fbcb6d9267b7
+
+https://github.com/user-attachments/assets/11e50aec-5c2a-435c-a020-b9efdfc0bc38
+
+### Sprint Review
+
+* Yeni oyun mekaniği sistemleri (silah, mermi, etkileşim animasyonları), sahne detayları, daha kapsamlı bir UI, polishing için yeni görevler tanımlandı ve büyük bir kısmı tamamlandı.
+
+* Oyunun hikayesi, ilerleyişi ve diğer detayları net bir şekilde belirlendi, GDD final haline çok yakın.
+
+* Sprint 2 sonunda oyun artık daha oynanabilir ve izlenebilir hale geldi.
+
+* Tamamlanan SP'ler açısından takımın ivme kazandığı ve daha büyük iş hacmini yönetebildiği görüldü.
+
+### Sprint Retrospective
+
+* Proje kapsamının büyümesi, yeni görevlerin doğru belirlenmesi ve paylaşılmasını zorlaştırdı.
+
+* Oyunun kompleksliği; tutorial sahnesini düzenleme, güzelleştirme, uygun asset'lerin araştırması noktalarında kendini epey hissettirdi. Takım üretim hızının yetersiz olabileceği düşünüldü.
+
+* Takım olarak Git 5 terminaline geçiş yapıldı. Bu karar ile Git problemleri sıfıra indirgenmeye çalışıldı.
+
+* Polishing noktasında takımca ortak karara varılması gerektiği ve önceliklendirmelerin bu karara göre yapılması gerektiğine karar verildi.
+
+</details>
