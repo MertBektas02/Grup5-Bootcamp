@@ -1,10 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Ebrar Furat/Assets/Sound.meta
-guid: 514571e8a43277b4a98217695da9368a
+
+guid: 5a2187624c5942e4da500275f695cc94
 folderAsset: yes
-========
-guid: 42f916770be13cd4683c3abf1cab5fec
->>>>>>>> master:Assets/Main/Scene/MainMenuScene/MainMenuMain.unity.meta
+
 DefaultImporter:
   externalObjects: {}
   userData: 
