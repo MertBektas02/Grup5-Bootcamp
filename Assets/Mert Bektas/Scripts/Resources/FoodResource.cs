@@ -41,6 +41,7 @@ public class FoodResource : MonoBehaviour, IClickable, IDataPersistence
             Destroy(ps.gameObject, 0.5f);
         }
     }
+
     private void DropResource()
     {
         if (data.dropPrefab != null)

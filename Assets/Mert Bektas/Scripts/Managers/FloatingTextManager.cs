@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FloatingTextManager : MonoBehaviour
 {
-    public float destroyTime = 1.12f;
+    public float destroyTime = 1f;
     public UnityEngine.Vector3 Offset = new UnityEngine.Vector3(0, 2, 0);
     public UnityEngine.Vector3 RandomizeIntensity=new UnityEngine.Vector3(1,0,0);
 
