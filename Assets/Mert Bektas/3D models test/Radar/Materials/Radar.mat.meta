@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b45f7cbfc9b246b4398103b7185c75f2
+timeCreated: 1497995835
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 93579
+  packageName: Military radar
+  packageVersion: 1.0
+  assetPath: Assets/Radar/Materials/Radar.mat
+  uploadId: 186099

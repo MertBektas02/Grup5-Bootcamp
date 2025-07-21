@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 502ad3d8af1c7074598455de2654ec06
+timeCreated: 1497995919
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 93579
+  packageName: Military radar
+  packageVersion: 1.0
+  assetPath: Assets/Radar/Rad_Rotate.controller
+  uploadId: 186099
