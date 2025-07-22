@@ -8,7 +8,7 @@ public class DayNightSystemCopy : MonoBehaviour
 
     [Header("Oranlar (0-1 toplamı 1 olacak)")]
     [Range(0.1f, 0.9f)] public float dayPortion = 0.7f; // örnek: %70 gündüz, %30 gece
-    [Range(0.1f, 0.9f)] public float nightPortion = 0.3f; // bu otomatik hesaplanabilir
+    [Range(0.1f, 0.9f)] public float nightPortion = 0.3f; // bu otomatik hesaplanabilir // artık otomatik hesaplanıyor lol
 
     [Header("Güneş Ayarları")]
     public Gradient sunColorOverTime;
@@ -18,21 +18,31 @@ public class DayNightSystemCopy : MonoBehaviour
     [SerializeField] private bool isDay = false;
     [SerializeField] private bool isNight = false;
 
+    public AmbienceManager ambienceManager;// isDay ve isNight bilgisini alarak hangi ambians fx'ini çalacağıma karar veriyorum.
+    private bool lastIsNight = false;
+
     void Update()
     {
         if (timeManager == null || sun == null) return;
 
-        // 0–1 arası gün ilerlemesi
         float t = timeManager.GetDayProgress01();
-
-        // Başlangıcı doğma konumuna kaydır
         float shifted = (t + 0.25f) % 1f;
 
-        // Gündüz/gece bool'ları
         isDay = shifted >= 0.25f && shifted < 0.75f;
         isNight = !isDay;
 
         UpdateSun(shifted);
+
+        // Sadece gece/gündüz durumu değiştiyse haber ver
+        if (isNight != lastIsNight)
+        {
+            if (ambienceManager != null)
+            {
+                ambienceManager.SetNightMode(isNight);
+            }
+            lastIsNight = isNight;
+        }
+
     }
 
     void UpdateSun(float timeOfDay)

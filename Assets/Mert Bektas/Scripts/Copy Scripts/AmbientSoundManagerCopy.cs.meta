@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: bdf104f88b43e2c42aaef2ebda7ab41a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - windSound1: {fileID: 8711136522205251748, guid: e76d03ab219bd93469ab58a8e4f2a20b,
+      type: 3}
+  - windSound2: {fileID: 8494620666685885200, guid: 05f1d59914660c4469514e1e8f8004e2,
+      type: 3}
+  - birdSound3: {fileID: 5175304381801579032, guid: dbe05928f0685644d993ad2f82c6be5c,
+      type: 3}
+  - birdSound2: {fileID: 1740202263162073925, guid: e58f42cbe98e8e942b3481f5de9ab97d,
+      type: 3}
+  - birdSound4: {fileID: 7817151451656351002, guid: 858407e94138a7c44bc368d266cbd228,
+      type: 3}
+  - bgmSource: {fileID: 6655741491946983078, guid: 070f0c4ad474d374fb588fee24da6e7b,
+      type: 3}
+  - bgmClip: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
