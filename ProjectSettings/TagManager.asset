@@ -10,6 +10,7 @@ TagManager:
   - FlashBomb
   - Weapon
   - InActiveSlot
+  - Vehicle
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - PickupLayer
   - FloatingText
   - Ammo
-  - 
+  - Vehicle
   - 
   - 
   - 
