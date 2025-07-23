@@ -77,7 +77,7 @@ public class ResourceManager : MonoBehaviour, IDataPersistence
         }
 
         resourceAmounts[type] = newAmount;
-        Debug.Log(type + " miktarı: " + resourceAmounts[type] + " / " + max);
+        //Debug.Log(type + " miktarı: " + resourceAmounts[type] + " / " + max);
         // Burada UI güncelleme çağrısı yapılabilir
     }
     public bool UseResource(ResourceType type, int amount)

@@ -5,102 +5,92 @@ using UnityEngine;
 public class AmbienceManager : MonoBehaviour
 {
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource daySource;
-    [SerializeField] private AudioSource nightSource;
+    [SerializeField] private AudioSource audioSource;
+    // Tek bir kaynak kullanıyoruz. İstersen 2 kaynak da yapabilirsin ama şart değil.
 
-    [Header("Ambience Clips")]
-    [SerializeField] private List<AudioClip> dayAmbienceClips = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> nightAmbienceClips = new List<AudioClip>();
+    [Header("Ses Listeleri")]
+    public List<AudioClip> dayAmbienceClips = new List<AudioClip>();
+    public List<AudioClip> nightAmbienceClips = new List<AudioClip>();
 
-    [Header("Settings")]
-    [SerializeField] private float minDelay = 5f;
-    [SerializeField] private float maxDelay = 15f;
-    [SerializeField] private float crossfadeDuration = 2f;
+    [Header("Durum")]
+    [SerializeField] private bool isNightNow = false;
+    private bool isTransitioning = false;
+    private Coroutine playRoutine;
 
-    private bool isNight = false;
-    private Coroutine ambienceRoutine;
-
-    private void Start()
+    void Start()
     {
-        // Gündüz ile başla
-        StartAmbienceRoutine(dayAmbienceClips, daySource);
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.loop = false;
+            audioSource.playOnAwake = false;
+        }
+        void Start()
+        {
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.loop = false;
+                audioSource.playOnAwake = false;
+            }
+
+            SetNightMode(false); // veya true yaparsan gece sesiyle başlar
+        }
     }
-    void Update()
-    {
-        Debug.Log($"isnight:"+isNight);
-    }
+
 
     public void SetNightMode(bool night)
     {
-        if (isNight == night) return; // Zaten aynı moddaysa değişme
-        isNight = night;
+        if (isNightNow == night) return; // aynı duruma tekrar geçme
+        isNightNow = night;
 
-        // önce mevcut routine’i durdur
-        if (ambienceRoutine != null)
-            StopCoroutine(ambienceRoutine);
+        // devam eden coroutine varsa durdur
+        if (playRoutine != null)
+        {
+            StopCoroutine(playRoutine);
+            playRoutine = null;
+        }
 
-        if (isNight)
-        {
-            // Fade Day -> Night
-            StartCoroutine(Crossfade(daySource, nightSource, crossfadeDuration));
-            ambienceRoutine = StartCoroutine(AmbienceRoutine(nightAmbienceClips, nightSource));
-        }
-        else
-        {
-            // Fade Night -> Day
-            StartCoroutine(Crossfade(nightSource, daySource, crossfadeDuration));
-            ambienceRoutine = StartCoroutine(AmbienceRoutine(dayAmbienceClips, daySource));
-        }
+        // çalan ses varsa durdur
+        audioSource.Stop();
+
+        // yeni moda göre başlat
+        playRoutine = StartCoroutine(PlayAmbienceRoutine(isNightNow));
     }
 
-    private void StartAmbienceRoutine(List<AudioClip> clips, AudioSource source)
+    private IEnumerator PlayAmbienceRoutine(bool night)
     {
-        ambienceRoutine = StartCoroutine(AmbienceRoutine(clips, source));
-    }
+        isTransitioning = true;
+        List<AudioClip> clips = night ? nightAmbienceClips : dayAmbienceClips;
 
-    private IEnumerator AmbienceRoutine(List<AudioClip> clips, AudioSource source)
-    {
+        if (clips == null || clips.Count == 0)
+        {
+            Debug.LogWarning("[AmbienceManager] Geçerli mod için ses yok!");
+            yield break;
+        }
+
+        isTransitioning = false;
+
         while (true)
         {
-            if (clips.Count > 0)
+            // listedeki rastgele bir clip seç
+            AudioClip selected = clips[Random.Range(0, clips.Count)];
+
+            // null kontrolü
+            if (selected == null)
             {
-                var clip = clips[Random.Range(0, clips.Count)];
-                Debug.Log($"Playing clip: {clip.name} at time: {Time.time}");
-                source.PlayOneShot(clip);
-
-                // Klip süresi kadar bekle ki ses üst üste binmesin
-                yield return new WaitForSeconds(clip.length);
-
-                // Ardından rastgele bir gecikme ekle
-                float delay = Random.Range(minDelay, maxDelay);
-                yield return new WaitForSeconds(delay);
+                Debug.LogWarning("[AmbienceManager] Null AudioClip bulundu.");
+                yield break;
             }
-            else
-            {
-                // Klip yoksa biraz bekle
-                yield return new WaitForSeconds(1f);
-            }
+
+            audioSource.clip = selected;
+            audioSource.Play();
+
+            // Çalma süresi boyunca bekle
+            yield return new WaitForSeconds(selected.length);
+
+            // Eğer bu sırada SetNightMode çağrılıp coroutine resetlenmişse break
+            if (isTransitioning) yield break;
         }
-    }
-
-    private IEnumerator Crossfade(AudioSource from, AudioSource to, float duration)
-    {
-        float time = 0f;
-        float fromStartVol = from.volume;
-        float toStartVol = to.volume;
-
-        to.volume = 0f;
-        to.Play(); // Loop açık olmalı
-
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            float t = time / duration;
-            from.volume = Mathf.Lerp(fromStartVol, 0f, t);
-            to.volume = Mathf.Lerp(0f, toStartVol, t);
-            yield return null;
-        }
-
-        from.Stop();
     }
 }

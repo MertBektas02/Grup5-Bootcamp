@@ -3534,7 +3534,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5192,6 +5192,7 @@ Transform:
   m_Children:
   - {fileID: 145796023}
   - {fileID: 1109228876}
+  - {fileID: 461252530}
   m_Father: {fileID: 2088548190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &300884900
@@ -7953,7 +7954,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -8044,11 +8045,11 @@ Transform:
   m_GameObject: {fileID: 461252528}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -29.36, y: -2.129, z: -33.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1243861448}
+  m_Father: {fileID: 300884899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &462761660 stripped
 Transform:
@@ -16936,7 +16937,7 @@ MonoBehaviour:
   - type: 0
     amount: 1
   uiPanel: {fileID: 1572149688}
-  uniqueID: testAutoPurchase_Wood
+  uniqueID: Auto_Wood_Collector
 --- !u!65 &1019283423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17193,7 +17194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDay: 1
-  dayDuration: 60
+  dayDuration: 180
 --- !u!4 &1031586387
 Transform:
   m_ObjectHideFlags: 0
@@ -20534,24 +20535,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550e5a7e1d191b0468a1cc8e95455ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  daySource: {fileID: 202644348}
-  nightSource: {fileID: 461252529}
+  audioSource: {fileID: 461252529}
   dayAmbienceClips:
-  - {fileID: 8300000, guid: 5e9a96d2719a69c4588d48d1972f6f41, type: 3}
-  - {fileID: 8300000, guid: f68901c97249b4c49acc59c31402ccc5, type: 3}
-  - {fileID: 8300000, guid: 823a70a4c79625a4b924c1cfe2cc2bbe, type: 3}
-  - {fileID: 8300000, guid: 1d611915694d8a24093cb75c53ca0d5a, type: 3}
-  - {fileID: 8300000, guid: dcc5f59ad8a3f064893f289662c8714f, type: 3}
+  - {fileID: 8300000, guid: 0cba20bae13e835449aa4b33a679c841, type: 3}
+  - {fileID: 8300000, guid: 881873ab297462a4c923f086e2da3819, type: 3}
+  - {fileID: 8300000, guid: 58985ae9b2f7ef1449cbf5966bc21160, type: 3}
+  - {fileID: 8300000, guid: 713ea0cee0095e146b6e7b1dbb381e45, type: 3}
   nightAmbienceClips:
-  - {fileID: 8300000, guid: bb71e67d2303e4d45b1cda7a1f12a64c, type: 3}
-  - {fileID: 8300000, guid: 1cfab1078ade18f47844ee7158bc42d0, type: 3}
-  - {fileID: 8300000, guid: 75313a5480e9e9f409964cf33d675748, type: 3}
-  - {fileID: 8300000, guid: e6486c023c80a854c862c4357a8f4eb0, type: 3}
-  - {fileID: 8300000, guid: 72117b031aef94f43beb165675947422, type: 3}
-  - {fileID: 8300000, guid: 387028917519ee941b5290ce72169b56, type: 3}
-  minDelay: 5
-  maxDelay: 15
-  crossfadeDuration: 2
+  - {fileID: 8300000, guid: cc4591994a273574fb8f42280a9e7114, type: 3}
+  - {fileID: 8300000, guid: ea89c1257db5c77478b2f67866bce468, type: 3}
+  - {fileID: 8300000, guid: 9bcdfe56360d5454bab29204eb25410f, type: 3}
+  - {fileID: 8300000, guid: 6d1293301a4aad542b4b7d8afc35afa3, type: 3}
+  - {fileID: 8300000, guid: 2c5fbec130e6ae34b994432e6f321a63, type: 3}
+  - {fileID: 8300000, guid: 5340f5e89e697054eba22108a835c23d, type: 3}
+  isNightNow: 0
 --- !u!4 &1243861448
 Transform:
   m_ObjectHideFlags: 0
@@ -20565,7 +20562,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 461252530}
   - {fileID: 202644349}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

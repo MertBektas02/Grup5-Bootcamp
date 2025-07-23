@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class DayNightSystemCopy : MonoBehaviour
 {
@@ -18,8 +19,28 @@ public class DayNightSystemCopy : MonoBehaviour
     [SerializeField] private bool isDay = false;
     [SerializeField] private bool isNight = false;
 
-    public AmbienceManager ambienceManager;// isDay ve isNight bilgisini alarak hangi ambians fx'ini çalacağıma karar veriyorum.
+    public AmbienceManager ambienceManager;
     private bool lastIsNight = false;
+
+    void Start()
+    {
+        // Bir frame bekleyip sonra kontrol et
+        StartCoroutine(InitAmbienceAfterFrame());
+    }
+
+    private IEnumerator InitAmbienceAfterFrame()
+    {
+        // bir frame bekle ki Update() bir kez çalışsın
+        yield return null;
+
+        // o sıradaki gece/gündüz durumunu kullan
+        if (ambienceManager != null)
+        {
+            ambienceManager.SetNightMode(isNight);
+            lastIsNight = isNight;
+        }
+    }
+
 
     void Update()
     {
