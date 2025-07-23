@@ -21,13 +21,6 @@ public class CurrentResourceUIManager : MonoBehaviour
     public TextMeshProUGUI waterAmount;
     public TextMeshProUGUI stoneAmount;
     public TextMeshProUGUI coalAmount;
-    // public TreeData currentData; //just in case if i needed;
-    // public void ShowCurrentResources(TreeData data)//just in case if i needed;
-    // {
-    //     currentData = data;
-
-
-    // }
 
 
     void Start()

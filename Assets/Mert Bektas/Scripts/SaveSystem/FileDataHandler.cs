@@ -17,7 +17,7 @@ public class FileDataHandler
         {
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(fullPath, json);
-            Debug.Log("Game saved to " + fullPath);
+            //Debug.Log("Game saved to " + fullPath);
         }
         catch (Exception e)
         {
