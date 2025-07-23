@@ -31,6 +31,15 @@ public class AutoCollector : MonoBehaviour
         loopAudioSource.maxDistance = 15f;
         loopAudioSource.rolloffMode = AudioRolloffMode.Linear;
     }
+    void Start()
+    {
+        if (_updateUI == null)
+        {
+            _updateUI = FindFirstObjectByType<CurrentResourceUIManager>();
+            if (_updateUI == null)
+                Debug.LogError("AutoCollector: CurrentResourceUIManager bulunamadı!");
+        }
+    }
 
 
 
