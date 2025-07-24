@@ -16,8 +16,8 @@ public class EquipmentManager : MonoBehaviour
     public Image handIcon;
 
 
-    public Color activeEquippedColor = Color.green; // elde olan ikon
-    public Color inactiveEquippedColor = Color.white; // elde olmayan ama alınmış ikon
+    public Color activeEquippedColor = Color.yellow; // elde olan ikon
+    public Color inactiveEquippedColor = Color.grey; // elde olmayan ama alınmış ikon
 
     public enum EquippedItem
     {
@@ -54,41 +54,24 @@ public class EquipmentManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (revolver != null && revolver.IsEquipped())
+            // Revolver varsa ve elde ya da inactiveSlot'taysa geçiş yapılabilir
+            if (revolver != null && 
+                (revolver.transform.parent == playerHand || revolver.transform.parent == inActiveSlot))
             {
                 EquipWeapon(EquippedItem.Revolver);
-                
-            }
-            else if (revolver != null && flashBomb != null && flashBomb.IsEquipped())
-            {
-                EquipWeapon(EquippedItem.Revolver);
-                
-            }
-            else if (revolver != null && revolver.IsEquipped() == false && (flashBomb == null || !flashBomb.IsEquipped()))
-            {
-                EquipWeapon(EquippedItem.Revolver);
-                
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (flashBomb != null && flashBomb.IsEquipped())
+            // FlashBomb varsa ve elde ya da inactiveSlot'taysa geçiş yapılabilir
+            if (flashBomb != null && 
+                (flashBomb.transform.parent == playerHand || flashBomb.transform.parent == inActiveSlot))
             {
                 EquipWeapon(EquippedItem.FlashBomb);
-                ;
-            }
-            else if (flashBomb != null && revolver != null && revolver.IsEquipped())
-            {
-                EquipWeapon(EquippedItem.FlashBomb);
-               
-            }
-            else if (flashBomb != null && flashBomb.IsEquipped() == false && (revolver == null || !revolver.IsEquipped()))
-            {
-                EquipWeapon(EquippedItem.FlashBomb);
-                
             }
         }
+
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             if (currentEquipped != EquippedItem.None)

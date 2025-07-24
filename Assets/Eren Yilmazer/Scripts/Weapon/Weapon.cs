@@ -99,10 +99,10 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward, out hit, shootRange))
         {
-            var zombie = hit.collider.GetComponentInParent<ZombieAI>();
-            if (zombie != null)
+            var mousey = hit.collider.GetComponentInParent<MouseyAI>();
+            if (mousey != null)
             {
-                zombie.TakeDamage((int)damage);
+                mousey.TakeDamage((int)damage);
             }
             
         }
