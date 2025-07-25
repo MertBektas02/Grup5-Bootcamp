@@ -19,7 +19,7 @@ public class DayNightSystemCopy : MonoBehaviour
     [SerializeField] private bool isDay = false;
     [SerializeField] private bool isNight = false;
 
-    public AmbienceManager ambienceManager;
+    public AmbienceManager2 ambienceManager;
     private bool lastIsNight = false;
 
     void Start()
