@@ -239,14 +239,15 @@ MonoBehaviour:
   fireRate: 1.2
   bulletPrefab: {fileID: 3864644711491974188, guid: 0ef56bd2dc4249b48b2dd16270eeb59c, type: 3}
   bulletSpawnPoint: {fileID: 4138936148736611650}
-  bulletForce: 10
+  bulletForce: 100
+  bulletHolePrefab: {fileID: 6704118740871105679, guid: 05820352c5aaa8f4c98c47cfb52d4064, type: 3}
   muzzleFlashPrefab: {fileID: 1391847458487284, guid: 9bf79f2d846a57440a981c168c87c617, type: 3}
   muzzlePoint: {fileID: 8842399344640793873}
   maxAmmo: 1
   reserveAmmo: 1
   reloadTime: 1.2
   shootSound: {fileID: 8300000, guid: c90d59f793937924a99117b0683eb367, type: 3}
-  reloadSound: {fileID: 8300000, guid: be85b348fd9b69c4eb3045e4365a0a4e, type: 3}
+  reloadSound: {fileID: 8300000, guid: 10291d1f8b1cc004291c8d36e76d27bf, type: 3}
   emptyClickSound: {fileID: 8300000, guid: 708b8ef803900b74182279421b6b6b22, type: 3}
   ammoUI: {fileID: 0}
 --- !u!82 &7652446381728504045
