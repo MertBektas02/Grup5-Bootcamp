@@ -20,7 +20,10 @@ public class Weapon : MonoBehaviour
     [Header("Mermi Ayarları")]
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
-    public float bulletForce = 50f;
+    public float bulletForce = 500f;
+    
+    [Header("Bullet Hole")]
+    public GameObject bulletHolePrefab;
 
     [Header("Muzzle Flash")]
     public GameObject muzzleFlashPrefab;
@@ -83,17 +86,45 @@ public class Weapon : MonoBehaviour
             }
         }
     }
+    void LateUpdate()
+    {
+        if (isEquipped)
+        {
+            Vector3 offset = fpsCamera.transform.right * 0.3f + fpsCamera.transform.up * -0.3f + fpsCamera.transform.forward * 0.5f;
+            transform.position = fpsCamera.transform.position + offset;
+            transform.rotation = fpsCamera.transform.rotation;
+        }
+    }
 
     
     private void Shoot()
     {
         if (isReloading || currentAmmo <= 0) return;
 
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         
+        Ray ray = fpsCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit1;
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out hit1, shootRange))
+        {
+            targetPoint = hit1.point;
+        }
+        else
+        {
+            targetPoint = ray.GetPoint(shootRange); // Boşa gittiğinde ileri bir nokta
+        }
+
+        
+        Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
+
+        
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().SetDirection(direction);
+
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.isKinematic = false;
-        bulletRb.AddForce(bulletSpawnPoint.forward * bulletForce, ForceMode.Impulse);
+        bulletRb.AddForce(direction * bulletForce, ForceMode.Impulse);
         
         // Raycast ile anlık hasar kontrolü
         RaycastHit hit;
@@ -116,6 +147,15 @@ public class Weapon : MonoBehaviour
             StartCoroutine(Reload());
         }
         
+        if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        {
+            Quaternion holeRotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+            Vector3 holePosition = hit.point + hit.normal * 0.01f;
+            GameObject hole = Instantiate(bulletHolePrefab, holePosition, holeRotation);
+            Destroy(hole, 2f);
+        }
+
+
     }
 
 
@@ -157,6 +197,8 @@ public class Weapon : MonoBehaviour
         
         rb.detectCollisions = false;
         SetColliderEnabled(false);
+        
+        
     }
 
     public void DropFromHand()
@@ -168,6 +210,7 @@ public class Weapon : MonoBehaviour
         SetColliderEnabled(true);
         transform.position = playerHand.position + playerHand.forward * 1f;
         transform.eulerAngles += new Vector3(0, 0, -45);
+        
     }
     public void AddAmmo(int amount)
     {
@@ -180,4 +223,5 @@ public class Weapon : MonoBehaviour
         if (col != null)
             col.enabled = isEnabled;
     }
+    
 }

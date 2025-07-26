@@ -39,7 +39,7 @@ public class EquipmentManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (revolver != null || flashBomb != null)
                 TryPickupNearest();

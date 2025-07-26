@@ -39,8 +39,16 @@ public class FlashBomb : MonoBehaviour
             Throw();
         }
     }
+    void LateUpdate()
+    {
+        if (isEquipped)
+        {
+            Vector3 offset = fpsCamera.transform.right * 0.3f + fpsCamera.transform.up * -0.3f + fpsCamera.transform.forward * 0.5f;
+            transform.position = fpsCamera.transform.position + offset;
+            transform.rotation = fpsCamera.transform.rotation;
+        }
+    }
 
-    
     void Throw()
     {
         isEquipped = false;
@@ -106,6 +114,8 @@ public class FlashBomb : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         rb.isKinematic = true;
+        
+       
     }
 
     public void DropFromHand()
@@ -115,6 +125,7 @@ public class FlashBomb : MonoBehaviour
         rb.isKinematic = false;
         transform.position = playerHand.position + playerHand.forward * 1f;
         transform.eulerAngles += new Vector3(0, 0, -45);
+        
     }
     
 }
