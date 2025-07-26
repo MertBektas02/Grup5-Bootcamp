@@ -23,6 +23,8 @@ public class GameData
 
     public int hordeDayData;
     public bool playerEscapedData;
+    //purchased kısmında kararsızlıklarım var.
+    public List<PurchasedObjectEntry> purchasedObjects = new();
     public List<CollectorData> purchasedCollectors = new List<CollectorData>();
 
 

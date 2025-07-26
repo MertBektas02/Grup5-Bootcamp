@@ -12,13 +12,12 @@ public class AutoCollector : MonoBehaviour
     public List<ResourceCost> purchaseCosts = new List<ResourceCost>();
     private CurrentResourceUIManager _updateUI;
 
-    
+
     [Header("Ses Ayarları")]
-    public AudioClip workingSound;         
+    public AudioClip workingSound;
     private AudioSource loopAudioSource;
-    void Start()
+    void Awake()
     {
-        _updateUI = FindFirstObjectByType<CurrentResourceUIManager>();
         if (loopAudioSource == null)
         {
             loopAudioSource = gameObject.AddComponent<AudioSource>();
@@ -27,11 +26,19 @@ public class AutoCollector : MonoBehaviour
         loopAudioSource.clip = workingSound;
         loopAudioSource.loop = true;
         loopAudioSource.playOnAwake = false;
-        loopAudioSource.spatialBlend = 1f; // %100 3D ses
+        loopAudioSource.spatialBlend = 1f;
         loopAudioSource.minDistance = 2f;
         loopAudioSource.maxDistance = 15f;
         loopAudioSource.rolloffMode = AudioRolloffMode.Linear;
-
+    }
+    void Start()
+    {
+        if (_updateUI == null)
+        {
+            _updateUI = FindFirstObjectByType<CurrentResourceUIManager>();
+            if (_updateUI == null)
+                Debug.LogError("AutoCollector: CurrentResourceUIManager bulunamadı!");
+        }
     }
 
 
@@ -55,13 +62,13 @@ public class AutoCollector : MonoBehaviour
     {
         isActive = true;
         timer = 0f;
-         if (workingSound != null && !loopAudioSource.isPlaying)
+        if (workingSound != null && !loopAudioSource.isPlaying)
         {
             loopAudioSource.Play();
         }
     }
 
-     public void Deactivate()//kullanacağımı sanmıyorum. Yine de hazırda dursun
+    public void Deactivate()//kullanacağımı sanmıyorum. Yine de hazırda dursun
     {
         isActive = false;
 
@@ -76,8 +83,8 @@ public class AutoCollector : MonoBehaviour
 
 
     [Header("Popup Ayarları")]
-    public GameObject automationPopupPrefab;     
-    public Transform popupSpawnPoint;            
+    public GameObject automationPopupPrefab;
+    public Transform popupSpawnPoint;
     private void ShowAutomationPopup(int amount, ResourceType type)
     {
         if (automationPopupPrefab == null) return;

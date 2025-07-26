@@ -78,11 +78,11 @@ public class FlashBomb : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, effectRadius);
         foreach (Collider col in hitColliders)
         {
-            ZombieAI zombie = col.GetComponentInParent<ZombieAI>();
-            if (zombie != null && !zombie.isDead)
+            MouseyAI mousey = col.GetComponentInParent<MouseyAI>();
+            if (mousey != null && !mousey.isDead)
             {
-                zombie.activeFlashBomb = gameObject;
-                zombie.BecomeBlinded(blindDuration, transform.position);
+                mousey.activeFlashBomb = gameObject;
+                mousey.BecomeBlinded(blindDuration, transform.position);
             }
         }
         EquipmentManager.Instance.ClearFlashBomb(); 

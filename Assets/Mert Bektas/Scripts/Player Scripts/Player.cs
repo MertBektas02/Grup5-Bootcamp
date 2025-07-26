@@ -89,7 +89,7 @@ public class Player : MonoBehaviour, IDataPersistence
     public void RecoveryHealth(int amount) // food ve water 85'in üstündeyse can yenilensin.
     {
         currentHealth = Mathf.Min(currentHealth + amount, 100);
-        Debug.Log("Player healing. Current health: " + currentHealth);
+        //Debug.Log("Player healing. Current health: " + currentHealth);
     }
 
 
