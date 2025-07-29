@@ -25,7 +25,7 @@ Gramp's Signal
 
 # Oyun Logosu
 
-<img width="1024" height="1024" alt="Image" src="https://github.com/user-attachments/assets/52035245-f222-42ab-9f3f-bb6adc672b53" />
+<img width="400" alt="Image" src="https://github.com/user-attachments/assets/52035245-f222-42ab-9f3f-bb6adc672b53" />
 
 # Oyun Açıklaması
 
