@@ -15,7 +15,7 @@ public class IdleSound : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         source = animator.GetComponent<AudioSource>();
 
-        if (source == null || player == null || idleMusic == null) return;
+        if (!source || !player || !idleMusic) return;
 
         source.clip = idleMusic;
         source.loop = loop;
@@ -27,7 +27,7 @@ public class IdleSound : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (source != null)
+        if (source)
         {
             source.Stop();
         }
@@ -37,7 +37,7 @@ public class IdleSound : StateMachineBehaviour
     {
         while (true)
         {
-            if (player == null || source == null) yield break;
+            if (!player || !source) yield break;
 
             float distance = Vector3.Distance(obj.transform.position, player.position);
 

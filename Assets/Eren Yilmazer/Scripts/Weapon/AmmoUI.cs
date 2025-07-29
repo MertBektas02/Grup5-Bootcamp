@@ -8,10 +8,10 @@ public class AmmoUI : MonoBehaviour
 
     public void UpdateAmmo(int currentAmmo, int reserveAmmo)
     {
-        if (ammoText != null)
+        if (ammoText)
             ammoText.text = currentAmmo.ToString();
     
-        if (totalAmmoText != null)
+        if (totalAmmoText)
             totalAmmoText.text = reserveAmmo.ToString();
     }
 }

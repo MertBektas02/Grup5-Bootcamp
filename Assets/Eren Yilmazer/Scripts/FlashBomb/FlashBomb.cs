@@ -55,13 +55,14 @@ public class FlashBomb : MonoBehaviour
         hasBeenThrown = true;
         transform.SetParent(null);
         rb.isKinematic = false;
+        SetColliderEnabled(true); 
 
         Vector3 throwDirection = fpsCamera.transform.forward + fpsCamera.transform.up * 0.5f;
         rb.AddForce(throwDirection.normalized * throwForce, ForceMode.VelocityChange);
         
         audioSource.PlayOneShot(explosionSound);
         
-        // FlashBomb ikonunu kapat
+        
         EquipmentManager.Instance.flashBombIcon.gameObject.SetActive(false);
         
 
@@ -80,14 +81,14 @@ public class FlashBomb : MonoBehaviour
         if (hasExploded) return;
         hasExploded = true;
 
-        if (explosionEffect != null)
+        if (explosionEffect)
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, effectRadius);
         foreach (Collider col in hitColliders)
         {
             MouseyAI mousey = col.GetComponentInParent<MouseyAI>();
-            if (mousey != null && !mousey.isDead)
+            if (mousey && !mousey.isDead)
             {
                 mousey.activeFlashBomb = gameObject;
                 mousey.BecomeBlinded(blindDuration, transform.position);
@@ -104,7 +105,17 @@ public class FlashBomb : MonoBehaviour
     public void SetEquipped(bool val)
     {
         isEquipped = val;
-        
+
+        if (val)
+        {
+            rb.isKinematic = true;
+            SetColliderEnabled(false);
+        }
+        else
+        {
+            rb.isKinematic = false;
+            SetColliderEnabled(true);
+        }
     }
 
     public void MoveTo(Transform target)
@@ -114,8 +125,7 @@ public class FlashBomb : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         rb.isKinematic = true;
-        
-       
+        SetColliderEnabled(false);
     }
 
     public void DropFromHand()
@@ -126,6 +136,13 @@ public class FlashBomb : MonoBehaviour
         transform.position = playerHand.position + playerHand.forward * 1f;
         transform.eulerAngles += new Vector3(0, 0, -45);
         
+        SetColliderEnabled(true);
     }
     
+    void SetColliderEnabled(bool isEnabled)
+    {
+        Collider col = GetComponent<Collider>();
+        if (col)
+            col.enabled = isEnabled;
+    }
 }
