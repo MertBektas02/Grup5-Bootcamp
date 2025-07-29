@@ -19,6 +19,8 @@ public class PurchasableObject : MonoBehaviour, IDataPersistence
     public void AttemptPurchase()
     {
         Debug.Log($"[{uniqueID}] Satın alma denemesi başladı. isPurchased = {isPurchased}");
+        NotificationManager.Instance.ShowNotification("Purchased!", 2f, SoundType.Purchased);
+
 
         if (isPurchased)
         {
@@ -28,13 +30,15 @@ public class PurchasableObject : MonoBehaviour, IDataPersistence
 
         if (ResourceManager.Instance.TrySpendResources(costList))
         {
-            Debug.Log($"[{uniqueID}] başarıyla satın alındı."); // 👈 Bu çalışıyor mu?
+            Debug.Log($"[{uniqueID}] başarıyla satın alındı.");
             isPurchased = true;
             ApplyPurchaseEffect();
+            SoundManager.PlaySound(SoundType.Purchased);
         }
         else
         {
-            Debug.Log($"[{uniqueID}] için yeterli kaynak yok.");
+            NotificationManager.Instance.ShowNotification("Not enough Resources!", 2f, SoundType.Denied);
+            SoundManager.PlaySound(SoundType.Denied);
         }
     }
 
