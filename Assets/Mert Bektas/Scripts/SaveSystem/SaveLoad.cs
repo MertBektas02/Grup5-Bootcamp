@@ -25,7 +25,7 @@ public class SaveLoad : MonoBehaviour
     }
     public void LoadWithButton()
     {
-        DataPersistenceManager.Instance.SaveGame();
+        DataPersistenceManager.Instance.LoadGame();
         NotificationManager.Instance.ShowNotification("Game Loaded!");
 
 
