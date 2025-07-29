@@ -8,7 +8,8 @@ public class WaterPickUp : MonoBehaviour
     {
         ResourceManager.Instance.AddResource(ResourceType.Water, amount);
         Debug.Log("water toplandı! +" + amount);
-        
+        SoundManager.PlaySound(SoundType.PickUp);
+
         Destroy(gameObject);
     }
 

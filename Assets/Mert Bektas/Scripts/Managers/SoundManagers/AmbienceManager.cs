@@ -24,17 +24,8 @@ public class AmbienceManager : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.loop = false;
             audioSource.playOnAwake = false;
-        }
-        void Start()
-        {
-            if (audioSource == null)
-            {
-                audioSource = gameObject.AddComponent<AudioSource>();
-                audioSource.loop = false;
-                audioSource.playOnAwake = false;
-            }
-
             SetNightMode(false); // veya true yaparsan gece sesiyle başlar
+
         }
     }
 

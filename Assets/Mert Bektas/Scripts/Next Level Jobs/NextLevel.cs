@@ -9,12 +9,14 @@ public class NextLevel : MonoBehaviour
     {
         if (ResourceManager.Instance.TrySpendResources(levelData.costList))
         {
-            SceneManager.LoadScene(sceneName:"EmptySceneMB");
+            SoundManager.PlaySound(SoundType.Purchased);
+            SceneManager.LoadScene(sceneName: "Level1MAIN");
             //SceneManager.LoadScene(levelData.sceneName);
         }
         else
         {
-            Debug.Log("Yeterli kaynağın yok!");
+            NotificationManager.Instance.ShowNotification("Not enough Resources!", 2f, SoundType.Denied);
+            SoundManager.PlaySound(SoundType.Denied);
         }
     }
 }

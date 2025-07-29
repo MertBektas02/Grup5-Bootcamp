@@ -13,7 +13,13 @@ public enum SoundType
     HitEffect,
     CowHurt1,
     CowHurt2,
-    CowHurt3
+    CowHurt3,
+    GameSaved,
+    Denied,
+    Purchased,
+    PickUp,
+    Footstep
+    
 }
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
