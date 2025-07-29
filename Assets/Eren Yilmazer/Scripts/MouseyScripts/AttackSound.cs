@@ -8,10 +8,10 @@ public class AttackSound : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (attackClip == null) return;
+        if (!attackClip) return;
 
         CoroutineRunner runner = animator.GetComponent<CoroutineRunner>();
-        if (runner != null)
+        if (runner)
         {
             runner.StartCoroutine(PlayAttackSoundDelayed(animator.GetComponent<AudioSource>()));
         }
@@ -21,7 +21,7 @@ public class AttackSound : StateMachineBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (source != null && attackClip != null)
+        if (source && attackClip)
         {
             source.PlayOneShot(attackClip);
         }

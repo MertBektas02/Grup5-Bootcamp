@@ -64,11 +64,11 @@ public class Weapon : MonoBehaviour
     {
         if (isEquipped)
         {
-            // Yeniden doldurma kontrolü
+            
             if (isReloading)
                 return;
 
-            // Atış kontrolü
+            
             if (Input.GetButton("Fire1") && Time.time >= nextFireTime && currentAmmo > 0)
             {
                 nextFireTime = Time.time + fireRate;
@@ -79,13 +79,14 @@ public class Weapon : MonoBehaviour
                 audioSource.PlayOneShot(emptyClickSound);
             }
 
-            // Yeniden doldurma
+            
             if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo && !isReloading)
             {
                 StartCoroutine(Reload());
             }
         }
     }
+    // Kamera sarsılma çözüm
     void LateUpdate()
     {
         if (isEquipped)
@@ -131,7 +132,7 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward, out hit, shootRange))
         {
             var mousey = hit.collider.GetComponentInParent<MouseyAI>();
-            if (mousey != null)
+            if (mousey)
             {
                 mousey.TakeDamage((int)damage);
             }
@@ -140,7 +141,7 @@ public class Weapon : MonoBehaviour
         PlayMuzzleFlash();
         currentAmmo--;
         ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
-        audioSource.PlayOneShot(shootSound);
+        
 
         if (currentAmmo <= 0 && reserveAmmo > 0)
         {
@@ -149,12 +150,12 @@ public class Weapon : MonoBehaviour
         
         if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
         {
-            Quaternion holeRotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-            Vector3 holePosition = hit.point + hit.normal * 0.01f;
-            GameObject hole = Instantiate(bulletHolePrefab, holePosition, holeRotation);
+            var holeRotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+            var holePosition = hit.point + hit.normal * 0.01f;
+            var hole = Instantiate(bulletHolePrefab, holePosition, holeRotation);
             Destroy(hole, 2f);
         }
-
+        audioSource.PlayOneShot(shootSound);
 
     }
 
@@ -182,7 +183,7 @@ public class Weapon : MonoBehaviour
         
     }
 
-    // ----------- Yeni Fonksiyonlar -----------
+    
     public bool IsEquipped() => isEquipped;
 
     public void SetEquipped(bool val) => isEquipped = val;
@@ -196,7 +197,6 @@ public class Weapon : MonoBehaviour
         rb.isKinematic = true;
         
         rb.detectCollisions = false;
-        SetColliderEnabled(false);
         
         
     }
@@ -206,8 +206,7 @@ public class Weapon : MonoBehaviour
         isEquipped = false;
         transform.SetParent(null);
         rb.isKinematic = false;
-        rb.detectCollisions = true; // ← geri aç
-        SetColliderEnabled(true);
+        rb.detectCollisions = true; 
         transform.position = playerHand.position + playerHand.forward * 1f;
         transform.eulerAngles += new Vector3(0, 0, -45);
         
@@ -217,11 +216,6 @@ public class Weapon : MonoBehaviour
         reserveAmmo += amount;
         ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
     }
-    void SetColliderEnabled(bool isEnabled)
-    {
-        Collider col = GetComponent<Collider>();
-        if (col != null)
-            col.enabled = isEnabled;
-    }
+   
     
 }

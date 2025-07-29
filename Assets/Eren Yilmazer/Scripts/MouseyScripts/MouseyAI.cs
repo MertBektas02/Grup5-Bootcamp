@@ -44,7 +44,7 @@ public class MouseyAI : MonoBehaviour
     void Update()
     {
         
-        if (isDead || player == null) return;
+        if (isDead || !player) return;
         
         
         
@@ -222,7 +222,7 @@ public class MouseyAI : MonoBehaviour
     }
     public void BecomeBlinded(float duration, Vector3 distractionPosition)
     {
-        if (isBlinded || isDead || agent == null) return;
+        if (isBlinded || isDead || !agent) return;
 
         isBlinded = true;
         blindTimer = duration;

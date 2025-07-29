@@ -28,10 +28,10 @@ public class PlayerPickup : MonoBehaviour
         if (Physics.Raycast(ray, out hit, pickupRange, ammoLayer))
         {
             AmmoBox ammoBox = hit.collider.GetComponent<AmmoBox>();
-            if (ammoBox != null)
+            if (ammoBox)
             {
                 Weapon weapon = GetComponentInChildren<Weapon>();
-                if (weapon != null)
+                if (weapon)
                 {
                     weapon.AddAmmo(ammoBox.ammoAmount);
                     Destroy(ammoBox.gameObject);
