@@ -18,10 +18,10 @@ public class MainMenuManager : MonoBehaviour
     {
         Application.Quit();
     }
-    
-    public void LoadWithButtonMenu()
-    {
-        DataPersistenceManager.Instance.LoadGame();
 
+    public void OnClick_LoadLastSave()
+    {
+        DataPersistenceManager.Instance.LoadLastSaveGame();
+        Debug.Log("load butonuna tıklanıldı");
     }
 }

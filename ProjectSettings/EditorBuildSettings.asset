@@ -9,11 +9,20 @@ EditorBuildSettings:
     path: Assets/Auto Created Folders/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Main/Scene/MainMenuScene/MainMenuMain.unity
-    guid: 5a2187624c5942e4da500275f695cc94
+    path: Assets/Main/Scene/MainMenuScene/MainMenuMain2.unity
+    guid: 8b630418677baa14d9611f1ebc660d53
+  - enabled: 1
+    path: Assets/Main/Scene/StoryScenes/StoryMenu.unity
+    guid: 83b1faeba0f087b48bb85891c9f81d49
   - enabled: 1
     path: Assets/Main/Scene/TutorialScene/TutorialScene.unity
     guid: 7f06c6cdaf4d2fe4993b86ac5ea77f58
+  - enabled: 1
+    path: Assets/Main/Scene/Level1Scene/Level1MAIN.unity
+    guid: c59c173db8554c54e94f8fc2858b887a
+  - enabled: 0
+    path: Assets/Main/Scene/MainMenuScene/MainMenuMain.unity
+    guid: 5a2187624c5942e4da500275f695cc94
   - enabled: 0
     path: Assets/Mert Bektas/Scenes/MBScene.unity
     guid: 8bda9eff25954b14a97967a9438187ac

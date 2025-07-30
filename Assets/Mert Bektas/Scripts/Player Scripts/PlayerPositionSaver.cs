@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerPositionSaver : MonoBehaviour, IDataPersistence
 {
@@ -21,5 +22,7 @@ public class PlayerPositionSaver : MonoBehaviour, IDataPersistence
         data.playerPosition[0] = pos.x;
         data.playerPosition[1] = pos.y;
         data.playerPosition[2] = pos.z;
+
+        data.lastSceneName = SceneManager.GetActiveScene().name;
     }
 }
