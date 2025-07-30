@@ -6,27 +6,38 @@ public class AnimalMovement : MonoBehaviour
     public float wanderRadius = 5f;
     public float waitTime = 2f;
 
+    public AudioClip animalSound;
+    public float minSoundDelay = 5f;
+    public float maxSoundDelay = 15f;
+
+    public float hearingDistance = 12f; // 🔊 Oyuncuya olan mesafe limiti
+    public Transform player; // 🧍 Oyuncu referansı
+
     private NavMeshAgent agent;
     private float waitTimer;
-    
     private Animator animator;
+    private AudioSource audioSource;
+
+    private float soundTimer;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        
+        audioSource = GetComponent<AudioSource>();
         ChooseNewDestination();
         waitTimer = waitTime;
-        // 2D sprite kullanımı için zorunlu ayarlar
+
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        
+
+        soundTimer = Random.Range(minSoundDelay, maxSoundDelay);
     }
 
     void Update()
     {
         if (!agent.isOnNavMesh) return;
+
         bool isWalking = agent.velocity.magnitude > 0.1f;
         animator.SetBool("isWalking", isWalking);
 
@@ -40,8 +51,18 @@ public class AnimalMovement : MonoBehaviour
                 waitTimer = waitTime;
             }
         }
-        
+
         RotateTowardsDirection();
+
+        soundTimer -= Time.deltaTime;
+        if (soundTimer <= 0f)
+        {
+            if (player != null && Vector3.Distance(transform.position, player.position) <= hearingDistance)
+            {
+                PlayAnimalSound();
+            }
+            soundTimer = Random.Range(minSoundDelay, maxSoundDelay);
+        }
     }
 
     void ChooseNewDestination()
@@ -53,9 +74,7 @@ public class AnimalMovement : MonoBehaviour
         if (NavMesh.SamplePosition(target, out NavMeshHit hit, wanderRadius, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
-            
         }
-       
     }
 
     void RotateTowardsDirection()
@@ -66,12 +85,16 @@ public class AnimalMovement : MonoBehaviour
             SpriteRenderer sprite = GetComponent<SpriteRenderer>();
             if (sprite)
             {
-                if (dir.x < -0.1f)
-                    sprite.flipX = false; // sola bak
-                else if (dir.x > 0.1f)
-                    sprite.flipX = true; // sağa bak
+                sprite.flipX = dir.x > 0.1f;
             }
         }
     }
 
+    void PlayAnimalSound()
+    {
+        if (animalSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(animalSound);
+        }
+    }
 }
