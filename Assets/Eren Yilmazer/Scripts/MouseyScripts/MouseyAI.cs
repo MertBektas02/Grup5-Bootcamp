@@ -52,7 +52,7 @@ public class MouseyAI : MonoBehaviour
         {
             blindTimer -= Time.deltaTime;
 
-            // Flash bombasına gitmeye devam etsin
+            
             agent.isStopped = false;
             animator.SetBool("isWalking", true);
             animator.SetBool("isAttacking", false);
@@ -62,7 +62,7 @@ public class MouseyAI : MonoBehaviour
                 isBlinded = false;
             }
 
-            return; // Bu çok kritik! Oyuncuya tepki verme!
+            return; 
         }
        
         float distance = Vector3.Distance(transform.position, player.position);
@@ -142,7 +142,7 @@ public class MouseyAI : MonoBehaviour
 
     }
   
-    // ReSharper disable Unity.PerformanceAnalysis
+    
     void TryDamagePlayer()
     {
         Player playerHealth = player.GetComponent<Player>();

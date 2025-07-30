@@ -4,19 +4,24 @@ public class PlayerPickup : MonoBehaviour
 {
     public float pickupRange = 2f;
     public LayerMask ammoLayer;
+    
+   
 
     private Camera playerCamera;
 
     private void Start()
     {
         playerCamera = Camera.main;
+        
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            
             TryPickupAmmo();
+            
         }
     }
 
@@ -34,9 +39,10 @@ public class PlayerPickup : MonoBehaviour
                 if (weapon)
                 {
                     weapon.AddAmmo(ammoBox.ammoAmount);
-                    Destroy(ammoBox.gameObject);
+                    ammoBox.PlayPickupSoundAndDestroy(); // Sesi çal ve yok et
                 }
             }
         }
     }
+
 }
