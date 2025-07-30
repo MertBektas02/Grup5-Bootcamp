@@ -21,15 +21,15 @@ Bootcamp High Five
 
 # Oyun İsmi
 
-Deadline to Last Stop
+Gramp's Signal
 
 # Oyun Logosu
 
-<img width="795" alt="Screenshot 2025-07-05 at 11 41 16" src="https://github.com/user-attachments/assets/636db7f3-7b90-4985-b1a2-f8c52ccc0123" />
+<img width="400" alt="Image" src="https://github.com/user-attachments/assets/52035245-f222-42ab-9f3f-bb6adc672b53" />
 
 # Oyun Açıklaması
 
-Deadline to Last Stop bir clicker kaynak toplama ve yönetme oyunudur. Karavanınızın ihtiyaç duyduğu kaynakları sağlayarak kıyametten kaçındığınız, kaynakları ararken çevreyi keşfettiğiniz ve aynı zamanda hayatta kalmaya çalıştığınız bu evrende “Son Durak” isimli yere varmaya çalışmaktasınız.
+Gramp's Signal bir clicker kaynak toplama ve yönetme oyunudur. Karavanınızın ihtiyaç duyduğu kaynakları toplayarak sinyalin kaynağını bulmaya çalıştığınız, çevreyi keşfettiğiniz ve aynı zamanda hayatta kalma mücadelesi verdiğiniz bu evrende, dedenin izini sürmek için yola koyuluyorsunuz.
 
 # Oyun Özellikleri
 

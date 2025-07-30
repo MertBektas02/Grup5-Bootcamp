@@ -31,10 +31,14 @@ public class AutoCollectorPurchasePoint : MonoBehaviour, IDataPersistence
         if (ResourceManager.Instance.TrySpendResources(purchaseCosts))
         {
             ActivateCollector();
+            NotificationManager.Instance.ShowNotification("Purchased!", 2f);
+            SoundManager.PlaySound(SoundType.Purchased);
+
         }
         else
         {
-            Debug.Log("Satın alma başarısız: Yetersiz kaynak.");
+            NotificationManager.Instance.ShowNotification("Not enough Resources!", 2f, SoundType.Denied);
+            SoundManager.PlaySound(SoundType.Denied);
         }
     }
 
@@ -46,6 +50,7 @@ public class AutoCollectorPurchasePoint : MonoBehaviour, IDataPersistence
 
         if (uiPanel != null)
             uiPanel.SetActive(false);
+
     }
 
     private void OnTriggerEnter(Collider other)

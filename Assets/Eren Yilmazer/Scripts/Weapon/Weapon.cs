@@ -20,7 +20,10 @@ public class Weapon : MonoBehaviour
     [Header("Mermi Ayarları")]
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
-    public float bulletForce = 50f;
+    public float bulletForce = 500f;
+    
+    [Header("Bullet Hole")]
+    public GameObject bulletHolePrefab;
 
     [Header("Muzzle Flash")]
     public GameObject muzzleFlashPrefab;
@@ -61,11 +64,11 @@ public class Weapon : MonoBehaviour
     {
         if (isEquipped)
         {
-            // Yeniden doldurma kontrolü
+            
             if (isReloading)
                 return;
 
-            // Atış kontrolü
+            
             if (Input.GetButton("Fire1") && Time.time >= nextFireTime && currentAmmo > 0)
             {
                 nextFireTime = Time.time + fireRate;
@@ -76,11 +79,21 @@ public class Weapon : MonoBehaviour
                 audioSource.PlayOneShot(emptyClickSound);
             }
 
-            // Yeniden doldurma
+            
             if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo && !isReloading)
             {
                 StartCoroutine(Reload());
             }
+        }
+    }
+    // Kamera sarsılma çözüm
+    void LateUpdate()
+    {
+        if (isEquipped)
+        {
+            Vector3 offset = fpsCamera.transform.right * 0.3f + fpsCamera.transform.up * -0.3f + fpsCamera.transform.forward * 0.5f;
+            transform.position = fpsCamera.transform.position + offset;
+            transform.rotation = fpsCamera.transform.rotation;
         }
     }
 
@@ -89,18 +102,37 @@ public class Weapon : MonoBehaviour
     {
         if (isReloading || currentAmmo <= 0) return;
 
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         
+        Ray ray = fpsCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit1;
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out hit1, shootRange))
+        {
+            targetPoint = hit1.point;
+        }
+        else
+        {
+            targetPoint = ray.GetPoint(shootRange); // Boşa gittiğinde ileri bir nokta
+        }
+
+        
+        Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
+
+        
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().SetDirection(direction);
+
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.isKinematic = false;
-        bulletRb.AddForce(bulletSpawnPoint.forward * bulletForce, ForceMode.Impulse);
+        bulletRb.AddForce(direction * bulletForce, ForceMode.Impulse);
         
         // Raycast ile anlık hasar kontrolü
         RaycastHit hit;
         if (Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward, out hit, shootRange))
         {
             var mousey = hit.collider.GetComponentInParent<MouseyAI>();
-            if (mousey != null)
+            if (mousey)
             {
                 mousey.TakeDamage((int)damage);
             }
@@ -109,13 +141,22 @@ public class Weapon : MonoBehaviour
         PlayMuzzleFlash();
         currentAmmo--;
         ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
-        audioSource.PlayOneShot(shootSound);
+        
 
         if (currentAmmo <= 0 && reserveAmmo > 0)
         {
             StartCoroutine(Reload());
         }
         
+        if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        {
+            var holeRotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+            var holePosition = hit.point + hit.normal * 0.01f;
+            var hole = Instantiate(bulletHolePrefab, holePosition, holeRotation);
+            Destroy(hole, 2f);
+        }
+        audioSource.PlayOneShot(shootSound);
+
     }
 
 
@@ -142,7 +183,7 @@ public class Weapon : MonoBehaviour
         
     }
 
-    // ----------- Yeni Fonksiyonlar -----------
+    
     public bool IsEquipped() => isEquipped;
 
     public void SetEquipped(bool val) => isEquipped = val;
@@ -156,7 +197,8 @@ public class Weapon : MonoBehaviour
         rb.isKinematic = true;
         
         rb.detectCollisions = false;
-        SetColliderEnabled(false);
+        
+        
     }
 
     public void DropFromHand()
@@ -164,20 +206,16 @@ public class Weapon : MonoBehaviour
         isEquipped = false;
         transform.SetParent(null);
         rb.isKinematic = false;
-        rb.detectCollisions = true; // ← geri aç
-        SetColliderEnabled(true);
+        rb.detectCollisions = true; 
         transform.position = playerHand.position + playerHand.forward * 1f;
         transform.eulerAngles += new Vector3(0, 0, -45);
+        
     }
     public void AddAmmo(int amount)
     {
         reserveAmmo += amount;
         ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
     }
-    void SetColliderEnabled(bool isEnabled)
-    {
-        Collider col = GetComponent<Collider>();
-        if (col != null)
-            col.enabled = isEnabled;
-    }
+   
+    
 }

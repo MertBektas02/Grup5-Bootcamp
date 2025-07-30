@@ -16,4 +16,18 @@ public class SaveLoad : MonoBehaviour
             //Debug.Log("Manual Load triggered (F9).");
         }
     }
+
+    public void SaveWithButton()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+        NotificationManager.Instance.ShowNotification("Game saved!", 2f, SoundType.GameSaved);
+        SoundManager.PlaySound(SoundType.GameSaved);
+    }
+    public void LoadWithButton()
+    {
+        DataPersistenceManager.Instance.LoadGame();
+        NotificationManager.Instance.ShowNotification("Game Loaded!");
+
+
+    }
 }

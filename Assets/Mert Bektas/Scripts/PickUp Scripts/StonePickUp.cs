@@ -8,7 +8,8 @@ public class StonePickUp : MonoBehaviour
     {
         ResourceManager.Instance.AddResource(ResourceType.Stone, amount);
         Debug.Log("stone toplandı! +" + amount);
-        
+        SoundManager.PlaySound(SoundType.PickUp);
+
         Destroy(gameObject);
     }
 

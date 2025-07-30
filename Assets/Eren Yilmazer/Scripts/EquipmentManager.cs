@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +17,8 @@ public class EquipmentManager : MonoBehaviour
     public Image handIcon;
 
 
-    public Color activeEquippedColor = Color.yellow; // elde olan ikon
-    public Color inactiveEquippedColor = Color.grey; // elde olmayan ama alınmış ikon
+    public Color activeEquippedColor = Color.yellow; 
+    public Color inactiveEquippedColor = Color.grey; 
 
     public enum EquippedItem
     {
@@ -39,11 +40,18 @@ public class EquipmentManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (revolver != null || flashBomb != null)
+            bool hasRevolver = revolver && (revolver.transform.parent == playerHand || revolver.transform.parent == inActiveSlot);
+            bool hasFlashBomb = flashBomb && (flashBomb.transform.parent == playerHand || flashBomb.transform.parent == inActiveSlot);
+
+            // Eğer revolver VE flashBomb zaten alınmışsa, pickup yapmaya gerek yok
+            if (!hasRevolver || !hasFlashBomb)
+            {
                 TryPickupNearest();
+            }
         }
+
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -54,8 +62,7 @@ public class EquipmentManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // Revolver varsa ve elde ya da inactiveSlot'taysa geçiş yapılabilir
-            if (revolver != null && 
+            if (revolver && 
                 (revolver.transform.parent == playerHand || revolver.transform.parent == inActiveSlot))
             {
                 EquipWeapon(EquippedItem.Revolver);
@@ -64,8 +71,8 @@ public class EquipmentManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            // FlashBomb varsa ve elde ya da inactiveSlot'taysa geçiş yapılabilir
-            if (flashBomb != null && 
+            
+            if (flashBomb && 
                 (flashBomb.transform.parent == playerHand || flashBomb.transform.parent == inActiveSlot))
             {
                 EquipWeapon(EquippedItem.FlashBomb);
@@ -74,20 +81,22 @@ public class EquipmentManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (currentEquipped != EquippedItem.None)
+            switch (currentEquipped)
             {
-                // Elimizdekini bırakmadan sadece inActiveSlot'a çekiyoruz
-                if (currentEquipped == EquippedItem.Revolver)
+                case EquippedItem.Revolver:
                     revolver.MoveTo(inActiveSlot);
-                else if (currentEquipped == EquippedItem.FlashBomb)
+                    break;
+                case EquippedItem.FlashBomb:
                     flashBomb.MoveTo(inActiveSlot);
-
-                currentEquipped = EquippedItem.None;
-                UpdateUIIcons();
+                    break;
             }
+
+            currentEquipped = EquippedItem.None;
+            UpdateUIIcons();
         }
-        
-            
+
+
+
     }
 
     void TryPickupNearest()
@@ -95,23 +104,23 @@ public class EquipmentManager : MonoBehaviour
         float revolverDist = float.MaxValue;
         float flashDist = float.MaxValue;
 
-        if (revolver != null && !revolver.IsEquipped())
+        if (revolver && !revolver.IsEquipped())
         {
-            if (revolver.transform != null && playerHand != null)
+            if (revolver.transform && playerHand)
                 revolverDist = Vector3.Distance(revolver.transform.position, playerHand.position);
         }
 
-        if (flashBomb != null && !flashBomb.IsEquipped())
+        if (flashBomb && !flashBomb.IsEquipped())
         {
-            if (flashBomb.transform != null && playerHand != null)
+            if (flashBomb.transform && playerHand)
                 flashDist = Vector3.Distance(flashBomb.transform.position, playerHand.position);
         }
 
-        // İkisi de eldeyse ya da yakında değilse çık
+        
         if (revolverDist == float.MaxValue && flashDist == float.MaxValue)
             return;
 
-        // En yakın olanı seç
+        
         if (revolverDist < flashDist && revolverDist <= 2f)
         {
             EquipWeapon(EquippedItem.Revolver);
@@ -143,7 +152,7 @@ public class EquipmentManager : MonoBehaviour
                 return;
         }
 
-        // Önce elindeki objeyi InActiveSlot'a taşı
+        
         if (currentEquipped != EquippedItem.None)
         {
 
@@ -204,40 +213,34 @@ public class EquipmentManager : MonoBehaviour
     
     private void UpdateUIIcons()
     {
-        bool hasRevolver = revolver != null && (revolver.transform.parent == playerHand || revolver.transform.parent == inActiveSlot);
-        bool hasFlashBomb = flashBomb != null && (flashBomb.transform.parent == playerHand || flashBomb.transform.parent == inActiveSlot);
+        bool hasRevolver = revolver && (revolver.transform.parent == playerHand || revolver.transform.parent == inActiveSlot);
+        bool hasFlashBomb = flashBomb && (flashBomb.transform.parent == playerHand || flashBomb.transform.parent == inActiveSlot);
 
-        bool revolverInHand = revolver != null && revolver.transform.parent == playerHand;
-        bool flashBombInHand = flashBomb != null && flashBomb.transform.parent == playerHand;
+        bool revolverInHand = revolver && revolver.transform.parent == playerHand;
+        bool flashBombInHand = flashBomb && flashBomb.transform.parent == playerHand;
 
-        // Revolver iconu
-        if (revolverIcon != null)
+        
+        // Opak ve yarı saydam renkler
+        Color visible = new Color(1f, 1f, 1f, 1f);       // Tam opak (ikon aktif)
+        Color faded = new Color(1f, 1f, 1f, 0.2f);        // Saydam (ikon silik)
+        
+        if (revolverIcon)
         {
-            revolverIcon.gameObject.SetActive(hasRevolver); // Elimde ya da inActiveSlot'ta varsa göster
-            if (revolverInHand)
-                revolverIcon.color = activeEquippedColor; // yeşil
-            else if (hasRevolver)
-                revolverIcon.color = inactiveEquippedColor; // beyaz
+            revolverIcon.gameObject.SetActive(hasRevolver);
+            revolverIcon.color = revolverInHand ? visible : faded;
         }
 
-        // Flash Bomb iconu
-        if (flashBombIcon != null)
+        if (flashBombIcon)
         {
             flashBombIcon.gameObject.SetActive(hasFlashBomb);
-            if (flashBombInHand)
-                flashBombIcon.color = activeEquippedColor;
-            else if (hasFlashBomb)
-                flashBombIcon.color = inactiveEquippedColor;
+            flashBombIcon.color = flashBombInHand ? visible : faded;
         }
-        // Hand Icon - her zaman açık 
-        if (handIcon != null)
-        {
-            handIcon.gameObject.SetActive(true); // her zaman açık
 
-            if (currentEquipped == EquippedItem.None)
-                handIcon.color = activeEquippedColor; // yeşil: sadece el aktif
-            else
-                handIcon.color = inactiveEquippedColor; // beyaz: el alınmış ama aktif değil
+        // El ikonunu her zaman göster ama uygun şekilde saydam yap
+        if (handIcon)
+        {
+            handIcon.gameObject.SetActive(true);
+            handIcon.color = (currentEquipped == EquippedItem.None) ? visible : faded;
         }
     }
     

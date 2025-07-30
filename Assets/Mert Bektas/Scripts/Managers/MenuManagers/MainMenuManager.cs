@@ -12,10 +12,16 @@ public class MainMenuManager : MonoBehaviour
     public void ToggleSettings()
     {
         settingsPanel.SetActive(!settingsPanel.activeSelf);
-        
+
     }
     public void QuitGame()
     {
         Application.Quit();
+    }
+    
+    public void LoadWithButtonMenu()
+    {
+        DataPersistenceManager.Instance.LoadGame();
+
     }
 }
