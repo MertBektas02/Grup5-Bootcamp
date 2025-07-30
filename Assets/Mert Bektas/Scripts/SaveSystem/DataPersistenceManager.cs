@@ -28,7 +28,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
-        
+
         dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
@@ -71,7 +71,57 @@ public class DataPersistenceManager : MonoBehaviour
             .ToList();
     }
 
-    // Manuel olarak çağırabilmen için
+    //--------- MAIN MENU veya PAUSE MENU'deyken Sahne yükleme---------
+    //Main menü sahnesinde son save'i yükleyebilmek için bazı değişikliklere ihtiyacım vardı.
+    //LoadLastSaveGame metodu, DataTransferBetWeenScenes.cs vs.
+    public void LoadLastSaveGame()
+    {
+        GameData loadedData = dataHandler.Load();
+
+        if (loadedData == null)
+        {
+            Debug.LogWarning("No save data found.");
+            return;
+        }
+
+        // Hedef sahneye geçmeden önce veri taşınsın
+        if (!string.IsNullOrEmpty(loadedData.lastSceneName) &&
+            loadedData.lastSceneName != UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+        {
+            DataTransferBetweenScenes.lastLoadedGameData = loadedData;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(loadedData.lastSceneName);
+        }
+        else
+        {
+            gameData = loadedData;
+            dataPersistenceObjects = FindAllDataPersistenceObjects();
+            LoadGame(); // aynı sahnedeysek direkt yükle
+        }
+    }
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        if (DataTransferBetweenScenes.lastLoadedGameData != null)
+        {
+            gameData = DataTransferBetweenScenes.lastLoadedGameData;
+            DataTransferBetweenScenes.lastLoadedGameData = null;
+
+            dataPersistenceObjects = FindAllDataPersistenceObjects();
+            LoadGame(); // Sahne yüklendiğinde kaldığı yerden devam
+        }
+    }
+    //--------- MAIN MENU veya PAUSE MENU'deyken Sahne yükleme---------
+
+
     private void OnApplicationQuit()
     {
         SaveGame();

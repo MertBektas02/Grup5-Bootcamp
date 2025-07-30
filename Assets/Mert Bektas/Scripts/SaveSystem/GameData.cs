@@ -28,12 +28,17 @@ public class GameData
     public List<CollectorData> purchasedCollectors = new List<CollectorData>();
 
 
-    // Boş constructor yeni oyun içindir
+    public string lastSceneName;
+
+
+    // Boş constructor yeni oyun için
 
     public GameData()
     {
         playerData.playerHealth = 100;
         playerData.playerFood = 100;
         playerData.playerWater = 100;
+
+        lastSceneName = "TutorialLevel";
     }
 }

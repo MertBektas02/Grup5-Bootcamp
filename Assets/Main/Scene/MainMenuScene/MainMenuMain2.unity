@@ -2122,7 +2122,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1451210563}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: LoadWithButtonMenu
+        m_MethodName: OnClick_LoadLastSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5636,9 +5636,9 @@ SceneRoots:
   - {fileID: 246378510}
   - {fileID: 2095543534}
   - {fileID: 1490294180}
-  - {fileID: 1451210564}
   - {fileID: 215642937}
   - {fileID: 1775244277}
   - {fileID: 2110766681}
   - {fileID: 130155444}
   - {fileID: 1747816905}
+  - {fileID: 1451210564}
