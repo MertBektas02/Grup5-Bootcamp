@@ -8,7 +8,6 @@ public class CoalPickUp : MonoBehaviour
     {
         ResourceManager.Instance.AddResource(ResourceType.Coal, amount);
         Debug.Log("coal toplandı! +" + amount);
-        SoundManager.PlaySound(SoundType.PickUp);
         
         Destroy(gameObject);
     }

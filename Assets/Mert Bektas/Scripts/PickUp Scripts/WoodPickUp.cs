@@ -6,9 +6,10 @@ public class WoodPickup : MonoBehaviour, IPickupable
 
     public void OnPickup()
     {
+                SoundManager.PlaySound(SoundType.PickUp);
+
         ResourceManager.Instance.AddResource(ResourceType.Wood, amount);
         Debug.Log("Odun toplandı! +" + amount);
-        SoundManager.PlaySound(SoundType.PickUp);
 
         Destroy(gameObject);
     }

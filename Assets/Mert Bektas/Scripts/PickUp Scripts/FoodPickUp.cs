@@ -8,7 +8,6 @@ public class FoodPickUp : MonoBehaviour
     {
         ResourceManager.Instance.AddResource(ResourceType.Food, amount);
         Debug.Log("food toplandı! +" + amount);
-        SoundManager.PlaySound(SoundType.PickUp);
 
         Destroy(gameObject);
     }
