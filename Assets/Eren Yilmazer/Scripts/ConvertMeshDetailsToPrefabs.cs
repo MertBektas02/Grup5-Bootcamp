@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
@@ -5,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class ConvertMeshDetailsToPrefabs : MonoBehaviour
 {
     [MenuItem("Tools/Convert Mesh Details To Prefabs")]
+    [Obsolete("Obsolete")]
     public static void ConvertDetails()
     {
-        Terrain terrain = FindObjectOfType<Terrain>();
+        var terrain = FindObjectOfType<Terrain>();
         if (terrain == null)
         {
             Debug.LogError("No terrain found!");

@@ -28,8 +28,9 @@ public class MouseyAI : MonoBehaviour
 
     public GameObject activeFlashBomb; 
     public GameObject bloodEffect;
-    
-    
+    public GameObject damageOverlay;
+    public float displayTime = 2f;
+    private EnemySoundManager soundManager;
 
     void Start()
     {
@@ -39,6 +40,7 @@ public class MouseyAI : MonoBehaviour
         idleTimer = wanderWaitTime;
         isWandering = true;
         Debug.DrawLine(transform.position, wanderTarget, Color.yellow, 2f);
+        soundManager = GetComponent<EnemySoundManager>();
     }
 
     void Update()
@@ -141,16 +143,30 @@ public class MouseyAI : MonoBehaviour
 
 
     }
-  
-    
     void TryDamagePlayer()
     {
-        Player playerHealth = player.GetComponent<Player>();
-        playerHealth.TakeDamage(10); // 10 birim hasar ver
-
-    }
-
+        // 1. Önce saldırı sesini çal
+        soundManager.PlayAttackSound();
     
+        // 2. 0.5 saniye sonra hasar ver + hurt sesi çal (Coroutine ile)
+        StartCoroutine(DelayedDamage());
+    }
+    private IEnumerator DelayedDamage()
+    {
+        // Saldırı animasyonu ile senkronizasyon için bekle
+        yield return new WaitForSeconds(0.7f); 
+    
+        Player playerHealth = player.GetComponent<Player>();
+        playerHealth.TakeDamage(10);
+        soundManager.PlayPlayerHurtSound();
+        // Hasar sesi gecikmeli çalacak
+        damageOverlay.SetActive(true);
+        Invoke("HideDamageEffect", displayTime);
+    }
+    private void HideDamageEffect()
+    {
+           damageOverlay.SetActive(false);
+    }
     void ChooseNewWanderTarget()
     {
         Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
@@ -201,7 +217,7 @@ public class MouseyAI : MonoBehaviour
         
         isDead = true;
         agent.isStopped = true;
-        
+        soundManager.PlayDeathSound();
         animator.SetBool("isDead", true);
         animator.SetBool("isWalking", false);
         animator.SetBool("isAttacking", false);

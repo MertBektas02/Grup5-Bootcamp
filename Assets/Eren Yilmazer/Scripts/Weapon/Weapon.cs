@@ -102,61 +102,48 @@ public class Weapon : MonoBehaviour
     {
         if (isReloading || currentAmmo <= 0) return;
 
-        
+        // Mermi çıkış efekti ve sesi
+        PlayMuzzleFlash();
+        audioSource.PlayOneShot(shootSound);
+    
+        // Mermi miktarını güncelle
+        currentAmmo--;
+        ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
+
+        // Raycast ile hedef kontrolü
         Ray ray = fpsCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        RaycastHit hit1;
-        Vector3 targetPoint;
-
-        if (Physics.Raycast(ray, out hit1, shootRange))
-        {
-            targetPoint = hit1.point;
-        }
-        else
-        {
-            targetPoint = ray.GetPoint(shootRange); // Boşa gittiğinde ileri bir nokta
-        }
-
-        
-        Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
-
-        
+        RaycastHit hit;
+    
+        // Mermi fiziksel olarak fırlatma
+        Vector3 direction = ray.direction;
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(direction);
+        bullet.GetComponent<Rigidbody>().AddForce(direction * bulletForce, ForceMode.Impulse);
 
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletRb.isKinematic = false;
-        bulletRb.AddForce(direction * bulletForce, ForceMode.Impulse);
-        
-        // Raycast ile anlık hasar kontrolü
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCamera.transform.position,fpsCamera.transform.forward, out hit, shootRange))
+        // Raycast ile anlık hasar kontrolü (SADECE BİR ŞEYE ÇARPTIYSA)
+        if (Physics.Raycast(ray, out hit, shootRange))
         {
+            // Düşman vurulduysa
             var mousey = hit.collider.GetComponentInParent<MouseyAI>();
             if (mousey)
             {
                 mousey.TakeDamage((int)damage);
             }
-            
+            // Duvar/diğer yüzeyler için delik efekti
+            else if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+            {
+                var holeRotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+                var holePosition = hit.point + hit.normal * 0.01f;
+                var hole = Instantiate(bulletHolePrefab, holePosition, holeRotation);
+                Destroy(hole, 2f);
+            }
         }
-        PlayMuzzleFlash();
-        currentAmmo--;
-        ammoUI.UpdateAmmo(currentAmmo, reserveAmmo);
-        
 
+        // Şarjör kontrolü
         if (currentAmmo <= 0 && reserveAmmo > 0)
         {
             StartCoroutine(Reload());
         }
-        
-        if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
-        {
-            var holeRotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-            var holePosition = hit.point + hit.normal * 0.01f;
-            var hole = Instantiate(bulletHolePrefab, holePosition, holeRotation);
-            Destroy(hole, 2f);
-        }
-        audioSource.PlayOneShot(shootSound);
-
     }
 
 
