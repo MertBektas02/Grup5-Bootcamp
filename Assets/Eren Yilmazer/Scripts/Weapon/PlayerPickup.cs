@@ -4,24 +4,23 @@ public class PlayerPickup : MonoBehaviour
 {
     public float pickupRange = 2f;
     public LayerMask ammoLayer;
+    public float pickupCooldown = 0.5f; // Yeni eklendi
     
-   
-
     private Camera playerCamera;
+    private float lastPickupTime; // Yeni eklendi
 
     private void Start()
     {
         playerCamera = Camera.main;
-        
+        lastPickupTime = -pickupCooldown; // Başlangıçta hemen toplamaya izin ver
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && Time.time >= lastPickupTime + pickupCooldown)
         {
-            
+            lastPickupTime = Time.time;
             TryPickupAmmo();
-            
         }
     }
 
@@ -39,10 +38,9 @@ public class PlayerPickup : MonoBehaviour
                 if (weapon)
                 {
                     weapon.AddAmmo(ammoBox.ammoAmount);
-                    ammoBox.PlayPickupSoundAndDestroy(); // Sesi çal ve yok et
+                    ammoBox.PlayPickupSoundAndDestroy();
                 }
             }
         }
     }
-
 }

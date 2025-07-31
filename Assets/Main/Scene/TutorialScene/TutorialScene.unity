@@ -6651,7 +6651,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -9486,6 +9486,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 493033496}
     m_Modifications:
+    - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
+      propertyPath: ammoAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
       propertyPath: pickupSound
       value: 
@@ -14707,6 +14711,7 @@ MonoBehaviour:
   ammoLayer:
     serializedVersion: 2
     m_Bits: 8192
+  pickupCooldown: 0.5
 --- !u!4 &300934587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4003897846794392, guid: cd87e5026d1695148aabe96121c526ef, type: 3}
@@ -32841,6 +32846,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 493033496}
     m_Modifications:
     - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
+      propertyPath: ammoAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
       propertyPath: pickupSound
       value: 
       objectReference: {fileID: 8300000, guid: bd1a5b29b655f5740ab640d40c65a9f1, type: 3}
@@ -34635,6 +34644,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 493033496}
     m_Modifications:
+    - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
+      propertyPath: ammoAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
       propertyPath: pickupSound
       value: 
@@ -38403,6 +38416,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 493033496}
     m_Modifications:
+    - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
+      propertyPath: ammoAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
       propertyPath: pickupSound
       value: 
@@ -42542,6 +42559,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 493033496}
     m_Modifications:
+    - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
+      propertyPath: ammoAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
       propertyPath: pickupSound
       value: 
@@ -61992,6 +62013,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 493033496}
     m_Modifications:
+    - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
+      propertyPath: ammoAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
       propertyPath: pickupSound
       value: 
@@ -82352,6 +82377,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6894979521318456901, guid: d250af4848f51154f9a2bf6a85b60ac2, type: 3}
   m_PrefabInstance: {fileID: 571149365}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1785727780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1785727782}
+  - component: {fileID: 1785727781}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1785727781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785727780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: d691137dcd49b5c4c8aef2924bafdf2f, type: 2}
+--- !u!4 &1785727782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785727780}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.167162, y: 2.5586514, z: 38.303783}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1789419144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94072,6 +94146,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 493033496}
     m_Modifications:
     - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
+      propertyPath: ammoAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034210353345233113, guid: 68b2cee3cee696a41b0fbd2c13ac9410, type: 3}
       propertyPath: pickupSound
       value: 
       objectReference: {fileID: 8300000, guid: bd1a5b29b655f5740ab640d40c65a9f1, type: 3}
@@ -99609,3 +99687,4 @@ SceneRoots:
   - {fileID: 201245184}
   - {fileID: 427545056}
   - {fileID: 1243861448}
+  - {fileID: 1785727782}

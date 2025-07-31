@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 2771950298562377009}
   - component: {fileID: 6417813199604901290}
   - component: {fileID: 341590830746983959}
-  - component: {fileID: 2395948934807179627}
+  - component: {fileID: 6629464471994333199}
   m_Layer: 15
   m_Name: Mousey
   m_TagString: Untagged
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   attackRange: 1.5
-  chaseRange: 7
+  chaseRange: 5
   health: 25
   wanderRadius: 10
   wanderWaitTime: 8
@@ -339,11 +339,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  DopplerLevel: 0
+  MinDistance: 2
+  MaxDistance: 18
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -376,7 +376,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -416,7 +416,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2395948934807179627
+--- !u!114 &6629464471994333199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -425,9 +425,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234262512204045136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2b9c0b7be41eb4e877fd3ef71b2a87, type: 3}
+  m_Script: {fileID: 11500000, guid: fafd21838929b2a428ef513b002ce766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleSound: {fileID: 8300000, guid: a64066250f0203d448c037d62774a12c, type: 3}
+  walkSound: {fileID: 8300000, guid: f7c07a1aba03e7b4b9ab2160ea9d7ea8, type: 3}
+  attackSound: {fileID: 8300000, guid: e783685fe6c184e4fac776c6ffbb4fb4, type: 3}
+  deathSound: {fileID: 8300000, guid: 2fb6b66b4afb11e4fbdecc31abdbe533, type: 3}
+  playerHurtSound: {fileID: 8300000, guid: 437e96c43ccb86e43b643b6d9b50c0b9, type: 3}
+  volume: 0.5
+  idleSoundInterval: 8
+  walkSoundInterval: 0.5
+  minDistance: 2
+  maxDistance: 10
 --- !u!1 &1289271017918328743
 GameObject:
   m_ObjectHideFlags: 0
