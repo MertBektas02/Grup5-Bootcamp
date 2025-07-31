@@ -4,12 +4,12 @@ using System.Collections;
 public class DayNightSystemCopy : MonoBehaviour
 {
     [Header("Referanslar")]
-    public GameTimeManager timeManager; // Inspector’dan bağla
+    public GameTimeManager timeManager;
     public Light sun;
 
     [Header("Oranlar (0-1 toplamı 1 olacak)")]
-    [Range(0.1f, 0.9f)] public float dayPortion = 0.7f; // örnek: %70 gündüz, %30 gece
-    [Range(0.1f, 0.9f)] public float nightPortion = 0.3f; // bu otomatik hesaplanabilir // artık otomatik hesaplanıyor lol
+    [Range(0.1f, 0.9f)] public float dayPortion = 0.7f;
+    [Range(0.1f, 0.9f)] public float nightPortion = 0.3f;
 
     [Header("Güneş Ayarları")]
     public Gradient sunColorOverTime;
@@ -22,25 +22,25 @@ public class DayNightSystemCopy : MonoBehaviour
     public AmbienceManager2 ambienceManager;
     private bool lastIsNight = false;
 
+    // 🟢 Getter methodları (public)
+    public bool GetIsNight() => isNight;
+    public bool GetIsDay() => isDay;
+
     void Start()
     {
-        // Bir frame bekleyip sonra kontrol et
         StartCoroutine(InitAmbienceAfterFrame());
     }
 
     private IEnumerator InitAmbienceAfterFrame()
     {
-        // bir frame bekle ki Update() bir kez çalışsın
         yield return null;
 
-        // o sıradaki gece/gündüz durumunu kullan
         if (ambienceManager != null)
         {
             ambienceManager.SetNightMode(isNight);
             lastIsNight = isNight;
         }
     }
-
 
     void Update()
     {
@@ -54,7 +54,6 @@ public class DayNightSystemCopy : MonoBehaviour
 
         UpdateSun(shifted);
 
-        // Sadece gece/gündüz durumu değiştiyse haber ver
         if (isNight != lastIsNight)
         {
             if (ambienceManager != null)
@@ -63,12 +62,10 @@ public class DayNightSystemCopy : MonoBehaviour
             }
             lastIsNight = isNight;
         }
-
     }
 
     void UpdateSun(float timeOfDay)
     {
-        // Güneş açısı
         float sunAngle = (timeOfDay * 360f) - 90f;
         sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
 
