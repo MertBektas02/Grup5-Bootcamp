@@ -1763,6 +1763,7 @@ Transform:
   - {fileID: 268397724}
   - {fileID: 2028951331}
   - {fileID: 135006062}
+  - {fileID: 931632016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &141368082 stripped
@@ -6135,7 +6136,6 @@ Transform:
   - {fileID: 1362204603}
   - {fileID: 1043183682}
   - {fileID: 744154434}
-  - {fileID: 931632016}
   - {fileID: 665173079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13835,7 +13835,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 412259418}
+  m_Father: {fileID: 139935351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &936509256
 PrefabInstance:
@@ -22383,8 +22383,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeManager: {fileID: 1946970141}
   sun: {fileID: 1266679437}
-  dayPortion: 0.4
-  nightPortion: 0.6
+  dayPortion: 0.5
+  nightPortion: 0.5
   sunColorOverTime:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -30010,7 +30010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDay: 1
-  dayDuration: 30
+  dayDuration: 5000
 --- !u!4 &1946970142
 Transform:
   m_ObjectHideFlags: 0
@@ -31518,7 +31518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31758cb98d28b8c418f8dff40c913eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hordeDay: 10
+  hordeDay: 20
   hordeUI: {fileID: 735291896}
 --- !u!1 &2017997742
 GameObject:

@@ -6,6 +6,7 @@ public class StonePickUp : MonoBehaviour
 
     public void OnPickup()
     {
+        SoundManager.PlaySound(SoundType.PickUp);
         ResourceManager.Instance.AddResource(ResourceType.Stone, amount);
         Debug.Log("stone toplandı! +" + amount);
 
