@@ -69,7 +69,7 @@ public class PauseManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        SceneManager.LoadScene("MainMenuMain");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public bool IsPaused()

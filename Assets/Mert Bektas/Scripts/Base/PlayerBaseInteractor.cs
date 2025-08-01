@@ -3,6 +3,9 @@ using UnityEngine;
 public class PlayerBaseInteractor : MonoBehaviour
 {
     private TeleportableObject currentTeleportable;
+    [SerializeField] private GameObject insideTrigger;
+    [SerializeField] private GameObject outsideTrigger;
+
 
     private bool isTeleporting = false;
 
