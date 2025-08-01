@@ -6,8 +6,15 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     public void StartGame()
     {
+        var dataManager = FindFirstObjectByType<DataPersistenceManager>();
+        if (dataManager != null)
+        {
+            dataManager.ResetSaveData();
+            // dataManager.NewGame();
+            // dataManager.SaveGame();
+        }
         GameOverManager.Instance.ResumeGame();
-        SceneManager.LoadScene(sceneName: "TutorialScene");
+        SceneManager.LoadScene(sceneName: "StoryMenu");
     }
     public void ToggleSettings()
     {

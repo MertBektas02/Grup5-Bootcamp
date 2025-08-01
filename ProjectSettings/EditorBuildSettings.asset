@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main/Scene/Level1Scene/Level1MAIN.unity
     guid: c59c173db8554c54e94f8fc2858b887a
+  - enabled: 1
+    path: Assets/Main/Scene/FinishScene.unity
+    guid: 290a386650dd2ce40a1f75fc3612f4d0
   - enabled: 0
     path: Assets/Main/Scene/MainMenuScene/MainMenuMain-old.unity
     guid: 5a2187624c5942e4da500275f695cc94
