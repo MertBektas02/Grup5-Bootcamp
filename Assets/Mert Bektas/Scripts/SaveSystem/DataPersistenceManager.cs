@@ -63,6 +63,13 @@ public class DataPersistenceManager : MonoBehaviour
 
         dataHandler.Save(gameData);
     }
+    public void ResetSaveData()
+    {
+        gameData = new GameData(); // bellekteki save'i sıfırla
+
+        dataHandler.DeleteSaveFile(); // fiziksel dosyayı da sil
+
+    }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {

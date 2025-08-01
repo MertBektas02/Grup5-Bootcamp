@@ -34,7 +34,11 @@ public class HordeManager : MonoBehaviour, IDataPersistence
     void GameOver()
     {
         Debug.Log("GAME OVER! Horde geldi, ama sen kaçamadın.");
-        // Oyunu bitir, menü göster, vs.
+
+        if (GameOverManager.Instance != null)
+            GameOverManager.Instance.ShowGameOver();
+        else
+            Debug.LogWarning("GameOverManager bulunamadı!");
     }
 
 

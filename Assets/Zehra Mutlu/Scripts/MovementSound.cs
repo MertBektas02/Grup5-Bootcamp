@@ -8,14 +8,13 @@ public class MovementSound : MonoBehaviour
     public float soundInterval = 0.4f;
 
     private Vector3 lastPosition;
-    private float startDelay = 0.2f; // ilk karede ses çalmasýný önlemek için
-    private float timer = 0f;
+    private float startDelay = 0.2f; // ilk karede ses ï¿½almasï¿½nï¿½ ï¿½nlemek iï¿½in
 
     void Start()
     {
         if (movementAudioSource == null)
         {
-            Debug.LogError("Adým sesi AudioSource atanmadý!");
+            Debug.LogError("Adï¿½m sesi AudioSource atanmadï¿½!");
             enabled = false;
             return;
         }
@@ -29,7 +28,7 @@ public class MovementSound : MonoBehaviour
 
     void Update()
     {
-        // Oyun baþlayalý çok kýsa süre olduysa hiçbir þey yapma
+        // Oyun baï¿½layalï¿½ ï¿½ok kï¿½sa sï¿½re olduysa hiï¿½bir ï¿½ey yapma
         if (Time.timeSinceLevelLoad < startDelay)
             return;
 
@@ -41,7 +40,7 @@ public class MovementSound : MonoBehaviour
             if (!movementAudioSource.isPlaying)
             {
                 movementAudioSource.Play();
-                Debug.Log("Adým sesi BAÞLADI");
+                Debug.Log("Adï¿½m sesi BAï¿½LADI");
             }
         }
         else
@@ -49,7 +48,7 @@ public class MovementSound : MonoBehaviour
             if (movementAudioSource.isPlaying)
             {
                 movementAudioSource.Stop();
-                Debug.Log("Adým sesi DURDU");
+                Debug.Log("Adï¿½m sesi DURDU");
             }
         }
 

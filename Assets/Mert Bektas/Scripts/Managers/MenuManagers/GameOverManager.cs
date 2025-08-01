@@ -49,11 +49,18 @@ public class GameOverManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        var dataManager = FindFirstObjectByType<DataPersistenceManager>();
+        if (dataManager != null)
+        {
+            dataManager.ResetSaveData();
+            // dataManager.NewGame();
+            // dataManager.SaveGame();
+        }
         if (screenUICanvas != null)
             screenUICanvas.SetActive(true); // <- Aktif et
 
         Time.timeScale = 1f; // Menüye geçmeden önce zamanı sıfırdan çıkarmayı unutma
-        SceneManager.LoadScene(sceneName: "MainMenuMain");
+        SceneManager.LoadScene(sceneName: "MainMenu");
     }
 
     public void QuitGame()
