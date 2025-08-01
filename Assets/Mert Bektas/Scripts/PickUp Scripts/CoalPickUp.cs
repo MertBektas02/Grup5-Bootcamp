@@ -6,6 +6,7 @@ public class CoalPickUp : MonoBehaviour
 
     public void OnPickup()
     {
+        SoundManager.PlaySound(SoundType.PickUp);
         ResourceManager.Instance.AddResource(ResourceType.Coal, amount);
         Debug.Log("coal toplandı! +" + amount);
         

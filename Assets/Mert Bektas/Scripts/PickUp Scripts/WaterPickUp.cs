@@ -6,6 +6,8 @@ public class WaterPickUp : MonoBehaviour
 
     public void OnPickup()
     {
+
+        SoundManager.PlaySound(SoundType.PickUp);
         ResourceManager.Instance.AddResource(ResourceType.Water, amount);
         Debug.Log("water toplandı! +" + amount);
 

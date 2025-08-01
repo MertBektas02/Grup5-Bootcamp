@@ -5,11 +5,15 @@ using System;
 public class FileDataHandler
 {
     private string fullPath;
-
+    private string dataDirPath;
+    private string dataFileName;
     public FileDataHandler(string dataDirPath, string fileName)
     {
+        this.dataDirPath = dataDirPath;
+        this.dataFileName = fileName;
         fullPath = Path.Combine(dataDirPath, fileName);
     }
+
 
     public void Save(GameData data)
     {
@@ -42,6 +46,17 @@ public class FileDataHandler
         {
             Debug.LogError("Error loading data: " + e);
             return null;
+        }
+    }
+
+    public void DeleteSaveFile()
+    {
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+            Debug.Log("Save dosyası silindi.");
         }
     }
 }

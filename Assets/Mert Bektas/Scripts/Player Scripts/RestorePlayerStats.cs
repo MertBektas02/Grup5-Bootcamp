@@ -44,7 +44,9 @@ public class RestorePlayerStats : MonoBehaviour
         }
         else
         {
-            Debug.Log("Yeterli su kaynağın yok.");
+            NotificationManager.Instance.ShowNotification("Not enough water!", 2f, SoundType.Denied);
+            SoundManager.PlaySound(SoundType.Denied);
+
         }
     }
 
@@ -76,7 +78,7 @@ public class RestorePlayerStats : MonoBehaviour
         }
         else
         {
-            Debug.Log("Yeterli gıda kaynağın yok.");
-        }
+            NotificationManager.Instance.ShowNotification("Not enough food!", 2f, SoundType.Denied);
+            SoundManager.PlaySound(SoundType.Denied);        }
     }
 }

@@ -19,10 +19,10 @@ public class DayNightSystemCopy : MonoBehaviour
     [SerializeField] private bool isDay = false;
     [SerializeField] private bool isNight = false;
 
-    public AmbienceManager2 ambienceManager;
+    public AmbienceManager ambienceManager;
     private bool lastIsNight = false;
 
-    // 🟢 Getter methodları (public)
+    //  Getter methodları (public)
     public bool GetIsNight() => isNight;
     public bool GetIsDay() => isDay;
 

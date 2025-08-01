@@ -10,6 +10,13 @@ public class NextLevel : MonoBehaviour
         if (ResourceManager.Instance.TrySpendResources(levelData.costList))
         {
             SoundManager.PlaySound(SoundType.Purchased);
+            var dataManager = FindFirstObjectByType<DataPersistenceManager>();
+            if (dataManager != null)
+            {
+                dataManager.ResetSaveData();
+                // dataManager.NewGame();
+                // dataManager.SaveGame();
+            }
             SceneManager.LoadScene(sceneName: "Level1MAIN");
             //SceneManager.LoadScene(levelData.sceneName);
         }
