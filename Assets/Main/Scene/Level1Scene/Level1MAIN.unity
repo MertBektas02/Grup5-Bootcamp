@@ -34275,6 +34275,10 @@ PrefabInstance:
       propertyPath: purchaseCosts.Array.data[2].amount
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 6817665488539242736, guid: 7eea66e8e8809a141ae594b09b68dab3, type: 3}
+      propertyPath: m_text
+      value: "Odun \xE7\u0131kar\u0131c\u0131\n30 wood 30 coal\nTo Buy \"F\""
+      objectReference: {fileID: 0}
     - target: {fileID: 8562955506606637792, guid: 7eea66e8e8809a141ae594b09b68dab3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1227.6799
