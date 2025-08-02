@@ -7821,6 +7821,7 @@ MonoBehaviour:
   mouseLookScript: {fileID: 564363767}
   playerMovementScript: {fileID: 246754836}
   customCursorImage: {fileID: 1196444081}
+  screenUICanvas: {fileID: 1664846109}
 --- !u!1 &444830924
 GameObject:
   m_ObjectHideFlags: 0
@@ -36204,6 +36205,7 @@ MonoBehaviour:
   mouseLookScript: {fileID: 564363767}
   playerMovementScript: {fileID: 246754836}
   screenUICanvas: {fileID: 1664846109}
+  pcUIManager: {fileID: 440829558}
 --- !u!1 &2031072114
 GameObject:
   m_ObjectHideFlags: 0
@@ -38110,7 +38112,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &2145728963
 RectTransform:

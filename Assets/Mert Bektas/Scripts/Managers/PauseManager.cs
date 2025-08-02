@@ -19,6 +19,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject screenUICanvas;  // Inspector’dan ekle
 
     private bool isPaused = false;
+    [SerializeField] private PcUIManager pcUIManager;
 
     private void Start()
     {
@@ -38,12 +39,17 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (PcUIIsOpen() || GameOverManager.Instance != null && GameOverManager.Instance.IsGameOver)
+                return;
             TogglePause();
         }
     }
 
     public void TogglePause()
     {
+        if (GameOverManager.Instance?.IsGameOver == true)
+            return;
+
         isPaused = !isPaused;
         pausePanel.SetActive(isPaused);
 
@@ -76,4 +82,9 @@ public class PauseManager : MonoBehaviour
     {
         return isPaused;
     }
+    public bool PcUIIsOpen()
+    {
+        return pcUIManager != null && pcUIManager.IsPcOpen();
+    }
+   
 }

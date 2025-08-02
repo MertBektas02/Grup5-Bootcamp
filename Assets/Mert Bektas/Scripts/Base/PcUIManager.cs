@@ -14,8 +14,12 @@ public class PcUIManager : MonoBehaviour
 
     [Header("UI Cursor")]
     [SerializeField] private GameObject customCursorImage;
+    
+    [SerializeField] private GameObject screenUICanvas;  
+
 
     private bool isPcOpen = false;
+    
 
     private void Start()
     {
@@ -29,6 +33,9 @@ public class PcUIManager : MonoBehaviour
 
         mouseLookScript.enabled = !isPcOpen;
         playerMovementScript.enabled = !isPcOpen;
+        
+        if (screenUICanvas != null)
+            screenUICanvas.SetActive(!isPcOpen);
 
         if (isPcOpen)
         {
@@ -49,4 +56,9 @@ public class PcUIManager : MonoBehaviour
     {
        StoragePanel.SetActive(!StoragePanel.activeSelf); 
     }
+    public bool IsPcOpen()
+    {
+        return isPcOpen;
+    }
+
 }

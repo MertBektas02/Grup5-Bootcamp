@@ -45,6 +45,14 @@ public class GameOverManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0;
+        
+        // Eğer varsa pause paneli kapat
+        var pauseManager = FindObjectOfType<PauseManager>();
+        if (pauseManager != null && pauseManager.IsPaused())
+        {
+            pauseManager.TogglePause(); // Kapatmak için toggle et
+        }
+
     }
 
     public void ReturnToMenu()
