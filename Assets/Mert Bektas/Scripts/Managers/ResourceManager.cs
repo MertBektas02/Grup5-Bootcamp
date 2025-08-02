@@ -50,13 +50,13 @@ public class ResourceManager : MonoBehaviour, IDataPersistence
     }
     private void InitializeMaxValues()//depo
     {
-        maxResourceAmounts[ResourceType.Wood] = 300;
-        maxResourceAmounts[ResourceType.Stone] = 300;
-        maxResourceAmounts[ResourceType.Iron] = 300;
+        maxResourceAmounts[ResourceType.Wood] = 400;
+        maxResourceAmounts[ResourceType.Stone] = 400;
+        maxResourceAmounts[ResourceType.Iron] = 400;
         maxResourceAmounts[ResourceType.Food] = 1000;
-        maxResourceAmounts[ResourceType.Fiber] = 300;
+        maxResourceAmounts[ResourceType.Fiber] = 400;
         maxResourceAmounts[ResourceType.Water] = 1000;
-        maxResourceAmounts[ResourceType.Coal] = 300;
+        maxResourceAmounts[ResourceType.Coal] = 400;
     }
     //--------initialization-------.
 

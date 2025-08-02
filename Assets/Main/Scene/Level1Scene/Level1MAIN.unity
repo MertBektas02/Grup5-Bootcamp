@@ -34247,6 +34247,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1860241909}
     m_Modifications:
+    - target: {fileID: 899482768437769218, guid: 7eea66e8e8809a141ae594b09b68dab3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3037197375096168774, guid: 7eea66e8e8809a141ae594b09b68dab3, type: 3}
       propertyPath: m_Name
       value: WoodAutoCollector
@@ -34277,7 +34281,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6817665488539242736, guid: 7eea66e8e8809a141ae594b09b68dab3, type: 3}
       propertyPath: m_text
-      value: "Odun \xE7\u0131kar\u0131c\u0131\n30 wood 30 coal\nTo Buy \"F\""
+      value: "Odun \xE7\u0131kar\u0131c\u0131\n30 wood \n30 stone \n30 coal\nTo Buy
+        \"F\""
       objectReference: {fileID: 0}
     - target: {fileID: 8562955506606637792, guid: 7eea66e8e8809a141ae594b09b68dab3, type: 3}
       propertyPath: m_LocalPosition.x
