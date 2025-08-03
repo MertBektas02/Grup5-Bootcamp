@@ -237,9 +237,9 @@ https://github.com/user-attachments/assets/11e50aec-5c2a-435c-a020-b9efdfc0bc38
 
 ## Sprint Notları
 
-* Bu sprint içerisinde oyunumuzda hissedilen hikaye ve görsel temanın uyumsuzluğu üzerine çalışılarak yeni bir hikaye ve oyun ismi belirlendi.
+* Bu sprint içerisinde, oyunumuzda hissedilen hikaye ve görsel temanın uyumsuzluğu üzerine çalışılarak yeni bir hikaye ve oyun ismi belirlendi.
 
-* Sprint 3'te ekip vaktini en çok polishing ve bug temizliği üzerinde geçirdi.
+* Sprint 3'te ekip, vaktini en çok polishing ve bug temizliği üzerinde geçirdi.
 
 * Yine bu sprint'te particles ve var olan sistemlerin detayları gibi ince ayrıntılar oyuna entegre edildi.
 
@@ -251,7 +251,7 @@ https://github.com/user-attachments/assets/11e50aec-5c2a-435c-a020-b9efdfc0bc38
 
 ### Tahmin Mantığı
 
-* İlk sprint’te belirlediğimiz efor, karmaşıklık ve bağımlılık temelli Fibonacci sistemini bu sprint’te de aynı kararlılıkla uygulandı.
+* İlk sprint’te belirlediğimiz efor, karmaşıklık ve bağımlılık temelli Fibonacci sistemi bu sprint’te de aynı kararlılıkla uygulandı.
 
 ### Daily Scrum
 
@@ -313,18 +313,18 @@ https://github.com/user-attachments/assets/55fa74c1-556b-4bbc-a653-dabd4763d26f
 
 * Hikaye değişiminin bu denli hızlı olması projemizin ve geliştirme sistemimizin ne denli esnek olduğunu ortaya koydu.
 
-* Git problemlerini takımca Bash terminaline geçerek epey azalttık ancak hala bu noktada birkaç sorun yaşadık.
+* Git problemlerini takımca Bash terminaline geçerek epey azalttık ancak bu noktada hala birkaç sorun yaşadık.
 
-* Yapılan temizliklere rağmen projenin büyüklüğü ve karmaşıklığı ortadan pek kaldırılamadı.
+* Yapılan temizliklere rağmen projenin büyüklüğü ve karmaşıklığı ortadan kaldırılamadı.
 
-* Yine bu sprint'te de tamamlanan SP'ler açısından takımın ivme kazandığı ve daha büyük iş hacmini yönetebildiği görüldü.
+* Yine bu sprint'te de önceki sprint'e kıyasla tamamlanan SP'ler açısından takımın ivme kazandığı ve daha büyük iş hacmini yönetebildiği görüldü.
 
 ### Sprint Retrospective
 
-* Takım olarak polishing kısmının düşündüğümüzden daha zor, öğelerin birbirleriyle olan son aşamadaki bağlantılarının epey karmaşık olduğunu gördük.
+* Takım olarak polishing kısmının düşündüğümüzden daha zor, öğelerin son aşamada birbirleriyle olan bağlantılarının epey karmaşık olduğunu gördük.
 
-* Altyapının ve sistemlerin başarıyla kurulduğu konusunda hemfikir olduk ancak oyuncuya vermek istediğimiz hissiyat noktasında eksik kaldığımızı düşündük. Bunu vakit yetersizliğine, zaman yönetimine bağladık.
+* Altyapının ve sistemlerin başarıyla kurulduğu konusunda hemfikir olduk ancak oyuncuya vermek istediğimiz hissiyat noktasında eksik kaldığımızı düşündük. Bunun sebebini vakit yetersizliğine ve zaman yönetimine bağladık.
 
-* Projenin boyuttan ziyade karmaşıklık hacminin bu noktada devam etmesinin de etkenlerden biri olabileceğini düşündük.
+* Projenin boyuttan ziyade karmaşıklık hacminin devam etmesinin de istediğimiz hissiyatı verememe etkenlerinden bir diğeri olabileceğini düşündük.
 
 </details>
